@@ -29,6 +29,12 @@ node tools/prototype-robustness-check.mjs --output captures/robustness-review
 
 当前本地验证及覆盖说明见 [验证记录](docs/VALIDATION.md) 和 [去除本机路径的结果摘要](docs/validation-results.json)。仓库初始基线尚未配置 CI 工作流，不把本地测试称为远端 CI。
 
+## 独立真实媒体技术探针
+
+新增的 [播放技术探针](docs/REAL-PLAYBACK-PROBE.md) 与原型 UI 分开，用真实媒体元素验证本地视频、加载失败、断网重试和进度恢复。执行 `node tools/serve-playback-probe.mjs` 后打开打印的本机地址。它是可丢弃的技术验证，尚未接入 PiliPlus/账号/XR，不替代正式客户端的评审和 Quest 门槛。
+
+[PiliPlus 播放接入基线](docs/PILIPLUS-PLAYBACK-BASELINE.md) 已固定实际上游与 lockfile 媒体依赖；当前阶段目标、人工项见 [阶段推进计划](docs/阶段推进计划.md)。
+
 ## 设计资料
 
 | 文档 | 内容 |

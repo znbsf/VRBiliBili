@@ -1,0 +1,186 @@
+{
+  "validatedAtUTC": "2026-10-01T11:57:39.401Z",
+  "browser": "Chrome/154.0.8037.58",
+  "passed": 36,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "原创H.264/AAC测试素材含视频及音轨",
+      "passed": true
+    },
+    {
+      "name": "本地素材取得真实时长",
+      "passed": true
+    },
+    {
+      "name": "真实视频帧已解码",
+      "passed": true
+    },
+    {
+      "name": "真实伴音已解码",
+      "passed": true
+    },
+    {
+      "name": "暂停停止真实媒体时钟",
+      "passed": true
+    },
+    {
+      "name": "进度条改变实际媒体位置",
+      "passed": true
+    },
+    {
+      "name": "刷新不保存/自动重载媒体URL",
+      "passed": true
+    },
+    {
+      "name": "重选同一文件恢复实际进度",
+      "passed": true
+    },
+    {
+      "name": "恢复后保持暂停",
+      "passed": true
+    },
+    {
+      "name": "不同来源不串进度",
+      "passed": true
+    },
+    {
+      "name": "真实离线事件暂停并保留进度",
+      "passed": true
+    },
+    {
+      "name": "离线重试不请求或无界循环",
+      "passed": true
+    },
+    {
+      "name": "网络恢复不自动发声",
+      "passed": true
+    },
+    {
+      "name": "真实HTTP失败展示可重试状态",
+      "passed": true
+    },
+    {
+      "name": "首次加载失败仍保留上次真实进度",
+      "passed": true
+    },
+    {
+      "name": "加载失败再重试保留真实进度",
+      "passed": true
+    },
+    {
+      "name": "重试尊重此前暂停意图",
+      "passed": true
+    },
+    {
+      "name": "显式重试可恢复此前播放意图",
+      "passed": true
+    },
+    {
+      "name": "真实浏览器关闭重开后重选恢复进度",
+      "passed": true
+    },
+    {
+      "name": "浏览器重开不会自动播放",
+      "passed": true
+    },
+    {
+      "name": "真实坏媒体错误可重新选素材",
+      "passed": true
+    },
+    {
+      "name": "加载失败后本地素材仍可用",
+      "passed": true
+    },
+    {
+      "name": "本地文件离线仍可真实播放",
+      "passed": true
+    },
+    {
+      "name": "结束来自真实媒体ended事件",
+      "passed": true
+    },
+    {
+      "name": "播放结束后可重播",
+      "passed": true
+    },
+    {
+      "name": "持久化不含URL/Blob/文件名",
+      "passed": true
+    },
+    {
+      "name": "加载期间暂停仍执行有界超时",
+      "passed": true
+    },
+    {
+      "name": "加载超时终止真实HTTP请求",
+      "passed": true
+    },
+    {
+      "name": "大量历史素材进度被限制到20项",
+      "passed": true
+    },
+    {
+      "name": "损坏存储仍可读取实际媒体 {bad",
+      "passed": true
+    },
+    {
+      "name": "损坏存储仍可读取实际媒体 null",
+      "passed": true
+    },
+    {
+      "name": "损坏存储仍可读取实际媒体 {\"version\":1",
+      "passed": true
+    },
+    {
+      "name": "存储不可用不阻断实际播放",
+      "passed": true
+    },
+    {
+      "name": "拒绝含账号密码的媒体URL",
+      "passed": true
+    },
+    {
+      "name": "快速换素材以最后选择为准",
+      "passed": true
+    },
+    {
+      "name": "没有未处理的浏览器脚本异常",
+      "passed": true
+    }
+  ],
+  "decoded": {
+    "video": 8,
+    "audio": 7999,
+    "time": 0.377036,
+    "width": 240,
+    "height": 136
+  },
+  "fixture": {
+    "mime": "video/mp4",
+    "bytes": 82284,
+    "sha256": "96abdfc81afcd9821d1127c7b7405d2879089fa742d9eec874ab8d80c2124348",
+    "containsAVC": true,
+    "containsAAC": true,
+    "containsVideoTrack": true,
+    "origin": "Owned 2D colors and sine tone; generator script included; no external/user media"
+  },
+  "sourceSHA256": {
+    "playback-probe/session.mjs": "ec9bde7aa95f076eb569143c108559426fa1aa0d47192d753296d69eaa791e48",
+    "playback-probe/app.mjs": "cac7138c6dd11a1bf7768e0dd8f5c65488bcfc4f1e36c8fc60298fa82d59e02d",
+    "playback-probe/index.html": "939a590f740a28a9c9da5f23d041be4dce1584db407472affd9b826c9b53e979"
+  },
+  "testToolSHA256": "ffc84ac0dcf379c2eea06d61be3ce76ecbbabfe07b0783a8d14e8f6d4ce613da",
+  "oldPrototypeRegression": {
+    "static": 10,
+    "dom": 31,
+    "coreBrowser": 42,
+    "robustBrowser": 43
+  },
+  "temporaryProfileRemoved": true,
+  "scope": [
+    "Does not validate PiliPlus/media-kit decoder, DASH split tracks, Bilibili login/network, XR or headset audio/comfort"
+  ],
+  "publishedApplication": false,
+  "ci": "Not configured; remote status is verified after push."
+}

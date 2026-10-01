@@ -1,0 +1,118 @@
+{
+  "repository": "bggRGjQaUbCoE/PiliPlus",
+  "commit": "c102a6115c7ac040f6a0c6a1653944b81b82dcb4",
+  "files": [
+    {
+      "path": "pubspec.yaml",
+      "blob": "79fbbb8d23f9460e9e1415170efd55b41deee645",
+      "sha256": "6d6067a8186024e65c93dcedef2de6d9086bfbed813de53c9d904414363fbcea",
+      "bytes": 8481
+    },
+    {
+      "path": "pubspec.lock",
+      "blob": "3bf09eeeb3f52c2f23b1764f328f4c1f8be5830b",
+      "sha256": "aed254f7991bd15e23c898e232a0871eb689966bed120186f8c8382f4e986d58",
+      "bytes": 61510
+    },
+    {
+      "path": "lib/plugin/pl_player/controller.dart",
+      "blob": "c1d54d488e8adb4ce41f309d477a0449de553e22",
+      "sha256": "65adfc9d9bf784794508ec9cbf3f82171e414a91bcff2b00869e9da2dc29d1ba",
+      "bytes": 50391
+    },
+    {
+      "path": "LICENSE",
+      "blob": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "bytes": 35149
+    }
+  ],
+  "mediaDependencies": [
+    {
+      "name": "media_kit",
+      "version": "1.1.11",
+      "source": "git",
+      "path": "media_kit",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "ref": "native",
+      "resolved-ref": "73771ec38176be2d984a3049c28177bce23b54a0"
+    },
+    {
+      "name": "media_kit_libs_android_video",
+      "version": "1.3.7",
+      "source": "git",
+      "path": "libs/android/media_kit_libs_android_video",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "ref": "native",
+      "resolved-ref": "73771ec38176be2d984a3049c28177bce23b54a0"
+    },
+    {
+      "name": "media_kit_libs_ios_video",
+      "version": "1.1.4",
+      "source": "git",
+      "path": "libs/ios/media_kit_libs_ios_video",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "ref": "native",
+      "resolved-ref": "73771ec38176be2d984a3049c28177bce23b54a0"
+    },
+    {
+      "name": "media_kit_libs_linux",
+      "version": "1.2.1",
+      "source": "hosted",
+      "url": "https://pub.dev",
+      "sha256": "2b473399a49ec94452c4d4ae51cfc0f6585074398d74216092bf3d54aac37ecf"
+    },
+    {
+      "name": "media_kit_libs_macos_video",
+      "version": "1.1.4",
+      "source": "hosted",
+      "url": "https://pub.dev",
+      "sha256": "f26aa1452b665df288e360393758f84b911f70ffb3878032e1aabba23aa1032d"
+    },
+    {
+      "name": "media_kit_libs_video",
+      "version": "1.0.5",
+      "source": "git",
+      "path": "libs/universal/media_kit_libs_video",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "ref": "native",
+      "resolved-ref": "73771ec38176be2d984a3049c28177bce23b54a0"
+    },
+    {
+      "name": "media_kit_libs_windows_video",
+      "version": "1.0.10",
+      "source": "git",
+      "path": "libs/windows/media_kit_libs_windows_video",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "ref": "native",
+      "resolved-ref": "73771ec38176be2d984a3049c28177bce23b54a0"
+    },
+    {
+      "name": "media_kit_native_event_loop",
+      "version": "1.0.9",
+      "source": "git",
+      "path": "media_kit_native_event_loop",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "ref": "native",
+      "resolved-ref": "73771ec38176be2d984a3049c28177bce23b54a0"
+    },
+    {
+      "name": "media_kit_video",
+      "version": "1.2.5",
+      "source": "git",
+      "path": "media_kit_video",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "ref": "native",
+      "resolved-ref": "73771ec38176be2d984a3049c28177bce23b54a0"
+    }
+  ],
+  "playerOutputEvidence": {
+    "repository": "My-Responsitories/media-kit",
+    "commit": "73771ec38176be2d984a3049c28177bce23b54a0",
+    "path": "media_kit_video/android/src/main/java/com/alexmercerind/media_kit_video/VideoOutput.java",
+    "gitBlobSHA1": "c5e28b3eedcbd8ee4a83d70f90c86af248e9df1e",
+    "sha256": "c2cd529fdec78274ad1aa3890bb7dac050aed6d718c851bb1334f36eabce5f3d"
+  },
+  "retrievedAtUTC": "2026-10-01",
+  "scope": "Selected source files and exact lockfile only; not a complete cloned or built PiliPlus client."
+}

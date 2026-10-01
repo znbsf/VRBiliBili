@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VRBiliBili 真实媒体技术探针</title>
+<style>
+:root{color-scheme:light dark;font-family:system-ui,sans-serif}body{max-width:920px;margin:24px auto;padding:0 18px;line-height:1.6}h1{font-size:24px;margin-bottom:8px}.note{color:light-dark(#555,#bbb);font-size:14px}video{display:block;width:100%;aspect-ratio:16/9;background:#111;border-radius:10px;margin:18px 0}.sources{display:grid;gap:12px}label{display:block}input,button{font:inherit;padding:8px;border:1px solid #888;border-radius:6px}input[type=url]{width:100%;box-sizing:border-box}button{cursor:pointer}button:disabled{cursor:default;opacity:.55}.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}#seek{flex:1;min-width:150px}#status{min-height:26px}#input-error{color:light-dark(#a42020,#ffb1b1)}details{margin-top:18px}code{overflow-wrap:anywhere}@media(max-width:500px){body{margin:12px auto}h1{font-size:21px}}
+</style>
+<h1>真实媒体技术探针</h1>
+<p class="note">独立桌面技术验证。使用你有权播放的本地视频或直接媒体地址；不连接 B 站账号，不实现 XR，也不代表 PiliPlus 播放器已集成。</p>
+<div class="sources">
+<label>本地视频（每次打开需重新选择）<br><input id="file" type="file" accept="video/*"></label>
+<form id="url-form"><label for="url">HTTP(S) 直接媒体地址</label><input id="url" type="url" placeholder="https://…/video.mp4" required autocomplete="off"><button id="load-url" type="submit">读取媒体</button></form>
+</div>
+<p id="input-error" role="alert"></p>
+<video id="media" preload="metadata" crossorigin="anonymous" playsinline></video>
+<div class="controls"><button id="play" disabled>播放</button><button id="pause" disabled>暂停</button><button id="retry" disabled>重试</button><label for="seek">进度</label><input id="seek" type="range" min="0" max="0" step=".1" value="0" disabled><output id="time">0:00 / 0:00</output></div>
+<p id="status" role="status" aria-live="polite">请选择媒体</p><p id="storage-note" class="note"></p>
+<details><summary>进度与验证边界</summary><p>暂停、拖动、离开页面时保存进度。重新选择同一素材后恢复到保存位置，保持暂停；断网后需点击重试，避免意外发声。</p><p>本地存储只保存有界的素材指纹和进度，不保存媒体地址、视频内容或账号。URL 参数改变会视为不同素材；文件指纹取大小和首尾片段，无法区分首尾相同而中段不同的特殊文件。</p><p>URL 需提供浏览器支持的直接媒体，并允许匿名跨域访问。不解析 B 站、DASH 音视频分轨、DRM 或登录权限。通过本探针不能证明 Flutter/media-kit、空间 Surface、头显声画和舒适度。</p></details>
+<script type="module" src="./app.mjs"></script>
+</html>
