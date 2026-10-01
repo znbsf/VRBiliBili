@@ -1,0 +1,301 @@
+{
+  "researched_on": "2026-09-22",
+  "timezone": "Asia/Hong_Kong",
+  "goal": {
+    "device": "Meta Quest 3",
+    "experience": "Spatial big-screen for ordinary Bilibili video; movable and resizable; controller and hands"
+  },
+  "evidence_status": {
+    "code_review": "Selected upstream files, comparison, repository content listings and releases inspected",
+    "apk_downloaded": false,
+    "apk_hash_locally_verified": false,
+    "built": false,
+    "quest_installed": false,
+    "quest_playback_tested": false
+  },
+  "search": {
+    "provider": "Exa",
+    "workstreams": [
+      "Bilibili client candidates",
+      "Quest platform and developer tools",
+      "Spatial media samples and related projects"
+    ],
+    "requested_results_total": 46,
+    "note": "Includes duplicate and excluded search results; this is not a count of unique verified projects."
+  },
+  "decision": {
+    "first": "Test current PiliPlus in Horizon OS system-managed windows, compare PiliPlusVR input behavior; retain current upstream and port only validated changes.",
+    "conditional_native_path": "Meta Spatial SDK + Kotlin + Media3; BiliTVNative is the first business-code candidate subject to build, authentication, playback and dependency-source checks."
+  },
+  "read_commits": {
+    "PiliPlusVR": {
+      "sha": "35c0a6cda38a2bb24a03a8c22d148a014f596c15",
+      "message": "Merge pull request #58 from bggRGjQaUbCoE/main\n\n[pull] main from bggRGjQaUbCoE:main",
+      "url": "https://api.github.com/repos/Xunflash/PiliPlusVR/commits/35c0a6cda38a2bb24a03a8c22d148a014f596c15",
+      "html_url": "https://github.com/Xunflash/PiliPlusVR/commit/35c0a6cda38a2bb24a03a8c22d148a014f596c15",
+      "diff": null,
+      "files": null,
+      "repository_full_name": "Xunflash/PiliPlusVR",
+      "comments": null,
+      "author": null,
+      "committer": null,
+      "created_at": "2026-05-08T18:15:38Z",
+      "git_author_email": null,
+      "display_url": "https://github.com/Xunflash/PiliPlusVR/commit/35c0a6cda38a2bb24a03a8c22d148a014f596c15",
+      "display_title": "Merge pull request #58 from bggRGjQaUbCoE/main"
+    },
+    "BiliTVNative": {
+      "sha": "ef2be9332a167f6cd797bc54b614162311984f3d",
+      "message": "Update DEVELOPMENT_PROGRESS.md",
+      "url": "https://api.github.com/repos/Hyper-Beast/BiliTVNative/commits/ef2be9332a167f6cd797bc54b614162311984f3d",
+      "html_url": "https://github.com/Hyper-Beast/BiliTVNative/commit/ef2be9332a167f6cd797bc54b614162311984f3d",
+      "diff": null,
+      "files": null,
+      "repository_full_name": "Hyper-Beast/BiliTVNative",
+      "comments": null,
+      "author": null,
+      "committer": null,
+      "created_at": "2026-07-22T02:17:52Z",
+      "git_author_email": null,
+      "display_url": "https://github.com/Hyper-Beast/BiliTVNative/commit/ef2be9332a167f6cd797bc54b614162311984f3d",
+      "display_title": "Update DEVELOPMENT_PROGRESS.md"
+    },
+    "Meta_Spatial_SDK_Samples": {
+      "sha": "f233e2327b95f9871b75bdba867d6fdd726f07cc",
+      "message": "Update Samples and Templates to 0.14.0\n\nSummary: Updating Samples and Templates for release 0.14.0\n\nReviewed By: dav-s\n\nDifferential Revision: D119557604\n\nfbshipit-source-id: 410dca58152c52d313e5e1d03a42d851fdee333d",
+      "url": "https://api.github.com/repos/meta-quest/Meta-Spatial-SDK-Samples/commits/f233e2327b95f9871b75bdba867d6fdd726f07cc",
+      "html_url": "https://github.com/meta-quest/Meta-Spatial-SDK-Samples/commit/f233e2327b95f9871b75bdba867d6fdd726f07cc",
+      "diff": null,
+      "files": null,
+      "repository_full_name": "meta-quest/Meta-Spatial-SDK-Samples",
+      "comments": null,
+      "author": null,
+      "committer": null,
+      "created_at": "2026-09-11T21:54:57Z",
+      "git_author_email": null,
+      "display_url": "https://github.com/meta-quest/Meta-Spatial-SDK-Samples/commit/f233e2327b95f9871b75bdba867d6fdd726f07cc",
+      "display_title": "Update Samples and Templates to 0.14.0"
+    }
+  },
+  "vr_upstream_comparison": {
+    "retrieved_on": "2026-09-22",
+    "base": "bggRGjQaUbCoE:main",
+    "head": "main",
+    "status": "diverged",
+    "base_commit": "3d8711cb3e34d5a0b0c504c073b36b979befdc4c",
+    "merge_base_commit": "f5dbfcec79eee523e67abd7667044c8b4cb816e5",
+    "inspected_vr_commit": "35c0a6cda38a2bb24a03a8c22d148a014f596c15",
+    "ahead_by": 62,
+    "behind_by": 456,
+    "files": [
+      {
+        "filename": ".github/pull.yml",
+        "status": "added",
+        "additions": 9,
+        "deletions": 0,
+        "changes": 9,
+        "previous_filename": null
+      },
+      {
+        "filename": ".github/workflows/sync_and_build.yml",
+        "status": "added",
+        "additions": 61,
+        "deletions": 0,
+        "changes": 61,
+        "previous_filename": null
+      },
+      {
+        "filename": "README.md",
+        "status": "modified",
+        "additions": 4,
+        "deletions": 4,
+        "changes": 8,
+        "previous_filename": null
+      },
+      {
+        "filename": "lib/common/widgets/gesture/immediate_tap_gesture_recognizer.dart",
+        "status": "modified",
+        "additions": 6,
+        "deletions": 1,
+        "changes": 7,
+        "previous_filename": null
+      },
+      {
+        "filename": "lib/http/api.dart",
+        "status": "modified",
+        "additions": 2,
+        "deletions": 1,
+        "changes": 3,
+        "previous_filename": null
+      },
+      {
+        "filename": "lib/main.dart",
+        "status": "modified",
+        "additions": 1,
+        "deletions": 1,
+        "changes": 2,
+        "previous_filename": null
+      },
+      {
+        "filename": "lib/pages/video/widgets/player_focus.dart",
+        "status": "modified",
+        "additions": 7,
+        "deletions": 4,
+        "changes": 11,
+        "previous_filename": null
+      },
+      {
+        "filename": "lib/plugin/pl_player/view/view.dart",
+        "status": "modified",
+        "additions": 98,
+        "deletions": 12,
+        "changes": 110,
+        "previous_filename": null
+      },
+      {
+        "filename": "lib/utils/platform_utils.dart",
+        "status": "modified",
+        "additions": 25,
+        "deletions": 0,
+        "changes": 25,
+        "previous_filename": null
+      }
+    ],
+    "note": "GitHub three-dot comparison reports net changed files from the merge base to the VR branch, not a two-tree diff against today's upstream."
+  },
+  "release_assets": [
+    {
+      "url": "https://github.com/bggRGjQaUbCoE/PiliPlus/releases/tag/2.1.4",
+      "tag": "2.1.4",
+      "created_at": "2026-09-13T06:09:01Z",
+      "published_at": "2026-09-13T06:15:54Z",
+      "updated_at": "2026-09-13T06:20:29Z",
+      "assets": [
+        {
+          "name": "PiliPlus_android_2.1.4-ce17223a8+5348_arm64-v8a.apk",
+          "size_bytes": 23976866,
+          "remote_reported_digest": "sha256:c105735207d32021e751f3c0d3ec60c52b7b4c8a1f6e8c130af219f274e034f2",
+          "locally_verified": false,
+          "asset_updated_at": "2026-09-13T06:20:29Z",
+          "url": "https://github.com/bggRGjQaUbCoE/PiliPlus/releases/download/2.1.4/PiliPlus_android_2.1.4-ce17223a8%2B5348_arm64-v8a.apk"
+        }
+      ],
+      "source_equivalence_verified": false
+    },
+    {
+      "url": "https://github.com/Xunflash/PiliPlusVR/releases/tag/2.0.7",
+      "tag": "2.0.7",
+      "created_at": "2026-05-05T06:15:33Z",
+      "published_at": "2026-05-05T06:25:24Z",
+      "updated_at": "2026-05-08T18:26:00Z",
+      "assets": [
+        {
+          "name": "app-release.apk",
+          "size_bytes": 39496454,
+          "remote_reported_digest": "sha256:f86890d70ded293234e774ad198bcb2cac4f423c1e2a8b267903e36004d4534a",
+          "locally_verified": false,
+          "asset_updated_at": "2026-05-08T18:26:00Z",
+          "url": "https://github.com/Xunflash/PiliPlusVR/releases/download/2.0.7/app-release.apk"
+        }
+      ],
+      "source_equivalence_verified": false
+    },
+    {
+      "url": "https://github.com/Hyper-Beast/BiliTVNative/releases/tag/v1.0.1",
+      "tag": "v1.0.1",
+      "created_at": "2026-07-13T01:50:44Z",
+      "published_at": "2026-07-22T01:58:36Z",
+      "updated_at": "2026-07-22T02:14:54Z",
+      "assets": [
+        {
+          "name": "BiliTVNative-arm64-v8a-1.0.1.apk",
+          "size_bytes": 5947328,
+          "remote_reported_digest": "sha256:fb846c12232a238801fa68b4777c4075193e04159128fe5c2ba61eb9c3c16cba",
+          "locally_verified": false,
+          "asset_updated_at": "2026-07-22T02:14:41Z",
+          "url": "https://github.com/Hyper-Beast/BiliTVNative/releases/download/v1.0.1/BiliTVNative-arm64-v8a-1.0.1.apk"
+        }
+      ],
+      "source_equivalence_verified": false
+    }
+  ],
+  "selected_source_files": [
+    {
+      "key": "vrplatform",
+      "url": "https://github.com/Xunflash/PiliPlusVR/blob/35c0a6cda38a2bb24a03a8c22d148a014f596c15/lib/utils/platform_utils.dart",
+      "git_blob_sha": "e915c668654c42a6a6d5a10c478b22d3d49d1747"
+    },
+    {
+      "key": "vrview",
+      "url": "https://github.com/Xunflash/PiliPlusVR/blob/35c0a6cda38a2bb24a03a8c22d148a014f596c15/lib/plugin/pl_player/view/view.dart",
+      "git_blob_sha": "72452f0f6a04b581204b1139437efc6a11d2f49f"
+    },
+    {
+      "key": "vrmanifest",
+      "url": "https://github.com/Xunflash/PiliPlusVR/blob/main/android/app/src/main/AndroidManifest.xml",
+      "git_blob_sha": "a74f0afb22163520ac9fd2942e4298d4b3465c08"
+    },
+    {
+      "key": "vrdeps",
+      "url": "https://github.com/Xunflash/PiliPlusVR/blob/main/pubspec.yaml",
+      "git_blob_sha": "40c8c6b8b529aceb851dd2735faf45cb115e7a4b"
+    },
+    {
+      "key": "native_readme",
+      "url": "https://github.com/Hyper-Beast/BiliTVNative/blob/main/README.md",
+      "git_blob_sha": "f1f8826fc58321ddddce18d484ba233c0b212786"
+    },
+    {
+      "key": "native_build",
+      "url": "https://github.com/Hyper-Beast/BiliTVNative/blob/main/app/build.gradle.kts",
+      "git_blob_sha": "edc625c072891f5aa841ccc0c71171097ac192be"
+    },
+    {
+      "key": "native_license",
+      "url": "https://github.com/Hyper-Beast/BiliTVNative/blob/main/LICENSE",
+      "git_blob_sha": "5f75a316ff700da9f624571cb53a387d84ff2516"
+    },
+    {
+      "key": "native_playback",
+      "url": "https://github.com/Hyper-Beast/BiliTVNative/blob/ef2be9332a167f6cd797bc54b614162311984f3d/app/src/main/java/com/kirin/bilitv/core/player/PlaybackRepository.kt",
+      "git_blob_sha": "ad1d3d880b13b250f1511064c057a4537ae7e116"
+    },
+    {
+      "key": "native_headers",
+      "url": "https://github.com/Hyper-Beast/BiliTVNative/blob/ef2be9332a167f6cd797bc54b614162311984f3d/app/src/main/java/com/kirin/bilitv/core/player/BiliPlaybackHeaders.kt",
+      "git_blob_sha": "802f587d42ac546d44916784db0de5ffecf48aec"
+    },
+    {
+      "key": "native_models",
+      "url": "https://github.com/Hyper-Beast/BiliTVNative/blob/ef2be9332a167f6cd797bc54b614162311984f3d/app/src/main/java/com/kirin/bilitv/core/player/PlaybackModels.kt",
+      "git_blob_sha": "ce8ccadef643adc8629dc5e19427a318097bbc82"
+    },
+    {
+      "key": "meta_readme_live",
+      "url": "https://github.com/meta-quest/Meta-Spatial-SDK-Samples/blob/f233e2327b95f9871b75bdba867d6fdd726f07cc/README.md",
+      "git_blob_sha": "eec4736ac63f7ca3e51867409d9494c06e62a798"
+    }
+  ],
+  "primary_documentation": [
+    "https://developers.meta.com/horizon/essentials/horizon-os-panel-sizing/",
+    "https://developers.meta.com/horizon/documentation/android-apps/features-overview/",
+    "https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-overview/",
+    "https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-media-playback/",
+    "https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-inputs-controllers/",
+    "https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-resize-panel/",
+    "https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-ovrmetrics/",
+    "https://developer.android.com/media/media3/exoplayer/dash"
+  ],
+  "limitations": [
+    "No on-device Quest compatibility or performance claims.",
+    "Public release tags and asset digests do not prove equivalence to inspected source commits.",
+    "BiliTVNative describes itself as experimental and excludes live streaming in its README.",
+    "Exact SDK, Android, Gradle and media dependencies must be pinned and built before integration."
+  ],
+  "research_retrieval_notes": [
+    "Local PowerShell/curl HTTPS failed with SEC_E_NO_CREDENTIALS; primary source files and metadata were instead read through GitHub connector.",
+    "Some indexed web pages were older than live GitHub responses; live commit/file/release metadata used when available.",
+    "Meta getting-started page fetch returned CRAWL_HTTP_400; official sample README and other official platform documents supplied setup evidence."
+  ],
+  "privacy_note": "Personal device enumeration and availability observations are omitted; this is a historical source snapshot."
+}

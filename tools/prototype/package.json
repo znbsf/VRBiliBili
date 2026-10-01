@@ -1,0 +1,7 @@
+{
+  "name": "vrbilibili-prototype-dom-validation",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Optional DOM validation dependency; real-browser tests use Node built-ins only",
+  "devDependencies": { "linkedom": "0.18.12" }
+}

@@ -1,0 +1,538 @@
+{
+  "schemaVersion": 1,
+  "validatedAtUTC": "2026-10-01T07:20:26.695Z",
+  "sourceSHA256": "80e9f0e22f0c659ae751b34d1d48c087db4053b3ad63f62525ee47aed2460dd9",
+  "previewSHA256": "4f10edb0129f37a8e87e504bcf5cdd1d1a6453840d1b733864a19d5f03b71f3c",
+  "browser": "Chrome/154.0.8037.58",
+  "validation": {
+    "static": {
+      "passed": 10,
+      "failed": 0,
+      "checks": [
+        {
+          "name": "JavaScript parses",
+          "passed": true
+        },
+        {
+          "name": "Fragment is below 1 MB",
+          "passed": true
+        },
+        {
+          "name": "No full-page document tags",
+          "passed": true
+        },
+        {
+          "name": "No network requests or remote resource URLs",
+          "passed": true
+        },
+        {
+          "name": "No escaped markup quotes",
+          "passed": true
+        },
+        {
+          "name": "Literal IDs are unique",
+          "passed": true
+        },
+        {
+          "name": "Every literal ID lookup is declared",
+          "passed": true
+        },
+        {
+          "name": "Every visible action has a handler",
+          "passed": true
+        },
+        {
+          "name": "README.md local links resolve",
+          "passed": true
+        },
+        {
+          "name": "V1-FUNCTIONAL-UI-DESIGN.md local links resolve",
+          "passed": true
+        }
+      ]
+    },
+    "dom": {
+      "passed": 31,
+      "failed": 0,
+      "checks": [
+        {
+          "name": "Home renders six sample cards",
+          "passed": true
+        },
+        {
+          "name": "Search returns matching videos",
+          "passed": true
+        },
+        {
+          "name": "Detail and later list update together",
+          "passed": true
+        },
+        {
+          "name": "Selected episode opens with correct duration",
+          "passed": true
+        },
+        {
+          "name": "Playback clock advances and seek persists",
+          "passed": true
+        },
+        {
+          "name": "Previous and next retain per-episode progress",
+          "passed": true
+        },
+        {
+          "name": "Desk layout opens two auxiliary components",
+          "passed": true
+        },
+        {
+          "name": "Auxiliary opacity does not fade the video",
+          "passed": true
+        },
+        {
+          "name": "Locked auxiliary window stays put during group move",
+          "passed": true
+        },
+        {
+          "name": "Unfollowing component stays put during group move",
+          "passed": true
+        },
+        {
+          "name": "Locked main cannot be nudged",
+          "passed": true
+        },
+        {
+          "name": "Recall preserves lock and opacity",
+          "passed": true
+        },
+        {
+          "name": "Layouts retain independent settings",
+          "passed": true
+        },
+        {
+          "name": "Error retry preserves progress",
+          "passed": true
+        },
+        {
+          "name": "Flat effect is contained inside the film",
+          "passed": true
+        },
+        {
+          "name": "River uses a separate stage lane and can stop",
+          "passed": true
+        },
+        {
+          "name": "Expired-login simulation can recover",
+          "passed": true
+        },
+        {
+          "name": "End state offers replay without automatic next",
+          "passed": true
+        },
+        {
+          "name": "Clock reaches end and stops",
+          "passed": true
+        },
+        {
+          "name": "History opens exact episode and completed items restart",
+          "passed": true
+        },
+        {
+          "name": "Empty search retains a recovery action",
+          "passed": true
+        },
+        {
+          "name": "Host snapshot restores meaningful state",
+          "passed": true
+        },
+        {
+          "name": "Return first closes settings then returns to history",
+          "passed": true
+        },
+        {
+          "name": "Escape follows history origin and saves exact progress",
+          "passed": true
+        },
+        {
+          "name": "Playback from detail returns to same detail episode",
+          "passed": true
+        },
+        {
+          "name": "Opacity is restored independently for each layout",
+          "passed": true
+        },
+        {
+          "name": "Recall leaves hidden component placement intact",
+          "passed": true
+        },
+        {
+          "name": "Every completed episode offers return to detail",
+          "passed": true
+        },
+        {
+          "name": "Old global-opacity snapshots migrate all presets",
+          "passed": true
+        },
+        {
+          "name": "Partial damaged snapshot cannot blank the watch view",
+          "passed": true
+        },
+        {
+          "name": "Nonfinite progress and malformed collections normalize safely",
+          "passed": true
+        }
+      ]
+    },
+    "realBrowserCore": {
+      "passed": 42,
+      "failed": 0,
+      "checks": [
+        {
+          "name": "发现页 320px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "播放页 320px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "桌面布局 320px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "观看设置 320px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "发现页 736px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "播放页 736px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "桌面布局 736px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "观看设置 736px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "发现页 1024px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "播放页 1024px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "桌面布局 1024px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "观看设置 1024px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "发现页 1280px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "播放页 1280px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "桌面布局 1280px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "观看设置 1280px 无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "真实键盘提交搜索得到两个结果",
+          "passed": true
+        },
+        {
+          "name": "选集与独立进度正确",
+          "passed": true
+        },
+        {
+          "name": "详情进入播放后返回原详情",
+          "passed": true
+        },
+        {
+          "name": "历史续播按 Escape 返回历史页",
+          "passed": true
+        },
+        {
+          "name": "预设分别保存透明度",
+          "passed": true
+        },
+        {
+          "name": "切回桌面透明度恢复35%",
+          "passed": true
+        },
+        {
+          "name": "真实标题栏拖动主屏成功",
+          "passed": true
+        },
+        {
+          "name": "锁定选集不随主屏拖动",
+          "passed": true
+        },
+        {
+          "name": "未锁定评论随主屏拖动",
+          "passed": true
+        },
+        {
+          "name": "召回不移动隐藏评论",
+          "passed": true
+        },
+        {
+          "name": "锁定主屏禁止方向按钮移动",
+          "passed": true
+        },
+        {
+          "name": "召回保留锁定与透明度",
+          "passed": true
+        },
+        {
+          "name": "一级返回先关闭摆放",
+          "passed": true
+        },
+        {
+          "name": "真实键盘滑杆步进改变进度",
+          "passed": true
+        },
+        {
+          "name": "失败重试保留进度",
+          "passed": true
+        },
+        {
+          "name": "河流处于独立通道",
+          "passed": true
+        },
+        {
+          "name": "停止清除所有效果",
+          "passed": true
+        },
+        {
+          "name": "结束后重播从零开始",
+          "passed": true
+        },
+        {
+          "name": "非末集结束同时提供下一段和返回详情",
+          "passed": true
+        },
+        {
+          "name": "仅显示模拟登录入口",
+          "passed": true
+        },
+        {
+          "name": "模拟登录保留布局",
+          "passed": true
+        },
+        {
+          "name": "真实刷新恢复状态并暂停",
+          "passed": true
+        },
+        {
+          "name": "深色桌面布局无横向溢出",
+          "passed": true
+        },
+        {
+          "name": "320px 主导航文字保持单行",
+          "passed": true
+        },
+        {
+          "name": "没有浏览器脚本异常",
+          "passed": true
+        },
+        {
+          "name": "没有外部网络资源请求",
+          "passed": true
+        }
+      ]
+    },
+    "realBrowserRobustness": {
+      "passed": 43,
+      "failed": 0,
+      "checks": [
+        {
+          "name": "20次快速稍后再看切换保持奇偶与UI一致",
+          "passed": true
+        },
+        {
+          "name": "20次快速播放切换回到暂停",
+          "passed": true
+        },
+        {
+          "name": "快速下一段在末集停止",
+          "passed": true
+        },
+        {
+          "name": "快速上一段在首集停止",
+          "passed": true
+        },
+        {
+          "name": "20次快速组件切换无重复或错误可见状态",
+          "passed": true
+        },
+        {
+          "name": "重绘后真实Escape立即关闭设置",
+          "passed": true
+        },
+        {
+          "name": "第二次Escape回到详情且保留进度",
+          "passed": true
+        },
+        {
+          "name": "内容页再次Escape不改来源",
+          "passed": true
+        },
+        {
+          "name": "点击一级返回加Escape二级返回一致",
+          "passed": true
+        },
+        {
+          "name": "动态resize 320px不溢出",
+          "passed": true
+        },
+        {
+          "name": "动态resize 736px不溢出",
+          "passed": true
+        },
+        {
+          "name": "动态resize 860px不溢出",
+          "passed": true
+        },
+        {
+          "name": "动态resize 861px不溢出",
+          "passed": true
+        },
+        {
+          "name": "动态resize 880px不溢出",
+          "passed": true
+        },
+        {
+          "name": "动态resize 1024px不溢出",
+          "passed": true
+        },
+        {
+          "name": "动态resize 1280px不溢出",
+          "passed": true
+        },
+        {
+          "name": "连续resize保留布局、设置与进度",
+          "passed": true
+        },
+        {
+          "name": "12次预设循环保留完整桌面配置",
+          "passed": true
+        },
+        {
+          "name": "880px宽屏CSS模式仍能真实拖动",
+          "passed": true
+        },
+        {
+          "name": "存储 非JSON可恢复可操作画面",
+          "passed": true
+        },
+        {
+          "name": "存储 非JSON回退后可继续浏览",
+          "passed": true
+        },
+        {
+          "name": "存储 null根可恢复可操作画面",
+          "passed": true
+        },
+        {
+          "name": "存储 null根回退后可继续浏览",
+          "passed": true
+        },
+        {
+          "name": "存储 数组根可恢复可操作画面",
+          "passed": true
+        },
+        {
+          "name": "存储 数组根回退后可继续浏览",
+          "passed": true
+        },
+        {
+          "name": "存储 超长存储可恢复可操作画面",
+          "passed": true
+        },
+        {
+          "name": "存储 超长存储回退后可继续浏览",
+          "passed": true
+        },
+        {
+          "name": "存储 未知版本可恢复可操作画面",
+          "passed": true
+        },
+        {
+          "name": "存储 未知版本回退后可继续浏览",
+          "passed": true
+        },
+        {
+          "name": "存储 缺少辅助窗口可恢复可操作画面",
+          "passed": true
+        },
+        {
+          "name": "存储 缺少辅助窗口回退后可继续浏览",
+          "passed": true
+        },
+        {
+          "name": "存储 损坏进度和分集可恢复可操作画面",
+          "passed": true
+        },
+        {
+          "name": "存储 损坏进度和分集回退后可继续浏览",
+          "passed": true
+        },
+        {
+          "name": "存储 损坏数值与枚举可恢复可操作画面",
+          "passed": true
+        },
+        {
+          "name": "存储 损坏数值与枚举回退后可继续浏览",
+          "passed": true
+        },
+        {
+          "name": "旧版全局透明度在真实浏览器迁移到预设",
+          "passed": true
+        },
+        {
+          "name": "存储不可用时本次会话仍可操作",
+          "passed": true
+        },
+        {
+          "name": "真实关闭再打开 1恢复进度与完整布局",
+          "passed": true
+        },
+        {
+          "name": "真实关闭再打开 1保持暂停",
+          "passed": true
+        },
+        {
+          "name": "真实关闭再打开 2恢复进度与完整布局",
+          "passed": true
+        },
+        {
+          "name": "真实关闭再打开 2保持暂停",
+          "passed": true
+        },
+        {
+          "name": "本轮没有未处理浏览器脚本异常",
+          "passed": true
+        },
+        {
+          "name": "本轮没有外部页面资源请求",
+          "passed": true
+        }
+      ]
+    }
+  },
+  "scope": "Offline desktop prototype only; no real account, video/audio, XR, headset, subjective comfort review or remote CI validation."
+}
