@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ <item type="id" name="cinema_video" />
+ <item type="id" name="cinema_overlay" />
+ <style name="CinemaOverlayTheme" parent="android:style/Theme.Material.NoActionBar">
+  <item name="android:windowBackground">@android:color/transparent</item>
+  <item name="android:colorAccent">#FB7299</item>
+  <item name="android:fontFamily">sans</item>
+ </style>
+</resources>

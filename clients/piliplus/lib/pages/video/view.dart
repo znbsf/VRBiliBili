@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
 import 'package:PiliPlus/quest/quest_device.dart';
+import 'package:PiliPlus/quest/cinema_player.dart';
 import 'package:PiliPlus/models/common/video/video_quality.dart';
 import 'dart:math';
 
@@ -184,6 +185,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
 
   // 获取视频资源，初始化播放器
   void videoSourceInit() {
+    if (QuestDevice.isQuest) videoDetailController.autoPlay = true;
     videoDetailController.queryVideoUrl(autoFullScreenFlag: !QuestDevice.isQuest);
     if (videoDetailController.autoPlay) {
       plPlayerController = videoDetailController.plPlayerController;
@@ -298,7 +300,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     }
   }
 
-  bool _questWide = false;
+  final bool _questWide = false;
   bool _questLoading = false;
   Future<void> questTogglePlayback() async {
     if (_questLoading) return;
@@ -314,6 +316,36 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
       } else if (player.playerStatus.isPlaying) { await player.pause(); }
       else { await player.play(); }
     } finally { if (mounted) setState(() => _questLoading = false); }
+  }
+
+  Future<void> questEnterCinema() async {
+    try {
+      await CinemaPlayer.open(videoDetailController);
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('无法进入影院，请等待视频加载完成后重试。')));
+      }
+    }
+  }
+
+  void questQualitySettings() {
+    final player = videoDetailController.plPlayerController;
+    final ids = videoDetailController.data.dash?.video?.map((v) => v.id).toSet() ?? <int>{};
+    showDialog<void>(context: context, builder: (context) => SimpleDialog(
+      title: const Text('画质'), children: [
+        if (ids.isEmpty) const Padding(padding: EdgeInsets.all(24), child: Text('当前视频暂无可切换画质')),
+        for (final id in ids) ListTile(
+          minTileHeight: 56,
+          title: Text(VideoQuality.fromCode(id).desc),
+          trailing: videoDetailController.currentVideoQa.value?.code == id ? const Icon(Icons.check, color: _questAccent) : null,
+          onTap: () {
+            player.cacheVideoQa = id;
+            videoDetailController.currentVideoQa.value = VideoQuality.fromCode(id);
+            videoDetailController.updatePlayer(); Navigator.pop(context);
+          }),
+        TextButton(onPressed: () => Navigator.pop(context), child: const Text('关闭画质选择')),
+      ]));
   }
 
   static const _questAccent = Color(0xFFFB7299);
@@ -1385,9 +1417,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
           const SizedBox(width: 12),
           const Text('正在观看', style: TextStyle(fontSize: 14, color: Colors.white54)),
           const Spacer(),
-          questIcon(_questWide ? '显示详情' : '放大画面',
-            _questWide ? Icons.view_sidebar_outlined : Icons.crop_free_rounded,
-            () => setState(() => _questWide = !_questWide)),
+
         ])),
         Expanded(child: Padding(padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
           child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
@@ -1442,7 +1472,12 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
           Obx(() => Text('${time(player.position.value)} / ${time(player.duration.value)}',
             style: const TextStyle(fontSize: 13, color: Colors.white70))),
           const Spacer(),
+          Obx(() => questIcon(player.enableShowDanmaku.value ? '关闭弹幕' : '开启弹幕',
+            Icons.subtitles_outlined, () => player.enableShowDanmaku.toggle(),
+            accent: player.enableShowDanmaku.value)),
+          questIcon('选择画质', Icons.hd_outlined, questQualitySettings),
           questIcon('播放设置', Icons.tune_rounded, questPlaybackSettings),
+          questIcon('全屏影院', Icons.fullscreen_rounded, questEnterCinema),
         ]),
       ])));
   }

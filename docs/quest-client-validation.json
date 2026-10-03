@@ -1,22 +1,56 @@
 {
-  "scope": "Basic PiliPlus Quest window; XR route removed",
-  "artifact": "VRBiliBili-Quest-redesign.apk",
-  "sha256": "28592cbcdc94fd59ea3df182fb53442907566834a9539836f41779722591ab42",
+  "scope": "PiliPlus Quest automatic playback and native cinema fullscreen",
+  "artifact": "reports/quest-cinema-20261003/final/VRBiliBili-Quest-cinema.apk",
+  "sha256": "301bee1057ec4223485369c871e2824f5082254c5b3ee0bcb55289fe9aa3253c",
   "installedMatches": true,
   "device": "Quest 3",
   "journeyPassed": true,
   "checked": [
-    "persistent navigation and compact playback toolbar",
-    "control hit bounds 84-85 px tall",
-    "real video width 1920 height 1080",
-    "pause holds",
-    "forward ten seconds",
-    "wide/detail and settings",
-    "back and home",
-    "responsive recommendation statistics"
+    "selection automatically starts playback",
+    "danmaku, quality and fullscreen on playback toolbar",
+    "pause and ten-second seek",
+    "native cinema video and audio decode",
+    "cinema quality switching",
+    "controls hide and reveal",
+    "pure picture and cinema scene toggle",
+    "position handoff and paused return",
+    "second cinema entry and exit",
+    "back and home"
   ],
-  "screenshots": "actual app window 1375x900",
-  "dartAnalysis": "0 errors, 0 warnings, 1 style info",
-  "manualComfort": "await user review",
-  "evidence": "reports/quest-ui-redesign-20261003/journey.txt"
+  "evidence": "reports/quest-cinema-20261003/final/journey.txt",
+  "nativePlayback": {
+    "positionMs": 17367,
+    "playing": true,
+    "videoFrames": 137,
+    "audioBuffers": 246,
+    "sceneReady": true,
+    "firstFrame": true,
+    "sourceChanges": 0,
+    "busy": false,
+    "trackingAligned": false,
+    "passthrough": false,
+    "cinema": true,
+    "roomMeshes": 51,
+    "controlsVisible": false,
+    "error": null
+  },
+  "screenshots": {
+    "quest-detail-ui.png": {
+      "width": 1375,
+      "height": 900
+    },
+    "quest-cinema-ui.png": {
+      "width": 8,
+      "height": 327936
+    },
+    "quest-pure-ui.png": {
+      "width": 4128,
+      "height": 2208
+    }
+  },
+  "dartAnalysis": "0 errors, 0 warnings, 3 style infos",
+  "manualControllerInput": "pending user test",
+  "manualComfortAndRecentering": "pending; viewer tracking returned default pose during automation",
+  "lighting": "static floor glow; no video-driven blurred reflections",
+  "screenshotNote": "Cinema uses metacam. Pure picture capture fell back to a stereo compositor mirror; see capture logs."
 }

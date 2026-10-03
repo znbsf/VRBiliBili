@@ -12,6 +12,7 @@ class MainActivity : AudioServiceActivity() {
     companion object { var debugChannel: MethodChannel? = null }
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        CinemaSession.configure(this, flutterEngine)
         val channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "vrbilibili/device")
         if (applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE != 0) debugChannel = channel
         channel.setMethodCallHandler { call, result ->
@@ -36,7 +37,7 @@ class MainActivity : AudioServiceActivity() {
 
     override fun onUserLeaveHint() {
         super.onUserLeaveHint()
-        AndroidHelper.ToDart.onUserLeaveHint?.run()
+        if (CinemaSession.media == null) AndroidHelper.ToDart.onUserLeaveHint?.run()
     }
 
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean, newConfig: Configuration?) {

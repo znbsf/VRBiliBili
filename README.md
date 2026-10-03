@@ -1,8 +1,8 @@
 # VRBiliBili：Quest 大屏 PiliPlus 客户端
 
-当前目标是做好 Quest 3 上的基础 PiliPlus 移植。2026-10-03 根据实机反馈移除空间视频路线：同一普通 Android 窗口内完成找片、登录与播放，不再跳转原生 XR 场景。
+当前目标是做好 Quest 3 上的基础 PiliPlus 移植。找片、登录和普通播放继续使用 PiliPlus；2026-10-03 根据后续要求增加播放栏的一键全屏影院，关闭透视并支持纯画面/影院布景切换。旧的自由摆放、多窗口空间视频方案不恢复。
 
-源码位于 [clients/piliplus](clients/piliplus)。Quest 详情页使用主视频与右侧简介/评论，提供常驻返回、播放进度、大按钮、播放设置和放大画面模式。构建与验证见 [客户端说明](docs/QUEST-CLIENT.md)。原空间设计与 HTML 文件保留为历史参考，不代表当前开发范围。
+源码位于 [clients/piliplus](clients/piliplus)。Quest 详情页使用主视频与右侧简介/评论，提供常驻返回、播放进度、图标工具栏、直接弹幕/画质选择和全屏影院。构建与验证见 [客户端说明](docs/QUEST-CLIENT.md)。原空间设计与 HTML 文件保留为历史参考，不代表当前开发范围。
 
 ## 打开原型
 

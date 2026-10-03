@@ -101,3 +101,11 @@ kotlin {
 flutter {
     source = "../.."
 }
+
+
+dependencies {
+    implementation("com.meta.spatial:meta-spatial-sdk:0.14.0")
+    implementation("com.meta.spatial:meta-spatial-sdk-toolkit:0.14.0")
+    implementation("com.meta.spatial:meta-spatial-sdk-vr:0.14.0")
+    implementation("androidx.media3:media3-exoplayer:1.5.1")
+}
