@@ -223,6 +223,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
 
   // 播放器状态监听
   Future<void> playerListener(PlayerStatus status) async {
+    if (QuestDevice.isQuest && mounted) setState(() {});
     final isPlaying = status.isPlaying;
     try {
       if (videoDetailController.scrollCtr.hasClients) {
@@ -301,7 +302,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
   bool _questLoading = false;
   Future<void> questTogglePlayback() async {
     if (_questLoading) return;
-    _questLoading = true;
+    setState(() => _questLoading = true);
     try {
       final player = videoDetailController.plPlayerController;
       if (!videoDetailController.autoPlay || plPlayerController == null) {
@@ -312,35 +313,61 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
         await handlePlay();
       } else if (player.playerStatus.isPlaying) { await player.pause(); }
       else { await player.play(); }
-    } finally { _questLoading = false; }
+    } finally { if (mounted) setState(() => _questLoading = false); }
   }
+
+  static const _questAccent = Color(0xFFFB7299);
 
   void questPlaybackSettings() {
     final player = videoDetailController.plPlayerController;
-    showModalBottomSheet<void>(context: context, isScrollControlled: true,
-      constraints: const BoxConstraints(maxWidth: 700), builder: (context) => SafeArea(
-        child: Padding(padding: const EdgeInsets.all(24), child: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(children: [const Text('播放设置', style: TextStyle(fontSize: 24)), const Spacer(),
-            IconButton(iconSize: 30, tooltip: '关闭设置', onPressed: () => Navigator.pop(context), icon: const Icon(Icons.close))]),
-          const SizedBox(height: 16), const Text('播放速度', style: TextStyle(fontSize: 20)),
-          Wrap(spacing: 12, runSpacing: 12, children: [for (final speed in [.75, 1.0, 1.25, 1.5, 2.0])
-            FilledButton.tonal(style: FilledButton.styleFrom(minimumSize: const Size(92, 60)),
-              onPressed: () { player.setPlaybackSpeed(speed); Navigator.pop(context); }, child: Text('$speed ×', style: const TextStyle(fontSize: 20)))]),
-          const SizedBox(height: 18), const Text('画质', style: TextStyle(fontSize: 20)),
-          if (videoDetailController.currentVideoQa.value != null)
-            Wrap(spacing: 12, runSpacing: 12, children: [for (final id in videoDetailController.data.dash?.video?.map((v) => v.id).toSet() ?? <int>{})
-              FilledButton.tonal(style: FilledButton.styleFrom(minimumSize: const Size(120, 60)), onPressed: () {
-                final quality = VideoQuality.fromCode(id);
-                player.cacheVideoQa = quality.code;
-                videoDetailController.currentVideoQa.value = quality;
-                videoDetailController.updatePlayer(); Navigator.pop(context);
-              }, child: Text(VideoQuality.fromCode(id).desc, style: const TextStyle(fontSize: 20)))]),
-          const SizedBox(height: 18),
-          Obx(() => SwitchListTile(title: const Text('显示弹幕', style: TextStyle(fontSize: 20)),
-            value: player.enableShowDanmaku.value, onChanged: (value) => player.enableShowDanmaku.value = value)),
-        ]))),
-      ));
+    showDialog<void>(context: context, builder: (context) => Dialog(
+      backgroundColor: const Color(0xFF202024),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: ConstrainedBox(constraints: const BoxConstraints(maxWidth: 480),
+        child: Padding(padding: const EdgeInsets.all(24), child: SingleChildScrollView(
+          child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Row(children: [const Text('播放设置', style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.w600)),
+              const Spacer(), questIcon('关闭设置', Icons.close, () => Navigator.pop(context))]),
+            const SizedBox(height: 16),
+            const Text('播放速度', style: TextStyle(color: Colors.white70, fontSize: 15)),
+            const SizedBox(height: 10),
+            Wrap(spacing: 8, runSpacing: 8, children: [for (final speed in [.75, 1.0, 1.25, 1.5, 2.0])
+              ChoiceChip(label: Text('$speed ×'), selected: player.playbackSpeed == speed,
+                selectedColor: _questAccent, backgroundColor: const Color(0xFF303036),
+                labelStyle: TextStyle(color: player.playbackSpeed == speed ? Colors.black : Colors.white),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                onSelected: (_) { player.setPlaybackSpeed(speed); Navigator.pop(context); })]),
+            const SizedBox(height: 16),
+            const Text('画质', style: TextStyle(color: Colors.white70, fontSize: 15)),
+            const SizedBox(height: 10),
+            if (videoDetailController.currentVideoQa.value != null)
+              Wrap(spacing: 8, runSpacing: 8, children: [for (final id in videoDetailController.data.dash?.video?.map((v) => v.id).toSet() ?? <int>{})
+                ChoiceChip(label: Text(VideoQuality.fromCode(id).desc),
+                  selected: videoDetailController.currentVideoQa.value?.code == id,
+                  selectedColor: _questAccent, backgroundColor: const Color(0xFF303036),
+                  labelStyle: TextStyle(color: videoDetailController.currentVideoQa.value?.code == id ? Colors.black : Colors.white),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  onSelected: (_) {
+                    final quality = VideoQuality.fromCode(id);
+                    player.cacheVideoQa = quality.code;
+                    videoDetailController.currentVideoQa.value = quality;
+                    videoDetailController.updatePlayer(); Navigator.pop(context);
+                  })]),
+            const SizedBox(height: 16), const Divider(color: Colors.white12),
+            Obx(() => SwitchListTile(contentPadding: EdgeInsets.zero,
+              title: const Text('显示弹幕', style: TextStyle(color: Colors.white, fontSize: 16)),
+              activeThumbColor: _questAccent,
+              value: player.enableShowDanmaku.value, onChanged: (value) => player.enableShowDanmaku.value = value)),
+          ])))),
+    ));
   }
+
+  Widget questIcon(String label, IconData icon, VoidCallback callback, {bool accent = false}) =>
+    IconButton(tooltip: label, onPressed: callback,
+      style: IconButton.styleFrom(minimumSize: const Size(52, 52),
+        foregroundColor: accent ? _questAccent : Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+      icon: Icon(icon, size: 26));
 
   // 继续播放或重新播放
   void continuePlay() {
@@ -1348,61 +1375,77 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
   }
 
   Widget questDetail() => SimpleScaffold(
-    body: SafeArea(child: LayoutBuilder(builder: (context, box) {
-      final player = videoDetailController.plPlayerController;
-      Widget action(String label, IconData icon, VoidCallback callback) => FilledButton.tonalIcon(
-        style: FilledButton.styleFrom(minimumSize: const Size(100, 58), textStyle: const TextStyle(fontSize: 18)),
-        onPressed: callback, icon: Icon(icon, size: 26), label: Text(label),
-      );
-      return Column(children: [
-        Padding(padding: const EdgeInsets.all(10), child: Row(children: [
-          action('返回上页', Icons.arrow_back, () => Get.back()),
-          const SizedBox(width: 10),
-          action('返回主页', Icons.home_outlined, player.onCloseAll),
+    body: ColoredBox(color: const Color(0xFF141416), child: SafeArea(
+      child: Column(children: [
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 12), child: Row(children: [
+          questIcon('返回上页', Icons.arrow_back_rounded, () => Get.back()),
+          questIcon('返回主页', Icons.home_outlined, videoDetailController.plPlayerController.onCloseAll),
+          const SizedBox(width: 12),
+          const Text('PiliPlus', style: TextStyle(fontSize: 21, fontWeight: FontWeight.w700, color: _questAccent)),
+          const SizedBox(width: 12),
+          const Text('正在观看', style: TextStyle(fontSize: 14, color: Colors.white54)),
           const Spacer(),
-          action('播放设置', Icons.settings_outlined, questPlaybackSettings),
-          const SizedBox(width: 10),
-          action(_questWide ? '显示详情' : '放大画面', Icons.aspect_ratio, () => setState(() => _questWide = !_questWide)),
+          questIcon(_questWide ? '显示详情' : '放大画面',
+            _questWide ? Icons.view_sidebar_outlined : Icons.crop_free_rounded,
+            () => setState(() => _questWide = !_questWide)),
         ])),
-        Expanded(child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          Expanded(flex: 7, child: LayoutBuilder(builder: (context, area) {
-            final w = min(area.maxWidth - 20, max(120.0, area.maxHeight - 150) * 16 / 9);
-            return Column(children: [
-              Expanded(child: Center(child: SizedBox(width: w, height: w * 9 / 16,
-                child: videoPlayer(width: w, height: w * 9 / 16)))),
-              Obx(() {
-                final duration = player.duration.value;
-                final position = player.position.value;
-                return Row(children: [
-                  const SizedBox(width: 14), Text('${position ~/ 60}:${(position % 60).toString().padLeft(2, '0')}'),
-                  Expanded(child: Slider(value: position.toDouble().clamp(0, duration.toDouble().clamp(1, double.infinity)),
-                    max: duration.toDouble().clamp(1, double.infinity),
-                    onChanged: duration > 0 ? (v) => player.seek(Duration(seconds: v.round()), isSeek: false) : null)),
-                  Text('${duration ~/ 60}:${(duration % 60).toString().padLeft(2, '0')}'), const SizedBox(width: 14),
-                ]);
-              }),
-              Padding(padding: const EdgeInsets.fromLTRB(10, 0, 10, 14), child: Row(children: [
-                Expanded(child: action('后退 10 秒', Icons.replay_10, () => player.seek(Duration(milliseconds: max(0, player.positionInMilliseconds - 10000)), isSeek: false))),
-                const SizedBox(width: 8),
-                Expanded(child: action('播放 / 暂停', Icons.play_arrow, questTogglePlayback)),
-                const SizedBox(width: 8),
-                Expanded(child: action('前进 10 秒', Icons.forward_10, () => player.seek(Duration(milliseconds: min(player.durationInMilliseconds, player.positionInMilliseconds + 10000)), isSeek: false))),
-              ])),
-            ]);
-          })),
-          if (!_questWide) const VerticalDivider(width: 1),
-          if (!_questWide) Expanded(flex: 4, child: LayoutBuilder(builder: (context, area) => Column(children: [
-            buildTabBar(),
-            Expanded(child: tabBarView(controller: videoDetailController.tabCtr, children: [
-              videoIntro(width: area.maxWidth, height: area.maxHeight - 48),
-              if (videoDetailController.showReply) videoReplyPanel(),
-              if (_shouldShowSeasonPanel) seasonPanel,
-            ])),
+        Expanded(child: Padding(padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
+          child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            Expanded(flex: 7, child: ClipRRect(borderRadius: BorderRadius.circular(12),
+              child: ColoredBox(color: const Color(0xFF09090B), child: Column(children: [
+                Expanded(child: LayoutBuilder(builder: (context, area) {
+                  final w = min(area.maxWidth, area.maxHeight * 16 / 9);
+                  return Center(child: SizedBox(width: w, height: w * 9 / 16,
+                    child: videoPlayer(width: w, height: w * 9 / 16)));
+                })),
+                questTransport(),
+              ])))),
+            if (!_questWide) const SizedBox(width: 16),
+            if (!_questWide) Expanded(flex: 4, child: ClipRRect(borderRadius: BorderRadius.circular(12),
+              child: ColoredBox(color: const Color(0xFF202024), child: LayoutBuilder(builder: (context, area) => Column(children: [
+                buildTabBar(),
+                Expanded(child: tabBarView(controller: videoDetailController.tabCtr, children: [
+                  videoIntro(width: area.maxWidth, height: area.maxHeight - 45),
+                  if (videoDetailController.showReply) videoReplyPanel(),
+                  if (_shouldShowSeasonPanel) seasonPanel,
+                ])),
+              ]))))),
           ]))),
-        ])),
-      ]);
-    })),
+      ]))),
   );
+
+  Widget questTransport() {
+    final player = videoDetailController.plPlayerController;
+    String time(int value) => '${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}';
+    return ColoredBox(color: const Color(0xFF202024), child: Padding(
+      padding: const EdgeInsets.fromLTRB(8, 0, 8, 6), child: Column(children: [
+        SizedBox(height: 32, child: Obx(() {
+          final duration = player.duration.value;
+          final position = player.position.value;
+          return SliderTheme(data: SliderTheme.of(context).copyWith(
+            trackHeight: 3, activeTrackColor: _questAccent, inactiveTrackColor: Colors.white24,
+            thumbColor: Colors.white, thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
+            overlayShape: const RoundSliderOverlayShape(overlayRadius: 20)),
+            child: Slider(value: position.toDouble().clamp(0, max(1, duration).toDouble()),
+              max: max(1, duration).toDouble(),
+              onChanged: duration > 0 ? (v) => player.seek(Duration(seconds: v.round()), isSeek: false) : null));
+        })),
+        Row(children: [
+          questIcon('播放 / 暂停', _questLoading ? Icons.hourglass_top_rounded :
+            player.playerStatus.isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
+            questTogglePlayback, accent: true),
+          questIcon('后退 10 秒', Icons.replay_10_rounded, () => player.seek(
+            Duration(milliseconds: max(0, player.positionInMilliseconds - 10000)), isSeek: false)),
+          questIcon('前进 10 秒', Icons.forward_10_rounded, () => player.seek(
+            Duration(milliseconds: min(player.durationInMilliseconds, player.positionInMilliseconds + 10000)), isSeek: false)),
+          const SizedBox(width: 8),
+          Obx(() => Text('${time(player.position.value)} / ${time(player.duration.value)}',
+            style: const TextStyle(fontSize: 13, color: Colors.white70))),
+          const Spacer(),
+          questIcon('播放设置', Icons.tune_rounded, questPlaybackSettings),
+        ]),
+      ])));
+  }
 
   Widget buildTabBar({
     bool needIndicator = true,

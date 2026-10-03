@@ -196,7 +196,11 @@ class VideoCardH extends StatelessWidget {
           ),
           if (videoItem.isLive != true) ...[
             const SizedBox(height: 3),
-            Row(
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Row(
+              mainAxisSize: MainAxisSize.min,
               spacing: 8,
               children: [
                 StatWidget(
@@ -208,7 +212,7 @@ class VideoCardH extends StatelessWidget {
                   value: videoItem.stat.danmu,
                 ),
               ],
-            ),
+            )),
           ],
         ],
       ),

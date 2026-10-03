@@ -1,20 +1,22 @@
 {
   "scope": "Basic PiliPlus Quest window; XR route removed",
-  "artifact": "VRBiliBili-Quest-basic-ui.apk",
-  "sha256": "40319a6bc2b5bfc884c6b5d4868d64690d2ffee8ef0f8f5224ed034b47c03c84",
+  "artifact": "VRBiliBili-Quest-redesign.apk",
+  "sha256": "28592cbcdc94fd59ea3df182fb53442907566834a9539836f41779722591ab42",
   "installedMatches": true,
   "device": "Quest 3",
   "journeyPassed": true,
   "checked": [
-    "persistent navigation and playback controls",
-    "control hit bounds 94-95 px tall",
-    "real video width 3840 height 2040",
+    "persistent navigation and compact playback toolbar",
+    "control hit bounds 84-85 px tall",
+    "real video width 1920 height 1080",
     "pause holds",
     "forward ten seconds",
     "wide/detail and settings",
-    "back and home"
+    "back and home",
+    "responsive recommendation statistics"
   ],
   "screenshots": "actual app window 1375x900",
   "dartAnalysis": "0 errors, 0 warnings, 1 style info",
-  "manualComfort": "await user review"
+  "manualComfort": "await user review",
+  "evidence": "reports/quest-ui-redesign-20261003/journey.txt"
 }
