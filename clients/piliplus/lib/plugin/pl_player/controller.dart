@@ -1,5 +1,4 @@
 import 'dart:async' show StreamSubscription, Timer;
-import 'package:PiliPlus/quest/spatial_player.dart';
 import 'dart:convert' show ascii, utf8;
 import 'dart:io' show Platform;
 import 'dart:math' show max, min;
@@ -1125,7 +1124,6 @@ class PlPlayerController with BlockConfigMixin, AudioNormalizationMixin {
 
   /// 播放视频
   Future<void> play({bool repeat = false, bool hideControls = true}) async {
-    if (SpatialPlayer.active) return;
     if (_playerCount == 0) return;
     // 播放时自动隐藏控制条
     controls = !hideControls;

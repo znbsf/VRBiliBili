@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 /** Runs actual Flutter accessibility actions, then observes native decoder counters. */
 public class QuestUiDriver extends Instrumentation {
+    private android.app.Activity targetActivity;
     private final List<String> steps = new ArrayList<>();
     @Override public void onCreate(Bundle args) { super.onCreate(args); start(); }
     private void wake() {
@@ -47,82 +48,72 @@ public class QuestUiDriver extends Instrumentation {
         if (!label.isEmpty()) labels.add(label.substring(0, Math.min(120, label.length())));
         for (int i = 0; i < n.getChildCount(); i++) collect(n.getChild(i), labels);
     }
-    private void command(String name) {
-        runOnMainSync(() -> {
-            if (SpatialSession.INSTANCE.getTestCommand() == null) throw new IllegalStateException("No spatial session");
-            SpatialSession.INSTANCE.getTestCommand().invoke(name);
-        });
-    }
-    private JSONObject waitState(File file, java.util.function.Predicate<JSONObject> predicate, long timeout) throws Exception {
-        long end = SystemClock.uptimeMillis() + timeout;
-        while (SystemClock.uptimeMillis() < end) {
-            wake();
-            if (file.exists()) {
-                try {
-                    JSONObject state = new JSONObject(new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8));
-                    if (predicate.test(state)) return state;
-                } catch (org.json.JSONException ignored) { }
-            }
-            SystemClock.sleep(300);
+    private void capture(String name) throws Exception {
+        android.graphics.Bitmap bitmap = getUiAutomation().takeScreenshot(targetActivity.getWindow());
+        if (bitmap == null) throw new Exception("Screenshot unavailable");
+        try (java.io.FileOutputStream out = new java.io.FileOutputStream(new File(getTargetContext().getFilesDir(), name))) {
+            bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, out);
         }
-        throw new Exception("Timed out waiting for " + file.getName());
+        bitmap.recycle();
+    }
+    private JSONObject state() throws Exception {
+        java.util.concurrent.CountDownLatch latch = new java.util.concurrent.CountDownLatch(1);
+        java.util.concurrent.atomic.AtomicReference<JSONObject> value = new java.util.concurrent.atomic.AtomicReference<>();
+        runOnMainSync(() -> MainActivity.Companion.getDebugChannel().invokeMethod("playerState", null, new io.flutter.plugin.common.MethodChannel.Result() {
+            public void success(Object result) { if (result instanceof java.util.Map) value.set(new JSONObject((java.util.Map) result)); latch.countDown(); }
+            public void error(String c, String m, Object d) { latch.countDown(); }
+            public void notImplemented() { latch.countDown(); }
+        }));
+        if (!latch.await(5, java.util.concurrent.TimeUnit.SECONDS) || value.get() == null) throw new Exception("No player state");
+        return value.get();
+    }
+    private void click(String label) throws Exception {
+        AccessibilityNodeInfo n = await(label, false, 15000);
+        if (n == null || !n.performAction(AccessibilityNodeInfo.ACTION_CLICK)) throw new Exception("Cannot click " + label);
+        SystemClock.sleep(700);
     }
     @Override public void onStart() {
-        Bundle result = new Bundle();
-        boolean passed = false;
+        Bundle result = new Bundle(); boolean passed = false;
         try {
-            File status = new File(getTargetContext().getFilesDir(), "spatial-status.json");
-            if (status.exists()) status.delete();
-            Intent intent = new Intent(getTargetContext(), MainActivity.class)
-                .setAction(Intent.ACTION_MAIN).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivitySync(intent);
+            targetActivity = startActivitySync(new Intent(getTargetContext(), MainActivity.class).setAction(Intent.ACTION_MAIN).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             AccessibilityNodeInfo card = await("", true, 35000);
-            if (card == null) throw new Exception("No real video card");
-            steps.add("video_card=" + card.getContentDescription());
-            if (!card.performAction(AccessibilityNodeInfo.ACTION_CLICK)) throw new Exception("Card action rejected");
-            steps.add("card_clicked");
-            AccessibilityNodeInfo play = await("播放", false, 8000);
-            if (play != null) { play.performAction(AccessibilityNodeInfo.ACTION_CLICK); steps.add("initial_play_clicked"); }
-            AccessibilityNodeInfo spatial = await("空间播放", false, 25000);
-            if (spatial == null) throw new Exception("Spatial playback button not found");
-            if (!spatial.performAction(AccessibilityNodeInfo.ACTION_CLICK)) throw new Exception("Spatial action rejected");
-            steps.add("spatial_button_clicked");
-            long end = SystemClock.uptimeMillis() + 30000;
-            while (SystemClock.uptimeMillis() < end) {
-                wake();
-                if (status.exists()) {
-                    String data = new String(Files.readAllBytes(status.toPath()), StandardCharsets.UTF_8);
-                    JSONObject state = new JSONObject(data);
-                    if (state.optInt("videoFrames") > 10 && state.optInt("audioBuffers") > 0) {
-                        steps.add("native_playback=" + data); passed = true; break;
-                    }
-                }
-                SystemClock.sleep(500);
+            if (card == null) throw new Exception("No video card");
+            capture("quest-home-ui.png");
+            card.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+            for (String label : new String[]{"返回上页", "返回主页", "播放 / 暂停", "放大画面", "播放设置"}) {
+                AccessibilityNodeInfo n = await(label, false, 12000);
+                if (n == null) throw new Exception("Missing control " + label);
+                android.graphics.Rect b = new android.graphics.Rect(); n.getBoundsInScreen(b);
+                if (b.height() < 58) throw new Exception("Small control " + label + b);
+                steps.add(label + b);
             }
-            if (!passed) throw new Exception("No native online video frames");
-            passed = false;
-            command("panels");
-            JSONObject panels = waitState(status, state -> state.optInt("catalogCount") > 0 && state.optInt("qualityCount") > 0 && state.optInt("commentCharacters") > 30, 25000);
-            steps.add("panels=" + panels);
-            command("quality");
-            JSONObject switched = waitState(status, state -> state.optInt("sourceChanges") > 0 && state.optBoolean("playing") && state.optInt("videoFrames") > 30, 35000);
-            steps.add("quality_switched=" + switched);
-            command("pause"); command("seek");
-            waitState(status, state -> Math.abs(state.optLong("positionMs") - 3000) < 250 && !state.optBoolean("playing"), 8000);
-            File handoff = new File(getTargetContext().getFilesDir(), "spatial-handoff.json");
-            if (handoff.exists()) handoff.delete();
-            command("finish");
-            JSONObject returned = waitState(handoff, state -> Math.abs(state.optLong("positionMs") - 3000) < 600 && !state.optBoolean("playing"), 15000);
-            if (returned.optLong("cid") != switched.optLong("cid")) throw new Exception("Returned to wrong video");
-            steps.add("returned_paused=" + returned);
-            passed = true;
+            if (find(getUiAutomation().getRootInActiveWindow(), "空间播放", false) != null) throw new Exception("XR entry still exists");
+            click("播放 / 暂停");
+            long end = SystemClock.uptimeMillis() + 30000;
+            JSONObject playing = state();
+            while (SystemClock.uptimeMillis() < end && (!playing.optBoolean("playing") || playing.optInt("width") == 0 || playing.optLong("positionMs") < 1200)) {
+                wake(); SystemClock.sleep(600); playing = state();
+            }
+            if (playing.optInt("width") == 0 || playing.optLong("positionMs") < 1200) throw new Exception("No decoded playback");
+            steps.add("playing=" + playing);
+            capture("quest-detail-ui.png");
+            click("播放 / 暂停"); JSONObject paused = state(); SystemClock.sleep(1200); JSONObject still = state();
+            if (still.optBoolean("playing") || Math.abs(still.optLong("positionMs") - paused.optLong("positionMs")) > 400) throw new Exception("Pause did not hold");
+            click("前进 10 秒"); JSONObject seek = state();
+            if (seek.optLong("positionMs") < paused.optLong("positionMs") + 8000) throw new Exception("Seek failed");
+            steps.add("paused_seek=" + seek);
+            click("放大画面"); capture("quest-wide-ui.png");
+            click("显示详情"); click("播放设置"); capture("quest-settings-ui.png"); click("关闭设置");
+            click("返回上页"); if (await("", true, 12000) == null) throw new Exception("Back failed");
+            await("", true, 12000).performAction(AccessibilityNodeInfo.ACTION_CLICK); click("返回主页");
+            if (await("", true, 12000) == null) throw new Exception("Home failed");
+            steps.add("back_and_home_passed"); passed = true;
         } catch (Exception e) {
-            result.putString("error", e.getMessage());
+            result.putString("error", e.toString());
             List<String> labels = new ArrayList<>(); collect(getUiAutomation().getRootInActiveWindow(), labels);
             result.putString("visible_labels", labels.toString());
         } finally {
-            result.putString("steps", steps.toString());
-            result.putBoolean("passed", passed);
+            result.putString("steps", steps.toString()); result.putBoolean("passed", passed);
             finish(passed ? -1 : 0, result);
         }
     }

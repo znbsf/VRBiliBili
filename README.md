@@ -1,8 +1,8 @@
-# VRBiliBili：PiliPlus 空间客户端
+# VRBiliBili：Quest 大屏 PiliPlus 客户端
 
-Quest 3 Android 客户端源码位于 [clients/piliplus](clients/piliplus)。PiliPlus 提供推荐、搜索、账号、详情、历史与稍后再看；同一 APK 内的 Meta Spatial SDK + Media3 原生播放器提供空间视频与辅助面板。原 HTML 原型仍保留为设计参考。
+当前目标是做好 Quest 3 上的基础 PiliPlus 移植。2026-10-03 根据实机反馈移除空间视频路线：同一普通 Android 窗口内完成找片、登录与播放，不再跳转原生 XR 场景。
 
-2026-10-03 按用户要求进入实际开发与实机测试。开发 APK 已安装到 Quest 3，已从真实推荐列表选片并进入原生空间播放，视频与音频均有解码计数证据。构建、安装、测试方式和验收边界见 [Quest 客户端说明](docs/QUEST-CLIENT.md)。
+源码位于 [clients/piliplus](clients/piliplus)。Quest 详情页使用主视频与右侧简介/评论，提供常驻返回、播放进度、大按钮、播放设置和放大画面模式。构建与验证见 [客户端说明](docs/QUEST-CLIENT.md)。原空间设计与 HTML 文件保留为历史参考，不代表当前开发范围。
 
 ## 打开原型
 

@@ -4,12 +4,10 @@ Vendored from https://github.com/bggRGjQaUbCoE/PiliPlus at
 `c102a6115c7ac040f6a0c6a1653944b81b82dcb4`. Original source and GPL license
 are retained. This directory is the actual Flutter/Android application.
 
-Quest additions use a distinct application ID (`io.github.vrbilibili.quest`),
-and an in-process native Meta Spatial SDK activity. PiliPlus owns discovery,
-accounts and playback resolution; the spatial activity owns the active decoder
-while visible. Signed media URLs stay in memory and are never put in Intent
-extras, preferences, diagnostics or source control. Returning transfers position
-and leaves playback paused. No website wrapping is involved.
+Quest uses a distinct application ID (`io.github.vrbilibili.quest`) and a
+Flutter large-window layout. Playback stays in the original media-kit player.
+The previously implemented Meta Spatial activity and its dependencies were removed
+at the user's request. Authentication and user data stay with the existing client.
 
 The project requires Flutter 3.47.5 with the upstream framework patches from
 `lib/scripts/` in an isolated SDK. Do not run upstream `patch.ps1` blindly: it
@@ -25,6 +23,4 @@ Pinned local dependency overrides:
 - media-kit stays locked to upstream fork commit
   `73771ec38176be2d984a3049c28177bce23b54a0`.
 
-Android uses AGP 8.11.1, Kotlin 2.2.21, Gradle 8.14.5 and Java 17. Meta Spatial
-SDK runtime 0.14.0 and Media3 1.5.1 are application dependencies. The Meta Gradle
-code-generation plugin is unnecessary because this app registers runtime panels.
+Android uses AGP 8.11.1, Kotlin 2.2.21, Gradle 8.14.5 and Java 17. The app has no Meta Spatial SDK or additional Media3 player dependency.

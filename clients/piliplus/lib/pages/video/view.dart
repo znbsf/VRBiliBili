@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
-import 'package:PiliPlus/quest/spatial_player.dart';
+import 'package:PiliPlus/quest/quest_device.dart';
+import 'package:PiliPlus/models/common/video/video_quality.dart';
 import 'dart:math';
 
 import 'package:PiliPlus/common/assets.dart';
@@ -167,13 +168,23 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     }
 
     videoSourceInit();
+    if (kDebugMode && QuestDevice.isQuest) {
+      QuestDevice.channel.setMethodCallHandler((call) async {
+        if (call.method != 'playerState') return null;
+        final p = videoDetailController.plPlayerController;
+        return {'positionMs': p.positionInMilliseconds, 'durationMs': p.durationInMilliseconds,
+          'playing': p.playerStatus.isPlaying,
+          'width': p.videoPlayerController?.state.width ?? 0,
+          'height': p.videoPlayerController?.state.height ?? 0};
+      });
+    }
 
     addObserverMobile(this);
   }
 
   // 获取视频资源，初始化播放器
   void videoSourceInit() {
-    videoDetailController.queryVideoUrl(autoFullScreenFlag: true);
+    videoDetailController.queryVideoUrl(autoFullScreenFlag: !QuestDevice.isQuest);
     if (videoDetailController.autoPlay) {
       plPlayerController = videoDetailController.plPlayerController;
       plPlayerController!
@@ -286,28 +297,49 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     }
   }
 
-  bool _openingSpatial = false;
-  Future<void> openSpatial() async {
-    if (_openingSpatial) return;
-    _openingSpatial = true;
+  bool _questWide = false;
+  bool _questLoading = false;
+  Future<void> questTogglePlayback() async {
+    if (_questLoading) return;
+    _questLoading = true;
     try {
-      final deadline = DateTime.now().add(const Duration(seconds: 30));
-      while (videoDetailController.isQuerying) {
-        if (DateTime.now().isAfter(deadline)) throw StateError('load timeout');
-        await Future<void>.delayed(const Duration(milliseconds: 100));
-      }
-      if (videoDetailController.videoUrl == null) await videoDetailController.queryVideoUrl();
-      if (!videoDetailController.autoPlay || plPlayerController == null) await handlePlay();
       final player = videoDetailController.plPlayerController;
-      while (player.processing) {
-        if (DateTime.now().isAfter(deadline)) throw StateError('load timeout');
-        await Future<void>.delayed(const Duration(milliseconds: 100));
-      }
-      await SpatialPlayer.open(player, detail: videoDetailController,
-          intro: videoDetailController.isUgc ? ugcIntroController : null);
-    } catch (_) {
-      SmartDialog.showToast('空间播放未能打开，请确认网络和视频可用后重试');
-    } finally { _openingSpatial = false; }
+      if (!videoDetailController.autoPlay || plPlayerController == null) {
+        final deadline = DateTime.now().add(const Duration(seconds: 25));
+        while (videoDetailController.isQuerying && DateTime.now().isBefore(deadline)) {
+          await Future<void>.delayed(const Duration(milliseconds: 100));
+        }
+        await handlePlay();
+      } else if (player.playerStatus.isPlaying) { await player.pause(); }
+      else { await player.play(); }
+    } finally { _questLoading = false; }
+  }
+
+  void questPlaybackSettings() {
+    final player = videoDetailController.plPlayerController;
+    showModalBottomSheet<void>(context: context, isScrollControlled: true,
+      constraints: const BoxConstraints(maxWidth: 700), builder: (context) => SafeArea(
+        child: Padding(padding: const EdgeInsets.all(24), child: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(children: [const Text('播放设置', style: TextStyle(fontSize: 24)), const Spacer(),
+            IconButton(iconSize: 30, tooltip: '关闭设置', onPressed: () => Navigator.pop(context), icon: const Icon(Icons.close))]),
+          const SizedBox(height: 16), const Text('播放速度', style: TextStyle(fontSize: 20)),
+          Wrap(spacing: 12, runSpacing: 12, children: [for (final speed in [.75, 1.0, 1.25, 1.5, 2.0])
+            FilledButton.tonal(style: FilledButton.styleFrom(minimumSize: const Size(92, 60)),
+              onPressed: () { player.setPlaybackSpeed(speed); Navigator.pop(context); }, child: Text('$speed ×', style: const TextStyle(fontSize: 20)))]),
+          const SizedBox(height: 18), const Text('画质', style: TextStyle(fontSize: 20)),
+          if (videoDetailController.currentVideoQa.value != null)
+            Wrap(spacing: 12, runSpacing: 12, children: [for (final id in videoDetailController.data.dash?.video?.map((v) => v.id).toSet() ?? <int>{})
+              FilledButton.tonal(style: FilledButton.styleFrom(minimumSize: const Size(120, 60)), onPressed: () {
+                final quality = VideoQuality.fromCode(id);
+                player.cacheVideoQa = quality.code;
+                videoDetailController.currentVideoQa.value = quality;
+                videoDetailController.updatePlayer(); Navigator.pop(context);
+              }, child: Text(VideoQuality.fromCode(id).desc, style: const TextStyle(fontSize: 20)))]),
+          const SizedBox(height: 18),
+          Obx(() => SwitchListTile(title: const Text('显示弹幕', style: TextStyle(fontSize: 20)),
+            value: player.enableShowDanmaku.value, onChanged: (value) => player.enableShowDanmaku.value = value)),
+        ]))),
+      ));
   }
 
   // 继续播放或重新播放
@@ -338,20 +370,21 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
       ..addStatusLister(playerListener)
       ..addPositionListener(positionListener);
     if (plPlayerController.preInitPlayer) {
-      if (plPlayerController.autoEnterFullScreen) {
+      if (plPlayerController.autoEnterFullScreen && !QuestDevice.isQuest) {
         plPlayerController.triggerFullScreen();
       }
       return plPlayerController.play();
     } else {
       return videoDetailController.playerInit(
         autoplay: true,
-        autoFullScreenFlag: true,
+        autoFullScreenFlag: !QuestDevice.isQuest,
       );
     }
   }
 
   @override
   void dispose() {
+    if (kDebugMode && QuestDevice.isQuest) QuestDevice.channel.setMethodCallHandler(null);
     plPlayerController
       ?..removeStatusLister(playerListener)
       ..removePositionListener(positionListener);
@@ -1282,6 +1315,8 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     Widget child;
     if (videoDetailController.plPlayerController.isPipMode) {
       child = plPlayer(width: maxWidth, height: maxHeight, isPipMode: true);
+    } else if (QuestDevice.isQuest) {
+      child = questDetail();
     } else if (!videoDetailController.horizontalScreen) {
       child = childWhenDisabled;
     } else if (maxWidth / maxHeight >= kScreenRatio) {
@@ -1311,6 +1346,63 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
         ? Theme(data: theme, child: child)
         : child;
   }
+
+  Widget questDetail() => SimpleScaffold(
+    body: SafeArea(child: LayoutBuilder(builder: (context, box) {
+      final player = videoDetailController.plPlayerController;
+      Widget action(String label, IconData icon, VoidCallback callback) => FilledButton.tonalIcon(
+        style: FilledButton.styleFrom(minimumSize: const Size(100, 58), textStyle: const TextStyle(fontSize: 18)),
+        onPressed: callback, icon: Icon(icon, size: 26), label: Text(label),
+      );
+      return Column(children: [
+        Padding(padding: const EdgeInsets.all(10), child: Row(children: [
+          action('返回上页', Icons.arrow_back, () => Get.back()),
+          const SizedBox(width: 10),
+          action('返回主页', Icons.home_outlined, player.onCloseAll),
+          const Spacer(),
+          action('播放设置', Icons.settings_outlined, questPlaybackSettings),
+          const SizedBox(width: 10),
+          action(_questWide ? '显示详情' : '放大画面', Icons.aspect_ratio, () => setState(() => _questWide = !_questWide)),
+        ])),
+        Expanded(child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          Expanded(flex: 7, child: LayoutBuilder(builder: (context, area) {
+            final w = min(area.maxWidth - 20, max(120.0, area.maxHeight - 150) * 16 / 9);
+            return Column(children: [
+              Expanded(child: Center(child: SizedBox(width: w, height: w * 9 / 16,
+                child: videoPlayer(width: w, height: w * 9 / 16)))),
+              Obx(() {
+                final duration = player.duration.value;
+                final position = player.position.value;
+                return Row(children: [
+                  const SizedBox(width: 14), Text('${position ~/ 60}:${(position % 60).toString().padLeft(2, '0')}'),
+                  Expanded(child: Slider(value: position.toDouble().clamp(0, duration.toDouble().clamp(1, double.infinity)),
+                    max: duration.toDouble().clamp(1, double.infinity),
+                    onChanged: duration > 0 ? (v) => player.seek(Duration(seconds: v.round()), isSeek: false) : null)),
+                  Text('${duration ~/ 60}:${(duration % 60).toString().padLeft(2, '0')}'), const SizedBox(width: 14),
+                ]);
+              }),
+              Padding(padding: const EdgeInsets.fromLTRB(10, 0, 10, 14), child: Row(children: [
+                Expanded(child: action('后退 10 秒', Icons.replay_10, () => player.seek(Duration(milliseconds: max(0, player.positionInMilliseconds - 10000)), isSeek: false))),
+                const SizedBox(width: 8),
+                Expanded(child: action('播放 / 暂停', Icons.play_arrow, questTogglePlayback)),
+                const SizedBox(width: 8),
+                Expanded(child: action('前进 10 秒', Icons.forward_10, () => player.seek(Duration(milliseconds: min(player.durationInMilliseconds, player.positionInMilliseconds + 10000)), isSeek: false))),
+              ])),
+            ]);
+          })),
+          if (!_questWide) const VerticalDivider(width: 1),
+          if (!_questWide) Expanded(flex: 4, child: LayoutBuilder(builder: (context, area) => Column(children: [
+            buildTabBar(),
+            Expanded(child: tabBarView(controller: videoDetailController.tabCtr, children: [
+              videoIntro(width: area.maxWidth, height: area.maxHeight - 48),
+              if (videoDetailController.showReply) videoReplyPanel(),
+              if (_shouldShowSeasonPanel) seasonPanel,
+            ])),
+          ]))),
+        ])),
+      ]);
+    })),
+  );
 
   Widget buildTabBar({
     bool needIndicator = true,
@@ -1506,15 +1598,8 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
           }
           return const SizedBox.shrink();
         }),
-        manualPlayerWidget(height),
-        if (Platform.isAndroid)
-          Positioned(top: 52, right: 12,
-            child: FilledButton.icon(
-              onPressed: openSpatial,
-              icon: const Icon(Icons.view_in_ar),
-              label: const Text('空间播放'),
-            ),
-          ),
+        if (!QuestDevice.isQuest) manualPlayerWidget(height),
+
 
         if (videoDetailController.plPlayerController.enableBlock ||
             videoDetailController.continuePlayingPart)

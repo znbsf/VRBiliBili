@@ -1,13 +1,20 @@
 {
-  "artifact": "VRBiliBili-Quest3-development.apk",
-  "sha256": "0bac08754767cb7265ca78f816c1cc37cd652ace9b1e234ed73fd914f7e686b1",
-  "installedSha256": "0bac08754767cb7265ca78f816c1cc37cd652ace9b1e234ed73fd914f7e686b1",
+  "scope": "Basic PiliPlus Quest window; XR route removed",
+  "artifact": "VRBiliBili-Quest-basic-ui.apk",
+  "sha256": "40319a6bc2b5bfc884c6b5d4868d64690d2ffee8ef0f8f5224ed034b47c03c84",
   "installedMatches": true,
-  "package": "io.github.vrbilibili.quest.debug",
   "device": "Quest 3",
-  "smoke": 7,
-  "onlineJourneyPassed": true,
-  "manualWearerAcceptance": "pending",
-  "signed": "development key",
-  "build": "debug-arm64"
+  "journeyPassed": true,
+  "checked": [
+    "persistent navigation and playback controls",
+    "control hit bounds 94-95 px tall",
+    "real video width 3840 height 2040",
+    "pause holds",
+    "forward ten seconds",
+    "wide/detail and settings",
+    "back and home"
+  ],
+  "screenshots": "actual app window 1375x900",
+  "dartAnalysis": "0 errors, 0 warnings, 1 style info",
+  "manualComfort": "await user review"
 }

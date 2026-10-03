@@ -35,10 +35,6 @@
         </intent>
     </queries>
 
-    <uses-feature android:name="android.hardware.vr.headtracking" android:required="false" />
-    <uses-feature android:name="com.oculus.feature.PASSTHROUGH" android:required="false" />
-    <uses-feature android:name="oculus.software.handtracking" android:required="false" />
-    <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
     <application xmlns:tools="http://schemas.android.com/tools"
         android:name="${applicationName}"
         android:allowBackup="false"
@@ -50,17 +46,6 @@
         <meta-data
             android:name="io.flutter.embedding.android.EnableImpeller"
             android:value="false" />
-        <uses-native-library android:name="libossdk.oculus.so" android:required="false" />
-        <meta-data android:name="com.oculus.supportedDevices" android:value="quest3|quest3s|questpro" />
-        <meta-data android:name="com.oculus.handtracking.version" android:value="V2.0" />
-        <meta-data android:name="com.oculus.vr.focusaware" android:value="true" />
-        <activity android:name=".SpatialPlayerActivity"
-            android:exported="false" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode">
-            <intent-filter><action android:name="android.intent.action.MAIN" />
-                <category android:name="com.oculus.intent.category.VR" />
-                <category android:name="android.intent.category.DEFAULT" /></intent-filter>
-        </activity>
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

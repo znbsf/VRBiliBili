@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:PiliPlus/quest/spatial_player.dart';
+import 'package:PiliPlus/quest/quest_device.dart';
 
 import 'package:PiliPlus/build_config.dart';
 import 'package:PiliPlus/common/constants.dart';
@@ -101,14 +101,14 @@ void main() async {
     if (kDebugMode) debugPrint('GStorage init error: $e');
     exit(0);
   }
-  if (Platform.isAndroid &&
-      await SpatialPlayer.channel.invokeMethod<bool>('isQuest') == true &&
-      GStorage.setting.get('questDefaultsV1') != true) {
+  QuestDevice.isQuest = Platform.isAndroid &&
+      await QuestDevice.channel.invokeMethod<bool>('isQuest') == true;
+  if (QuestDevice.isQuest && GStorage.setting.get('questDefaultsV2') != true) {
     await GStorage.setting.putAll({
       SettingBoxKey.horizontalScreen: true,
-      SettingBoxKey.uiScale: 1.15,
+      SettingBoxKey.uiScale: Pref.uiScale <= 1.15 ? 1.3 : Pref.uiScale,
       SettingBoxKey.enableSlideVolumeBrightness: false,
-      'questDefaultsV1': true,
+      'questDefaultsV2': true,
     });
   }
   ScaledWidgetsFlutterBinding.instance.scaleFactor = Pref.uiScale;
@@ -293,6 +293,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final (light, dark) = getAllTheme();
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: Constants.appName,
       theme: light,
       darkTheme: dark,
