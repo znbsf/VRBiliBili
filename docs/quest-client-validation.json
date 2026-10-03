@@ -1,0 +1,13 @@
+{
+  "artifact": "VRBiliBili-Quest3-development.apk",
+  "sha256": "0bac08754767cb7265ca78f816c1cc37cd652ace9b1e234ed73fd914f7e686b1",
+  "installedSha256": "0bac08754767cb7265ca78f816c1cc37cd652ace9b1e234ed73fd914f7e686b1",
+  "installedMatches": true,
+  "package": "io.github.vrbilibili.quest.debug",
+  "device": "Quest 3",
+  "smoke": 7,
+  "onlineJourneyPassed": true,
+  "manualWearerAcceptance": "pending",
+  "signed": "development key",
+  "build": "debug-arm64"
+}

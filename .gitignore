@@ -45,3 +45,9 @@ Thumbs.db
 /tools/Open-SpatialEditor.cmd
 /tools/Open-UnityEditor.cmd
 /tools/Open-XRSimulator.cmd
+
+# Android / Flutter generated state
+**/.dart_tool/
+**/.gradle/
+**/.flutter-plugins*
+**/ephemeral/

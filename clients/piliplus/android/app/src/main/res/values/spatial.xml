@@ -1,0 +1,20 @@
+<resources>
+    <item type="id" name="spatial_handle_main" />
+    <item type="id" name="spatial_handle_episodes" />
+    <item type="id" name="spatial_handle_comments" />
+    <item type="id" name="spatial_video" />
+    <item type="id" name="spatial_controls" />
+    <item type="id" name="spatial_episodes" />
+    <item type="id" name="spatial_comments" />
+    <item type="id" name="spatial_overlay" />
+    <style name="SpatialOverlayTheme" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+    </style>
+    <style name="SpatialPanelTheme" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">#FB7299</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+</resources>

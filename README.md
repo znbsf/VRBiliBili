@@ -1,8 +1,8 @@
-# VRBiliBili：PiliPlus 空间版原型
+# VRBiliBili：PiliPlus 空间客户端
 
-以 [PiliPlus](https://github.com/bggRGjQaUbCoE/PiliPlus) 为第三方客户端基础，探索 Quest 3 空间大屏、多组件摆放与可选空间弹幕。当前仓库包含设计、可点击的桌面原型与验证工具，尚无 PiliPlus 业务源码副本、业务 APK 或 Quest 验收结果。
+Quest 3 Android 客户端源码位于 [clients/piliplus](clients/piliplus)。PiliPlus 提供推荐、搜索、账号、详情、历史与稍后再看；同一 APK 内的 Meta Spatial SDK + Media3 原生播放器提供空间视频与辅助面板。原 HTML 原型仍保留为设计参考。
 
-阶段顺序为功能/UI 原型评审 → 头显等比例与输入验证 → 实施。首版围绕发现/搜索、详情、空间播放、稍后再看与历史续播；主视频始终不透明，最多两个辅助面板。河流弹幕是有条件试用，跳出/朗读为实验预览。最终平台路线和舒适度须由后续验证决定。
+2026-10-03 按用户要求进入实际开发与实机测试。开发 APK 已安装到 Quest 3，已从真实推荐列表选片并进入原生空间播放，视频与音频均有解码计数证据。构建、安装、测试方式和验收边界见 [Quest 客户端说明](docs/QUEST-CLIENT.md)。
 
 ## 打开原型
 
@@ -49,4 +49,4 @@ node tools/prototype-robustness-check.mjs --output captures/robustness-review
 | [开发环境边界](docs/DEVELOPMENT-ENVIRONMENT.md) | 工具验证概况与仍需设备/许可的事项 |
 | [调研快照](docs/research-snapshot.json) | 历史上游版本与来源，不代表实时状态 |
 
-本机安装目录、官方示例副本、完整机器环境记录、原始检索/测试日志、备份、APK 和交接包保留在本地，不纳入仓库。技术验证启动后再固定 PiliPlus 上游提交与真实依赖；目前未选定最终空间实现路线。
+本机安装目录、官方示例副本、完整机器环境记录、原始检索/测试日志、备份、APK 和交接包保留在本地，不纳入仓库。客户端上游与依赖已固定，来源见 [客户端来源说明](clients/piliplus/VRBILIBILI-UPSTREAM.md)。
