@@ -2,7 +2,7 @@
 
 面向 Meta Quest 3 的实验性 Bilibili 客户端，基于 PiliPlus。选片、账号和普通播放使用 PiliPlus；观看页提供大尺寸播放控件，以及固定屏幕的全屏影院入口。影院支持深色／浅色环境、纯画面模式和屏幕大小调整。
 
-当前源码已合入本地缓存与影院返回的进度恢复修复。2026-10-04 ARM64 本地测试候选为 `2.1.5-quest.20261004.4+2026100404`，关于页显示基础提交、补丁 SHA256 和构建标签。**含 Meta Spatial SDK 的公开 APK Release 仍待组合许可依据确认；目前没有可下载的正式 APK，不以源码压缩包代替 APK。** 详见 [二进制分发核查](docs/BINARY-DISTRIBUTION-REVIEW.md) 与 [本轮交付验收](docs/QUEST-ARM64-DELIVERY.md)。
+当前源码已合入本地缓存与影院返回的进度恢复修复。真实 Quest 的面板双 CID 隔离及新进程续播已通过；沉浸影院进出仍因未佩戴时系统睡眠阻断，需要用户佩戴后继续验收。2026-10-04 ARM64 本地测试候选为 `2.1.5-quest.20261004.4+2026100404`，关于页显示基础提交、补丁 SHA256 和构建标签。**含 Meta Spatial SDK 的公开 APK Release 仍待组合许可依据确认；目前没有可下载的正式 APK，不以源码压缩包代替 APK。** 详见 [二进制分发核查](docs/BINARY-DISTRIBUTION-REVIEW.md) 与 [本轮交付验收](docs/QUEST-ARM64-DELIVERY.md)。
 
 ## 应用截图
 
@@ -10,7 +10,7 @@
 
 ![Quest 3 实际应用窗口：原创离线片段播放](docs/images/app-offline-quest3.png)
 
-Quest 3 的实际 MainActivity 窗口，来自本轮 Q1 候选。它证明普通播放器界面与真实素材解码，不是 XR 合成器的双眼画面。素材实际为 320×180；1080P 为测试目录元数据。
+Quest 3 的实际 MainActivity 窗口，来自 Q4 候选的 R5 真机播放验证。它证明普通播放器界面与真实素材解码，不是 XR 合成器的双眼画面。素材实际为 320×180；1080P 为测试目录元数据。
 
 ![离线片段播放及影院返回后的暂停状态：模拟器真实应用截图](docs/images/app-offline-recovery-simulator.png)
 

@@ -39,11 +39,11 @@
     "prepare": true,
     "seed": false
   },
-  "actual_MediaKit_decoded": false,
+  "actual_MediaKit_decoded": true,
   "actual_new_CinemaActivity_session_decoded": false,
   "actual_paused_return_persisted": false,
-  "two_CID_isolation": false,
-  "new_process_resume": false,
+  "two_CID_isolation": true,
+  "new_process_resume": true,
   "headset_comfort_controller_rays_and_tracking_alignment": "requires wearer; not passed by automation",
   "public_release": "blocked pending positive combination-license basis and native corresponding-source/notice obligations; no source-only release substitution",
   "prior_Q1_limited_evidence": {
@@ -52,5 +52,37 @@
     "actual_new_CinemaActivity_session": "CID910041000001, session11994896-15bd-4f3a-9419-2dbe66dd5146, firstFrame=true, sceneReady=true, videoFrames13 audioBuffers66 playing=true",
     "later_state": "paused at5091ms; trackingAligned=false, frames54 audioBuffers227; does not establish pause cause alone",
     "coverage": "Q1 only, not a passing Q4 sequence or sustained/subjective XR acceptance"
-  }
+  },
+  "initial_Q4_attempt": {
+    "phases": {
+      "prepare": true,
+      "seed": false
+    },
+    "actual_MediaKit_decoded": false,
+    "two_CID_isolation": false,
+    "new_process_resume": false
+  },
+  "installed_application_source_commit": "d73f75251aed9866e909f3348bbc2f5d490541d8",
+  "source_files_are_frozen_build_inputs": true,
+  "post_delivery_application_source_changed": false,
+  "post_delivery_test_source_sha256": "891d5abf0f66ae1b8d3ef9025719c10d1d32323c53f5e9e39d8e35a60af0d797",
+  "post_delivery_test_apk_sha256": "70d204e5ebbe3ff4979329db5a5c591ae43b59cecb9092d0a5693019ed3f168e",
+  "latest_passed_scope": "real Quest 2D panel playback/two-CID normal-route persistence/new-process decoder restore; immersive handoff not passed",
+  "complete_immersive_end_to_end_passed": false,
+  "latest_panel_evidence": {
+    "seed_pid": 9536,
+    "restart_pid": 10360,
+    "A_CID": 910041000013,
+    "B_CID": 910041000014,
+    "A_saved_ms": 10750,
+    "B_saved_ms": 21166,
+    "A_first_decoder_ms": 11083,
+    "B_first_decoder_ms": 21750,
+    "first_decoder_since_loaded_ms": [
+      507,
+      507
+    ],
+    "B_kept_A_ms": 11083
+  },
+  "hardware_pause_evidence": "HEADSET_UNMOUNTED -> sleep; real MainActivity and new CinemaActivity paused by system; exact Dart pause caller not journaled"
 }
