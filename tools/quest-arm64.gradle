@@ -1,0 +1,10 @@
+// Explicit Quest ARM64 packaging for direct Gradle builds. Does not choose a key.
+// Example: gradlew -I ../../../tools/quest-arm64.gradle -Ptarget-platform=android-arm64 :app:assembleDebug
+allprojects { project ->
+    project.plugins.withId('com.android.application') {
+        project.extensions.getByName('androidComponents').finalizeDsl { android ->
+            android.defaultConfig.ndk.abiFilters.clear()
+            android.defaultConfig.ndk.abiFilters.add('arm64-v8a')
+        }
+    }
+}

@@ -5,7 +5,7 @@ allprojects {
     plugins.withId('com.android.application') {
         androidComponents.finalizeDsl { androidDsl ->
             def runner = project.findProperty('questRegressionRunner') ?: 'CinemaPreviewRegression'
-            if (!(runner in ['CinemaPreviewRegression', 'CinemaFlutterHandoffRegression'])) {
+            if (!(runner in ['CinemaPreviewRegression', 'CinemaFlutterHandoffRegression', 'CinemaCacheRecoveryRegression', 'QuestHardwareRecoveryRegression'])) {
                 throw new GradleException('Unknown offline regression runner')
             }
             androidDsl.defaultConfig.testInstrumentationRunner =

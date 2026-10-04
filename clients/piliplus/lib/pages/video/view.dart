@@ -5,6 +5,7 @@ import 'package:PiliPlus/models/common/video/video_quality.dart';
 import 'dart:math';
 
 import 'package:PiliPlus/common/assets.dart';
+import 'package:PiliPlus/build_config.dart';
 import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/custom_icon.dart';
 import 'package:PiliPlus/common/widgets/flutter/pop_scope.dart';
@@ -51,11 +52,13 @@ import 'package:PiliPlus/pages/video/widgets/intro_layout.dart';
 import 'package:PiliPlus/pages/video/widgets/player_focus.dart';
 import 'package:PiliPlus/plugin/pl_player/controller.dart';
 import 'package:PiliPlus/plugin/pl_player/models/fullscreen_mode.dart';
+import 'package:PiliPlus/plugin/pl_player/models/data_status.dart';
 import 'package:PiliPlus/plugin/pl_player/models/play_repeat.dart';
 import 'package:PiliPlus/plugin/pl_player/models/play_status.dart';
 import 'package:PiliPlus/plugin/pl_player/utils/fullscreen.dart';
 import 'package:PiliPlus/plugin/pl_player/view/view.dart';
 import 'package:PiliPlus/services/service_locator.dart';
+import 'package:PiliPlus/services/download/download_service.dart';
 import 'package:PiliPlus/services/shutdown_timer_service.dart'
     show shutdownTimerService;
 import 'package:PiliPlus/utils/accounts.dart';
@@ -176,35 +179,89 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
           final detail = videoDetailController;
           final oldCid = detail.cid.value;
           final oldQuerying = detail.isQuerying;
+          final oldStatus = detail.plPlayerController.dataStatus.value;
           final rejected = <String, bool>{};
           try {
             detail.isQuerying = true;
-            try { await CinemaPlayer.open(detail); }
-            on PlatformException catch (error) { rejected['querying'] = error.code == 'loading'; }
+            try {
+              await CinemaPlayer.open(detail);
+            } on PlatformException catch (error) {
+              rejected['querying'] = error.code == 'loading';
+            }
             detail.isQuerying = false;
             detail.cid.value = oldCid + 1;
-            try { await CinemaPlayer.open(detail); }
-            on PlatformException catch (error) { rejected['mismatchedCid'] = error.code == 'loading'; }
+            try {
+              await CinemaPlayer.open(detail);
+            } on PlatformException catch (error) {
+              rejected['mismatchedCid'] = error.code == 'loading';
+            }
+            detail.cid.value = oldCid;
+            for (final status in [
+              DataStatus.none,
+              DataStatus.loading,
+              DataStatus.error,
+            ]) {
+              detail.plPlayerController.dataStatus.value = status;
+              try {
+                await CinemaPlayer.open(detail);
+              } on PlatformException catch (error) {
+                rejected[status.name] = error.code == 'loading';
+              }
+            }
             return {...rejected, 'cinemaActive': CinemaPlayer.active};
           } finally {
             detail.cid.value = oldCid;
             detail.isQuerying = oldQuerying;
+            detail.plPlayerController.dataStatus.value = oldStatus;
           }
+        }
+        if (call.method == 'pauseForCacheRecovery') {
+          await videoDetailController.plPlayerController.pause();
+          return {'paused': true};
+        }
+        if (call.method == 'downloadCacheState') {
+          final service = Get.find<DownloadService>();
+          await service.waitForInitialization;
+          return {
+            'completed': service.downloadList
+                .map((entry) => entry.cid)
+                .toList(),
+            'waiting': service.waitDownloadQueue
+                .map((entry) => entry.cid)
+                .toList(),
+          };
         }
         if (call.method != 'playerState') return null;
         final p = videoDetailController.plPlayerController;
         final probeCid = (call.arguments as Map?)?['probeCid'] ?? p.cid;
-        return {'positionMs': p.positionInMilliseconds, 'durationMs': p.durationInMilliseconds,
+        return {
+          'buildVersionName': BuildConfig.versionName,
+          'buildVersionCode': BuildConfig.versionCode,
+          'buildBaseCommit': BuildConfig.commitHash,
+          'buildLocalPatch': BuildConfig.localPatch,
+          'buildLabel': BuildConfig.buildLabel,
+          'positionMs': p.positionInMilliseconds,
+          'durationMs': p.durationInMilliseconds,
           'playing': p.playerStatus.isPlaying,
           'rawPlaying': p.videoPlayerController?.state.playing ?? false,
-          'cid': p.cid, 'detailCid': videoDetailController.cid.value,
-          'processing': p.processing, 'dataStatus': p.dataStatus.value.name,
+          'cid': p.cid,
+          'detailCid': videoDetailController.cid.value,
+          'processing': p.processing,
+          'dataStatus': p.dataStatus.value.name,
           'cinemaActive': CinemaPlayer.active,
           'playedTimeMs': videoDetailController.playedTime?.inMilliseconds,
-          'cachedPositionMs': p.cid == null ? null : videoDetailController.watchProgress.get(p.cid.toString()),
-          'cachedProbePositionMs': probeCid == null ? null : videoDetailController.watchProgress.get(probeCid.toString()),
+          'cachedPositionMs': p.cid == null
+              ? null
+              : GStorage.readWatchProgress(p.cid!),
+          'cachedProbePositionMs': probeCid == null
+              ? null
+              : GStorage.readWatchProgress(probeCid as int),
+          'restoreStartMs': videoDetailController.defaultST?.inMilliseconds,
+          'playbackRate': p.videoPlayerController?.state.rate ?? p.playbackSpeed,
+          'watchProgressPath': GStorage.watchProgress.path,
           'width': p.videoPlayerController?.state.width ?? 0,
-          'height': p.videoPlayerController?.state.height ?? 0};
+          'height': p.videoPlayerController?.state.height ?? 0,
+        };
       });
     }
 

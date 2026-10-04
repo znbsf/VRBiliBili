@@ -1,0 +1,29 @@
+[
+  {
+    "path": "docs/images/app-offline-recovery-simulator.png",
+    "sha256": "2f1470106c149d71a70746fe1bdca18b710bf99c553615d3f2982f3d4107d2a2",
+    "capture_date": "2026-10-04",
+    "source": "actual app in isolated Meta Spatial Simulator; unchanged original screenshot",
+    "media": "original generated six-second color/tone fixture",
+    "privacy_review": "no account/avatar/watch history/credential visible",
+    "coverage": "Flutter local playback/return or native non-XR controls preview; not physical headset XR/controller/comfort"
+  },
+  {
+    "path": "docs/images/app-native-controls-simulator.png",
+    "sha256": "e3871d3145efab791ed72dd246aaf78b815ddfa0d47d8834d3157d6f8e251486",
+    "capture_date": "2026-10-04",
+    "source": "actual app in isolated Meta Spatial Simulator; unchanged original screenshot",
+    "media": "original generated six-second color/tone fixture",
+    "privacy_review": "no account/avatar/watch history/credential visible",
+    "coverage": "Flutter local playback/return or native non-XR controls preview; not physical headset XR/controller/comfort"
+  },
+  {
+    "path": "docs/images/app-offline-quest3.png",
+    "sha256": "3f95ba6741ce9d922d5dcd1f2f8c3210e2c4e49aff5b904006268cd9fa97caf9",
+    "capture_date": "2026-10-04",
+    "source": "actual Quest 3 MainActivity window, Q1 candidate 2.1.5-quest.20261004.1; original unmodified screenshot",
+    "media": "original generated sixty-second color/tone fixture, 320x180",
+    "privacy_review": "no account/avatar/watch history/credential visible",
+    "coverage": "actual MediaKit decode; does not capture XR compositor or prove controller/comfort"
+  }
+]

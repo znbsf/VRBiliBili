@@ -95,8 +95,15 @@ class DownloadService extends GetxService {
             final entry = BiliDownloadEntryInfo.fromJson(jsonDecode(entryJson))
               ..pageDirPath = pageDir.path
               ..entryDirPath = entryDir.path;
+            // Reject individual broken records before list sorting or UI access.
+            if (entry.cid <= 0 ||
+                entry.sortKey < 0 ||
+                (entry.pageData == null &&
+                    (entry.ep == null || entry.source == null))) {
+              continue;
+            }
             if (entry.isCompleted) {
-              result.add(entry);
+              if (await _hasCompletedMedia(entry)) result.add(entry);
             } else {
               waitDownloadQueue.add(entry..status = DownloadStatus.wait);
             }
@@ -106,6 +113,33 @@ class DownloadService extends GetxService {
     }
 
     return result;
+  }
+
+  Future<bool> _hasCompletedMedia(BiliDownloadEntryInfo entry) async {
+    final tag = entry.typeTag;
+    if (tag == null ||
+        tag.isEmpty ||
+        tag == '.' ||
+        tag == '..' ||
+        tag.contains('/') ||
+        tag.contains('\\') ||
+        path.isAbsolute(tag)) {
+      return false;
+    }
+    final names = switch (entry.mediaType) {
+      1 => [PathUtils.videoNameType1],
+      2 => [
+        PathUtils.videoNameType2,
+        if (entry.hasDashAudio) PathUtils.audioNameType2,
+      ],
+      _ => <String>[],
+    };
+    if (names.isEmpty) return false;
+    for (final name in names) {
+      final file = File(path.join(entry.entryDirPath, tag, name));
+      if (!await file.exists() || await file.length() == 0) return false;
+    }
+    return true;
   }
 
   void downloadVideo(

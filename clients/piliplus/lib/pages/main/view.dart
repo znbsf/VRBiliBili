@@ -1,4 +1,5 @@
 import 'package:PiliPlus/quest/quest_device.dart';
+import 'package:PiliPlus/build_config.dart';
 import 'dart:io';
 
 import 'package:PiliPlus/common/assets.dart';
@@ -22,6 +23,7 @@ import 'package:PiliPlus/utils/mobile_observer.dart';
 import 'package:PiliPlus/utils/platform_utils.dart';
 import 'package:PiliPlus/utils/storage.dart';
 import 'package:PiliPlus/utils/storage_key.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart';
@@ -56,6 +58,19 @@ class _MainAppState extends PopScopeState<MainApp>
   void initState() {
     super.initState();
     addObserverMobile(this);
+    if (kDebugMode && QuestDevice.isQuest) {
+      QuestDevice.channel.setMethodCallHandler((call) async {
+        if (call.method != 'probeCacheKeys') return null;
+        final cids = (call.arguments as Map?)?['probeCids'] as List? ?? [];
+        return {
+          'ready': true,
+          'occupied': cids
+              .whereType<int>()
+              .where((cid) => GStorage.watchProgress.containsKey(cid.toString()))
+              .toList(),
+        };
+      });
+    }
     if (Platform.isMacOS) {
       HardwareKeyboard.instance.addHandler(_handleKeyEvent);
     }
@@ -413,6 +428,9 @@ class _MainAppState extends PopScopeState<MainApp>
         const Icon(Icons.smart_display_rounded, color: Color(0xFFFB7299), size: 32),
         const SizedBox(height: 6),
         const Text('PiliPlus', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
+        const SizedBox(height: 4),
+        const Text(BuildConfig.buildLabel, textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 10), maxLines: 3),
         const SizedBox(height: 18),
         IconButton(tooltip: '搜索', onPressed: () => Get.toNamed('/search'), icon: const Icon(Icons.search_rounded)),
         const SizedBox(height: 12),

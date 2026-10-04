@@ -24,6 +24,17 @@ abstract final class GStorage {
   static late final Box<int> watchProgress;
   static late final Box<Uint8List>? reply;
 
+  /// Older or damaged boxes may contain values outside the current int schema.
+  static int? readWatchProgress(int? cid) {
+    if (cid == null || cid <= 0) return null;
+    try {
+      final progress = watchProgress.get(cid.toString());
+      return progress != null && progress >= 0 ? progress : null;
+    } on TypeError {
+      return null;
+    }
+  }
+
   static Future<void> init() async {
     Hive.init(path.join(appSupportDirPath, 'hive'));
     regAdapter();

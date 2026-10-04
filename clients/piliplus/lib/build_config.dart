@@ -13,4 +13,14 @@ abstract final class BuildConfig {
     'pili.hash',
     defaultValue: 'N/A',
   );
+
+  static const String localPatch = String.fromEnvironment(
+    'vr.patch',
+    defaultValue: 'unrecorded',
+  );
+  static const String buildLabel = String.fromEnvironment(
+    'vr.label',
+    defaultValue: 'development',
+  );
+  static const String sourceSummary = 'main $commitHash + local $localPatch';
 }

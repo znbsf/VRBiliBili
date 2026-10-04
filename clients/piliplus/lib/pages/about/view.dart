@@ -155,12 +155,15 @@ class _AboutPageState extends State<AboutPage> {
             title: Text(
               '''
 Build Time: ${DateFormatUtils.format(BuildConfig.buildTime, format: DateFormatUtils.longFormatDs)}
-Commit Hash: ${BuildConfig.commitHash}''',
+Base Commit: ${BuildConfig.commitHash}
+Local Patch SHA256: ${BuildConfig.localPatch}
+Build: ${BuildConfig.buildLabel}
+Source: main + uncommitted delivery changes''',
               style: const TextStyle(fontSize: 14),
             ),
             leading: const Icon(Icons.info_outline),
             onTap: () => PageUtils.launchURL(
-              '${Constants.sourceCodeUrl}/commit/${BuildConfig.commitHash}',
+              'https://github.com/znbsf/VRBiliBili/commit/${BuildConfig.commitHash}',
             ),
             onLongPress: () => Utils.copyText(BuildConfig.commitHash),
             onSecondaryTap: PlatformUtils.isMobile

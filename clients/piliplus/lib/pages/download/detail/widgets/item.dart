@@ -211,9 +211,7 @@ class DetailItem extends StatelessWidget {
                     ListenableBuilder(
                       listenable: progress!,
                       builder: (_, _) {
-                        final progress = GStorage.watchProgress.get(
-                          cid.toString(),
-                        );
+                        final progress = GStorage.readWatchProgress(cid);
                         if (progress != null) {
                           return Positioned(
                             left: 0,
@@ -241,7 +239,12 @@ class DetailItem extends StatelessWidget {
                                   color: theme.colorScheme.primary,
                                   backgroundColor:
                                       theme.colorScheme.secondaryContainer,
-                                  progress: progress / entry.totalTimeMilli,
+                                  progress: entry.totalTimeMilli > 0
+                                      ? (progress / entry.totalTimeMilli).clamp(
+                                          0.0,
+                                          1.0,
+                                        )
+                                      : 0.0,
                                 ),
                               ],
                             ),

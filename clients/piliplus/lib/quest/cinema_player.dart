@@ -27,6 +27,7 @@ abstract final class CinemaPlayer {
     if (active ||
         !ownsSource() ||
         player.processing ||
+        player.dataStatus.value != DataStatus.loaded ||
         player.dataSource.videoSource.isEmpty) {
       throw PlatformException(code: 'loading', message: '请等待视频加载完成');
     }
@@ -107,11 +108,10 @@ abstract final class CinemaPlayer {
             };
           case 'position':
             if ((call.arguments as Map)['cid'] == player.cid) {
-              detail
-                ..playedTime = Duration(
-                  milliseconds: (call.arguments as Map)['positionMs'] as int,
-                )
-                ..cacheLocalProgress(expectedCid: sessionCid);
+              detail.playedTime = Duration(
+                milliseconds: (call.arguments as Map)['positionMs'] as int,
+              );
+              await detail.cacheLocalProgress(expectedCid: sessionCid);
             }
             return null;
           default:
@@ -154,9 +154,8 @@ abstract final class CinemaPlayer {
         // Reload resets playedTime to the old Flutter position. Preserve the
         // native return position even if media loading or seeking fails.
         if (returnPosition != null && ownsSource()) {
-          detail
-            ..playedTime = Duration(milliseconds: returnPosition)
-            ..cacheLocalProgress(expectedCid: sessionCid);
+          detail.playedTime = Duration(milliseconds: returnPosition);
+          await detail.cacheLocalProgress(expectedCid: sessionCid);
         }
       }
     } catch (error, stackTrace) {

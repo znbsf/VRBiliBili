@@ -51,6 +51,7 @@ class CinemaActivity : AppSystemActivity() {
     private var dragging = false
     private var closing = false
     private var busy = false
+    private val debugSessionId = java.util.UUID.randomUUID().toString()
     private var requestEpoch = 0
     private var firstFrame = false
     private var alignedAfterVideo = false
@@ -397,11 +398,13 @@ class CinemaActivity : AppSystemActivity() {
     private fun writeStatus() {
         if (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE == 0) return
         filesDir.resolve("cinema-status.json").writeText(JSONObject(mapOf(
+            "cid" to media?.cid, "sessionId" to debugSessionId, "sampleUptimeMs" to SystemClock.uptimeMillis(),
             "positionMs" to lastPosition, "playing" to (player?.isPlaying == true),
             "videoFrames" to (player?.videoDecoderCounters?.renderedOutputBufferCount ?: 0),
             "audioBuffers" to (player?.audioDecoderCounters?.renderedOutputBufferCount ?: 0),
             "sceneReady" to (video != null), "firstFrame" to firstFrame,
             "sourceChanges" to sourceChanges, "busy" to busy,
+            "activityResumed" to resumed, "spatialFocused" to spatialFocused,
             "trackingAligned" to alignedAfterVideo,
             "danmakuEnabled" to (danmaku?.danmakuEnabled == true),
             "danmakuVisible" to (danmaku?.danmakuEnabled == true && danmaku?.visibility == View.VISIBLE),
