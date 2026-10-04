@@ -16,7 +16,8 @@ import org.json.JSONObject;
 public class QuestUiDriver extends Instrumentation {
     private android.app.Activity targetActivity;
     private final List<String> steps = new ArrayList<>();
-    @Override public void onCreate(Bundle args) { super.onCreate(args); start(); }
+    private boolean panelOnly;
+    @Override public void onCreate(Bundle args) { panelOnly = "panel".equals(args.getString("scope")); super.onCreate(args); start(); }
     private void wake() {
         try { getUiAutomation().executeShellCommand("input keyevent 224").close(); }
         catch (Exception ignored) { }
@@ -49,7 +50,7 @@ public class QuestUiDriver extends Instrumentation {
         for (int i = 0; i < n.getChildCount(); i++) collect(n.getChild(i), labels);
     }
     private void capture(String name) throws Exception {
-        android.graphics.Bitmap bitmap = getUiAutomation().takeScreenshot(targetActivity.getWindow());
+        android.graphics.Bitmap bitmap = android.os.Build.MODEL.contains("Spatial Simulator") ? getUiAutomation().takeScreenshot() : getUiAutomation().takeScreenshot(targetActivity.getWindow());
         if (bitmap == null) throw new Exception("Screenshot unavailable");
         try (java.io.FileOutputStream out = new java.io.FileOutputStream(new File(getTargetContext().getFilesDir(), name))) {
             bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, out);
@@ -91,12 +92,21 @@ public class QuestUiDriver extends Instrumentation {
     @Override public void onStart() {
         Bundle result = new Bundle(); boolean passed = false;
         try {
+            for(String name : new String[]{"quest-home-ui.png", "quest-account-ui.png", "quest-dynamic-ui.png", "quest-search-ui.png", "quest-detail-ui.png", "quest-wide-ui.png", "quest-quality-ui.png", "quest-settings-ui.png"})
+                new File(getTargetContext().getFilesDir(), name).delete();
             new File(getTargetContext().getFilesDir(), "cinema-status.json").delete();
             new File(getTargetContext().getFilesDir(), "cinema-capture.txt").delete();
             targetActivity = startActivitySync(new Intent(getTargetContext(), MainActivity.class).setAction(Intent.ACTION_MAIN).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             AccessibilityNodeInfo card = await("", true, 35000);
             if (card == null) throw new Exception("No video card");
             capture("quest-home-ui.png");
+            click("我的"); capture("quest-account-ui.png");
+            click("动态"); capture("quest-dynamic-ui.png");
+            click("首页");
+            click("搜索"); capture("quest-search-ui.png");
+            getUiAutomation().performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_BACK);
+            card = await("", true, 15000);
+            if(card == null) throw new Exception("Search return failed");
             card.performAction(AccessibilityNodeInfo.ACTION_CLICK);
             for (String label : new String[]{"返回上页", "返回主页", "播放 / 暂停", "全屏影院", "选择画质", "播放设置"}) {
                 AccessibilityNodeInfo n = await(label, false, 12000);
@@ -115,6 +125,7 @@ public class QuestUiDriver extends Instrumentation {
             if (playing.optInt("width") == 0 || playing.optLong("positionMs") < 1200) throw new Exception("No decoded playback");
             steps.add("playing=" + playing);
             capture("quest-detail-ui.png");
+            click("收起视频信息"); capture("quest-wide-ui.png"); click("显示视频信息");
             click("播放 / 暂停"); JSONObject paused = state(); SystemClock.sleep(1200); JSONObject still = state();
             if (still.optBoolean("playing") || Math.abs(still.optLong("positionMs") - paused.optLong("positionMs")) > 400) throw new Exception("Pause did not hold");
             click("前进 10 秒"); JSONObject seek = state();
@@ -123,6 +134,27 @@ public class QuestUiDriver extends Instrumentation {
             click("选择画质"); capture("quest-quality-ui.png"); click("关闭画质选择");
             click("播放设置"); capture("quest-settings-ui.png"); click("关闭设置");
             click("关闭弹幕"); click("开启弹幕");
+            if (panelOnly) {
+                click("全屏影院");
+                long previewEnd=SystemClock.uptimeMillis()+25000;
+                JSONObject preview=new JSONObject();
+                File previewFile=new File(getTargetContext().getFilesDir(),"preview-status.json");
+                while(SystemClock.uptimeMillis()<previewEnd) {
+                    if(previewFile.exists()) try { preview=new JSONObject(new String(Files.readAllBytes(previewFile.toPath()),StandardCharsets.UTF_8)); } catch(Exception ignored) {}
+                    if(preview.optInt("width")>0 && preview.optBoolean("playing")) break;
+                    SystemClock.sleep(500);
+                }
+                if(preview.optInt("width")==0 || !preview.optBoolean("playing")) throw new Exception("Preview decode failed: "+preview);
+                steps.add("simulator_preview_decode="+preview);
+                // The preview uses the production Android HUD/menu classes, not the XR renderer.
+                click("暂停");capture("quest-preview-ui.png");
+                click("环境");capture("quest-preview-environment-ui.png");click("观看环境 · 仅验证菜单");
+                click("屏幕大小");capture("quest-preview-size-ui.png");click("屏幕大小 · 仅验证菜单");
+                click("退出全屏");
+                if(await("全屏影院",false,15000)==null) throw new Exception("Preview return failed");
+                steps.add("simulator_preview_controls_menus_return_passed");
+            }
+            if (!panelOnly) {
             click("全屏影院");
             JSONObject cinema = cinemaState();
             long cinemaEnd = SystemClock.uptimeMillis() + 45000;
@@ -141,15 +173,32 @@ public class QuestUiDriver extends Instrumentation {
             if (cinemaState().optInt("sourceChanges") == 0 || !cinemaState().optBoolean("playing")) throw new Exception("Cinema quality switch failed: " + cinemaState());
             steps.add("cinema_quality=" + cinemaState());
             cinemaCommand("recenter"); cinemaCommand("cinema"); cinemaCommand("show"); captureCinema("quest-cinema-ui.png");
-            cinemaCommand("pure"); SystemClock.sleep(4500); cinema = cinemaState();
+            cinemaCommand("tap:环境"); captureCinema("quest-environment-ui.png"); cinemaCommand("tap:观看环境");
+            cinemaCommand("tap:屏幕大小"); captureCinema("quest-size-ui.png"); cinemaCommand("tap:大");
+
+            if(cinemaState().optDouble("screenScale") < 1.2) throw new Exception("Screen size failed");
+            cinemaCommand("tap:屏幕大小"); cinemaCommand("tap:中"); cinemaCommand("tap:环境"); cinemaCommand("tap:浅色空间");
+            if(!cinemaState().optString("environment").equals("light")) throw new Exception("Light environment failed");
+            cinemaCommand("tap:环境"); cinemaCommand("tap:混合现实");
+            if(!cinemaState().optBoolean("passthrough")) throw new Exception("Passthrough selection failed");
+            cinemaCommand("cinema");
+            steps.add("environment_and_size_passed");
+            cinemaCommand("tap:弹幕");
+            if (!cinemaState().optBoolean("danmakuEnabled")) throw new Exception("Danmaku button failed");
+            cinemaCommand("tap:环境"); cinemaCommand("tap:纯画面"); SystemClock.sleep(4500); cinema = cinemaState();
+            if (cinema.optBoolean("danmakuVisible") || !cinema.optBoolean("danmakuEnabled")) throw new Exception("Pure picture did not suppress/preserve danmaku");
             if (cinema.optBoolean("cinema") || cinema.optBoolean("controlsVisible")) throw new Exception("Pure picture failed: " + cinema);
             captureCinema("quest-pure-ui.png");
             cinemaCommand("show"); if (!cinemaState().optBoolean("controlsVisible")) throw new Exception("Cannot reveal controls");
-            cinemaCommand("pause"); long cp = cinemaState().optLong("positionMs"); SystemClock.sleep(1000);
+            cinemaCommand("tap:暂停"); long cp = cinemaState().optLong("positionMs"); SystemClock.sleep(1000);
             if (cinemaState().optBoolean("playing") || Math.abs(cinemaState().optLong("positionMs") - cp) > 500) throw new Exception("Cinema pause failed");
-            cinemaCommand("seek"); SystemClock.sleep(800); long sought = cinemaState().optLong("positionMs");
+            cinemaCommand("tap:前进 10 秒"); SystemClock.sleep(800); long sought = cinemaState().optLong("positionMs");
             if (sought < cp + 8000) throw new Exception("Cinema seek failed");
-            cinemaCommand("cinema"); cinemaCommand("finish");
+            cinemaCommand("tap:环境"); cinemaCommand("tap:深色影院");
+            if (!cinemaState().optBoolean("danmakuVisible")) throw new Exception("Danmaku preference not restored");
+            cinemaCommand("tap:弹幕");
+            steps.add("native_button_callbacks_and_pure_danmaku_restore_passed");
+            cinemaCommand("tap:退出全屏");
             if (await("全屏影院", false, 15000) == null) throw new Exception("Cinema return failed");
             JSONObject returned = state();
             if (returned.optBoolean("playing") || Math.abs(returned.optLong("positionMs") - sought) > 1200) throw new Exception("Handoff failed: " + returned);
@@ -161,6 +210,7 @@ public class QuestUiDriver extends Instrumentation {
             cinemaCommand("finish");
             if (await("全屏影院", false, 15000) == null) throw new Exception("Second cinema return failed");
             steps.add("cinema_reentry_passed");
+            }
             click("返回上页"); if (await("", true, 12000) == null) throw new Exception("Back failed");
             await("", true, 12000).performAction(AccessibilityNodeInfo.ACTION_CLICK); click("返回主页");
             if (await("", true, 12000) == null) throw new Exception("Home failed");

@@ -1,3 +1,4 @@
+import 'package:PiliPlus/quest/quest_device.dart';
 import 'dart:async';
 
 import 'package:PiliPlus/common/assets.dart';
@@ -112,7 +113,7 @@ class _MediaPageState extends CommonPageState<MinePage>
                 onTap: e.onTap,
                 borderRadius: Style.mdRadius,
                 child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 80),
+                  constraints: BoxConstraints(maxWidth: QuestDevice.isQuest ? 110 : 80),
                   child: AspectRatio(
                     aspectRatio: 1,
                     child: Column(
@@ -147,6 +148,9 @@ class _MediaPageState extends CommonPageState<MinePage>
             padding: EdgeInsets.only(left: 8),
             child: BackButton(),
           )
+        else if (QuestDevice.isQuest)
+          const Padding(padding: EdgeInsets.only(left: 20), child: Text('我的媒体库',
+            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700)))
         else
           const SizedBox.shrink(),
         Row(

@@ -1,0 +1,489 @@
+{
+  "upstream_repository": "https://github.com/bggRGjQaUbCoE/PiliPlus",
+  "upstream_commit": "c102a6115c7ac040f6a0c6a1653944b81b82dcb4",
+  "file_count": 60,
+  "upstream_license": "clients/piliplus/LICENSE",
+  "scope": "Inherited client assets are unchanged from fixed upstream checkout. Text checkout line endings are distinguished from Git blob bytes. Shader MIT exception remains in its subdirectory.",
+  "files": [
+    {
+      "path": "clients/piliplus/assets/fonts/custom_icon.ttf",
+      "upstream_path": "assets/fonts/custom_icon.ttf",
+      "working_and_upstream_checkout_sha256": "ff50160d69715640ef326a78f7d5e0fd7333873eb176af31a9f42dc7dca3efd1",
+      "upstream_git_blob_sha256": "ff50160d69715640ef326a78f7d5e0fd7333873eb176af31a9f42dc7dca3efd1",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/fonts/digital_id_num.ttf",
+      "upstream_path": "assets/fonts/digital_id_num.ttf",
+      "working_and_upstream_checkout_sha256": "5b0634c68191d8c31aa084d8c1ea50fbdb61adc24723a263b82842ba10e9044f",
+      "upstream_git_blob_sha256": "5b0634c68191d8c31aa084d8c1ea50fbdb61adc24723a263b82842ba10e9044f",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/ai.png",
+      "upstream_path": "assets/images/ai.png",
+      "working_and_upstream_checkout_sha256": "1898676d1369f7e6a0dd694bb30a88aff3a881045a58ba404a54d9c0a1a305a2",
+      "upstream_git_blob_sha256": "1898676d1369f7e6a0dd694bb30a88aff3a881045a58ba404a54d9c0a1a305a2",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/big-vip.svg",
+      "upstream_path": "assets/images/big-vip.svg",
+      "working_and_upstream_checkout_sha256": "e402d58067d3bb0fe64037c5212c6b2485c2275bbd35829768c2fa736ac02255",
+      "upstream_git_blob_sha256": "e402d58067d3bb0fe64037c5212c6b2485c2275bbd35829768c2fa736ac02255",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/error.svg",
+      "upstream_path": "assets/images/error.svg",
+      "working_and_upstream_checkout_sha256": "276d43445d688f3697e0d4f581e0ef790d118f1373d8ba86245a86cdef29a754",
+      "upstream_git_blob_sha256": "276d43445d688f3697e0d4f581e0ef790d118f1373d8ba86245a86cdef29a754",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/live.gif",
+      "upstream_path": "assets/images/live.gif",
+      "working_and_upstream_checkout_sha256": "5a82bfedc4de5199b51730d21eed0a5f43f4f536beca29defe76ad1247423e06",
+      "upstream_git_blob_sha256": "5a82bfedc4de5199b51730d21eed0a5f43f4f536beca29defe76ad1247423e06",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/live.png",
+      "upstream_path": "assets/images/live.png",
+      "working_and_upstream_checkout_sha256": "a29f35708400adc0f55f5b86de26fd34ccc42e9f19bb2380bbea6734f8209125",
+      "upstream_git_blob_sha256": "a29f35708400adc0f55f5b86de26fd34ccc42e9f19bb2380bbea6734f8209125",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/live/default_bg.webp",
+      "upstream_path": "assets/images/live/default_bg.webp",
+      "working_and_upstream_checkout_sha256": "1543fc13d2e8a58ad4b4eb526e6e888b32656bbabd073f7d646a301d5aaebe23",
+      "upstream_git_blob_sha256": "1543fc13d2e8a58ad4b4eb526e6e888b32656bbabd073f7d646a301d5aaebe23",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/live/live.gif",
+      "upstream_path": "assets/images/live/live.gif",
+      "working_and_upstream_checkout_sha256": "cfbb11a8e83e0077ba34347b7d38b5de7eace157a24378b47cd5255eba9bdffe",
+      "upstream_git_blob_sha256": "cfbb11a8e83e0077ba34347b7d38b5de7eace157a24378b47cd5255eba9bdffe",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/loading.png",
+      "upstream_path": "assets/images/loading.png",
+      "working_and_upstream_checkout_sha256": "38907a7e7c5ca4e9411c2a6c62447dd215fd131e093839625fb8386c90de2934",
+      "upstream_git_blob_sha256": "38907a7e7c5ca4e9411c2a6c62447dd215fd131e093839625fb8386c90de2934",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/loading.webp",
+      "upstream_path": "assets/images/loading.webp",
+      "working_and_upstream_checkout_sha256": "97ad82c000752ee5ddcfdd4778e9ea043f4587d1c1788f01409e60a312f15f85",
+      "upstream_git_blob_sha256": "97ad82c000752ee5ddcfdd4778e9ea043f4587d1c1788f01409e60a312f15f85",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/logo/desktop/logo_large.png",
+      "upstream_path": "assets/images/logo/desktop/logo_large.png",
+      "working_and_upstream_checkout_sha256": "05362cfc05230e81605ef46c01135d601e7cfd1ebf94c982acf6dfd2cbfd1144",
+      "upstream_git_blob_sha256": "05362cfc05230e81605ef46c01135d601e7cfd1ebf94c982acf6dfd2cbfd1144",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/logo/ico/app_icon.ico",
+      "upstream_path": "assets/images/logo/ico/app_icon.ico",
+      "working_and_upstream_checkout_sha256": "482be1a645bc6a85a1e1a2863007cbbd315f342fa8800b7f1c38765478546912",
+      "upstream_git_blob_sha256": "482be1a645bc6a85a1e1a2863007cbbd315f342fa8800b7f1c38765478546912",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/logo/logo.png",
+      "upstream_path": "assets/images/logo/logo.png",
+      "working_and_upstream_checkout_sha256": "9a58961a43c4473680f0bca16f1f2583ed361df6606d1c837a6a4124480af100",
+      "upstream_git_blob_sha256": "9a58961a43c4473680f0bca16f1f2583ed361df6606d1c837a6a4124480af100",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/logo/logo_2.png",
+      "upstream_path": "assets/images/logo/logo_2.png",
+      "working_and_upstream_checkout_sha256": "fc50a1c7c18f70a578116a05923916d5e9fec7189ee71d46d199ebe3f2c5c85d",
+      "upstream_git_blob_sha256": "fc50a1c7c18f70a578116a05923916d5e9fec7189ee71d46d199ebe3f2c5c85d",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/noface.jpeg",
+      "upstream_path": "assets/images/noface.jpeg",
+      "working_and_upstream_checkout_sha256": "824be2d5b27ae6c2b8c2b4b63545a187e38ce6cab33bdb56d65b2d04485c03bb",
+      "upstream_git_blob_sha256": "824be2d5b27ae6c2b8c2b4b63545a187e38ce6cab33bdb56d65b2d04485c03bb",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_22_gun_sister.png",
+      "upstream_path": "assets/images/paycoins/ic_22_gun_sister.png",
+      "working_and_upstream_checkout_sha256": "225bb4addbb4bd8e0619abe56d0d5195ed5ae1843416a309509a70ca48add547",
+      "upstream_git_blob_sha256": "225bb4addbb4bd8e0619abe56d0d5195ed5ae1843416a309509a70ca48add547",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_22_mario.png",
+      "upstream_path": "assets/images/paycoins/ic_22_mario.png",
+      "working_and_upstream_checkout_sha256": "49778fb348af498d474b4c8a39fd9abb74bf762ed04374f6371f0ee6c6633c49",
+      "upstream_git_blob_sha256": "49778fb348af498d474b4c8a39fd9abb74bf762ed04374f6371f0ee6c6633c49",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_22_not_enough_pay.png",
+      "upstream_path": "assets/images/paycoins/ic_22_not_enough_pay.png",
+      "working_and_upstream_checkout_sha256": "9c268a1d1e40ea0c3246b942fe404ecd2ad95f40ca18d648ff2cea6dc9405137",
+      "upstream_git_blob_sha256": "9c268a1d1e40ea0c3246b942fe404ecd2ad95f40ca18d648ff2cea6dc9405137",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_coins_one.png",
+      "upstream_path": "assets/images/paycoins/ic_coins_one.png",
+      "working_and_upstream_checkout_sha256": "b69f7af4cea1c8c962182ee827f0ba8a94c83e808ea03a96e156cc1ac2359297",
+      "upstream_git_blob_sha256": "b69f7af4cea1c8c962182ee827f0ba8a94c83e808ea03a96e156cc1ac2359297",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_coins_two.png",
+      "upstream_path": "assets/images/paycoins/ic_coins_two.png",
+      "working_and_upstream_checkout_sha256": "6901bd6f91bbcb46d73d7e214ddbb1373d9105ebf684818241b9af4929d27680",
+      "upstream_git_blob_sha256": "6901bd6f91bbcb46d73d7e214ddbb1373d9105ebf684818241b9af4929d27680",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_left.png",
+      "upstream_path": "assets/images/paycoins/ic_left.png",
+      "working_and_upstream_checkout_sha256": "070b35287f0a6fad68f11531292c2b57da69f5acf4b43d96197617f34f82396f",
+      "upstream_git_blob_sha256": "070b35287f0a6fad68f11531292c2b57da69f5acf4b43d96197617f34f82396f",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_left_disable.png",
+      "upstream_path": "assets/images/paycoins/ic_left_disable.png",
+      "working_and_upstream_checkout_sha256": "252f49c3f0744447f323f1f764a91eae8053945e3a66d6feaef631f7785a3b49",
+      "upstream_git_blob_sha256": "252f49c3f0744447f323f1f764a91eae8053945e3a66d6feaef631f7785a3b49",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_panel_close.png",
+      "upstream_path": "assets/images/paycoins/ic_panel_close.png",
+      "working_and_upstream_checkout_sha256": "c1e54deeaa780feef671f9d97050b3bc321f04df2f5b19afc0968b2dfc15615a",
+      "upstream_git_blob_sha256": "c1e54deeaa780feef671f9d97050b3bc321f04df2f5b19afc0968b2dfc15615a",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_pay_coins_box.png",
+      "upstream_path": "assets/images/paycoins/ic_pay_coins_box.png",
+      "working_and_upstream_checkout_sha256": "eb0eba9872ce7ce07bcac569644c1477142183f5d971d9b8487eb04d924840ca",
+      "upstream_git_blob_sha256": "eb0eba9872ce7ce07bcac569644c1477142183f5d971d9b8487eb04d924840ca",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_pay_coins_close.png",
+      "upstream_path": "assets/images/paycoins/ic_pay_coins_close.png",
+      "working_and_upstream_checkout_sha256": "6ea65bc199f00bbbe1fb4ce8a8c39069496f2d843e18b829f281f68c0973a96e",
+      "upstream_git_blob_sha256": "6ea65bc199f00bbbe1fb4ce8a8c39069496f2d843e18b829f281f68c0973a96e",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_right.png",
+      "upstream_path": "assets/images/paycoins/ic_right.png",
+      "working_and_upstream_checkout_sha256": "c7c85f3470a1e6347a85586cd6c2128e7c9a3ffc683fbaee55afbc6af0e54a14",
+      "upstream_git_blob_sha256": "c7c85f3470a1e6347a85586cd6c2128e7c9a3ffc683fbaee55afbc6af0e54a14",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_right_disable.png",
+      "upstream_path": "assets/images/paycoins/ic_right_disable.png",
+      "working_and_upstream_checkout_sha256": "29f6c56de53d0cae4f474853bb949bce9888220d4bd1c9938a42b99da7d38583",
+      "upstream_git_blob_sha256": "29f6c56de53d0cae4f474853bb949bce9888220d4bd1c9938a42b99da7d38583",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_thunder_1.png",
+      "upstream_path": "assets/images/paycoins/ic_thunder_1.png",
+      "working_and_upstream_checkout_sha256": "55f2acbd11caa77f7804acaadac549655c7d49ba226e448d639fd573a6730a93",
+      "upstream_git_blob_sha256": "55f2acbd11caa77f7804acaadac549655c7d49ba226e448d639fd573a6730a93",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_thunder_2.png",
+      "upstream_path": "assets/images/paycoins/ic_thunder_2.png",
+      "working_and_upstream_checkout_sha256": "53bb11861e77326d18529f9a7853e19d97d8805b3eb3b72af9fa457ce4a169ae",
+      "upstream_git_blob_sha256": "53bb11861e77326d18529f9a7853e19d97d8805b3eb3b72af9fa457ce4a169ae",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/paycoins/ic_thunder_3.png",
+      "upstream_path": "assets/images/paycoins/ic_thunder_3.png",
+      "working_and_upstream_checkout_sha256": "9fcbb67e9949225f9e5c2a097bbc7dd26b72a2cb91b7d7b7ff3468ce598dce64",
+      "upstream_git_blob_sha256": "9fcbb67e9949225f9e5c2a097bbc7dd26b72a2cb91b7d7b7ff3468ce598dce64",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/topic-header-bg.png",
+      "upstream_path": "assets/images/topic-header-bg.png",
+      "working_and_upstream_checkout_sha256": "ba3ec83016e007912d3b6491b23dcf3765d1f8fc2cc3933ae306faa0148c8d25",
+      "upstream_git_blob_sha256": "ba3ec83016e007912d3b6491b23dcf3765d1f8fc2cc3933ae306faa0148c8d25",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/images/trending_banner.png",
+      "upstream_path": "assets/images/trending_banner.png",
+      "working_and_upstream_checkout_sha256": "188da22f3975618da15c90c28f4d450abd3392cbdbcedfe36728c7f2fd27cef1",
+      "upstream_git_blob_sha256": "188da22f3975618da15c90c28f4d450abd3392cbdbcedfe36728c7f2fd27cef1",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/linux/DEBIAN/control",
+      "upstream_path": "assets/linux/DEBIAN/control",
+      "working_and_upstream_checkout_sha256": "3714bf6ec52c0e058f1b6628bd53b08f2ac6cf755590926129f19582e48f56cb",
+      "upstream_git_blob_sha256": "03feec1511ad0ee474cb6e8674c81254aaf58b8ea568f2e11dc78605a20887d8",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/linux/DEBIAN/postinst",
+      "upstream_path": "assets/linux/DEBIAN/postinst",
+      "working_and_upstream_checkout_sha256": "16c461a94659bec083387378284f1a09d9436ddb6b39d99c8fd86201ccffd3ab",
+      "upstream_git_blob_sha256": "147eab6f9dbd41630b1be2ac706609747832f8b0e5f8cae78c8ca038ff36afe3",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/linux/DEBIAN/postrm",
+      "upstream_path": "assets/linux/DEBIAN/postrm",
+      "working_and_upstream_checkout_sha256": "f0488a12ee110a2994bfc8bdc408a39a7fe3988232bfd4b4f6fe904ad46129f6",
+      "upstream_git_blob_sha256": "0a871c43756f9a6ce14c579c71b24e295f64d0076cc68884fec0458ab00f1c36",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/linux/DEBIAN/prerm",
+      "upstream_path": "assets/linux/DEBIAN/prerm",
+      "working_and_upstream_checkout_sha256": "afab352d7f34820276e563e83a26f46e730df73d5c3fa04f783d479a3e3e2d74",
+      "upstream_git_blob_sha256": "dec70df0009a8ce447ccc39c061b4e866c901bbb49fe8d821a2094d929e1d1ff",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/linux/com.example.piliplus.desktop",
+      "upstream_path": "assets/linux/com.example.piliplus.desktop",
+      "working_and_upstream_checkout_sha256": "3a2808e3f97503ba15e421838535c6bad900c9973db1e9add98ff3a044b83380",
+      "upstream_git_blob_sha256": "7cf1d7180a033f0ba86cc03a0ba652f0e96095713485e25f4a5f9ebf0abbe27c",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/screenshots/174shots_so.png",
+      "upstream_path": "assets/screenshots/174shots_so.png",
+      "working_and_upstream_checkout_sha256": "6358584805bc1d9a6d42dc359fa04fd011100629f2e9223247cacf5c66d90017",
+      "upstream_git_blob_sha256": "6358584805bc1d9a6d42dc359fa04fd011100629f2e9223247cacf5c66d90017",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/screenshots/510shots_so.png",
+      "upstream_path": "assets/screenshots/510shots_so.png",
+      "working_and_upstream_checkout_sha256": "e325069cfaa9d677a89b4b0829c117c742dd7b010996111283271d677370b018",
+      "upstream_git_blob_sha256": "e325069cfaa9d677a89b4b0829c117c742dd7b010996111283271d677370b018",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/screenshots/850shots_so.png",
+      "upstream_path": "assets/screenshots/850shots_so.png",
+      "working_and_upstream_checkout_sha256": "56b6c8c78969a8ff06035a6657dff5bfb8e332872d5ba879aa01db2d866994fa",
+      "upstream_git_blob_sha256": "56b6c8c78969a8ff06035a6657dff5bfb8e332872d5ba879aa01db2d866994fa",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/screenshots/bangumi.png",
+      "upstream_path": "assets/screenshots/bangumi.png",
+      "working_and_upstream_checkout_sha256": "a13c1271bea952ddf08a18eeb1c36790a1c8095a17f9caa552da783e655c2dc5",
+      "upstream_git_blob_sha256": "a13c1271bea952ddf08a18eeb1c36790a1c8095a17f9caa552da783e655c2dc5",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/screenshots/bangumi_detail.png",
+      "upstream_path": "assets/screenshots/bangumi_detail.png",
+      "working_and_upstream_checkout_sha256": "584ba47c27d51b0183301c78edf84548ea7bc5d72712e31ce2cfd188f53880da",
+      "upstream_git_blob_sha256": "584ba47c27d51b0183301c78edf84548ea7bc5d72712e31ce2cfd188f53880da",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/screenshots/dynamic.png",
+      "upstream_path": "assets/screenshots/dynamic.png",
+      "working_and_upstream_checkout_sha256": "1dd09dacad91fca991b8ce5a2d6772f775b49777c251e16e0d5a86c5c249bc0f",
+      "upstream_git_blob_sha256": "1dd09dacad91fca991b8ce5a2d6772f775b49777c251e16e0d5a86c5c249bc0f",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/screenshots/home.png",
+      "upstream_path": "assets/screenshots/home.png",
+      "working_and_upstream_checkout_sha256": "ab99b96627409140031165e4c0e69525bcc589d4b60c2469cd417be34c705bdd",
+      "upstream_git_blob_sha256": "ab99b96627409140031165e4c0e69525bcc589d4b60c2469cd417be34c705bdd",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/screenshots/main_screen.png",
+      "upstream_path": "assets/screenshots/main_screen.png",
+      "working_and_upstream_checkout_sha256": "32c78aaa488299f37425256a4c94cbc91a4f4a133f8e1d5c8787909f0dfab147",
+      "upstream_git_blob_sha256": "32c78aaa488299f37425256a4c94cbc91a4f4a133f8e1d5c8787909f0dfab147",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/screenshots/media.png",
+      "upstream_path": "assets/screenshots/media.png",
+      "working_and_upstream_checkout_sha256": "e96bb3103afa4b582b7ded9dbb2261ebb258addf319654f8d2a1ccc0f60d6a85",
+      "upstream_git_blob_sha256": "e96bb3103afa4b582b7ded9dbb2261ebb258addf319654f8d2a1ccc0f60d6a85",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/screenshots/member.png",
+      "upstream_path": "assets/screenshots/member.png",
+      "working_and_upstream_checkout_sha256": "53edc742f7bc553f1256b3cb7cafa5fd91b8525b2ecdeed3cfae5a3ffcd7789a",
+      "upstream_git_blob_sha256": "53edc742f7bc553f1256b3cb7cafa5fd91b8525b2ecdeed3cfae5a3ffcd7789a",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/screenshots/search.png",
+      "upstream_path": "assets/screenshots/search.png",
+      "working_and_upstream_checkout_sha256": "8ab7c689d96a5e45911ccdd4acf480f6b555be76c84f00dee89904924abd2513",
+      "upstream_git_blob_sha256": "8ab7c689d96a5e45911ccdd4acf480f6b555be76c84f00dee89904924abd2513",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/screenshots/set.png",
+      "upstream_path": "assets/screenshots/set.png",
+      "working_and_upstream_checkout_sha256": "5f8b9b9e49ef027dce3d4ade6d43267246cca66ca0ff70516ad61d7fdbd6484d",
+      "upstream_git_blob_sha256": "5f8b9b9e49ef027dce3d4ade6d43267246cca66ca0ff70516ad61d7fdbd6484d",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": false
+    },
+    {
+      "path": "clients/piliplus/assets/shaders/Anime4K_AutoDownscalePre_x2.glsl",
+      "upstream_path": "assets/shaders/Anime4K_AutoDownscalePre_x2.glsl",
+      "working_and_upstream_checkout_sha256": "9141668ced0b26512253e6396e805820716f35b57c92950d9da489f8b96a7ba4",
+      "upstream_git_blob_sha256": "8c58291740146bd766a4d73f132775a797fe80f7d07919b5d767e27a5dc85656",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/shaders/Anime4K_AutoDownscalePre_x4.glsl",
+      "upstream_path": "assets/shaders/Anime4K_AutoDownscalePre_x4.glsl",
+      "working_and_upstream_checkout_sha256": "dadb7b713cfa1d810c55b5deff616072f3390e546fed1e6a54f80ea555f7b95d",
+      "upstream_git_blob_sha256": "5af62d8cd844916dc1126613e13bad3beab195787f93a71200b47c6ec78f2e41",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/shaders/Anime4K_Clamp_Highlights.glsl",
+      "upstream_path": "assets/shaders/Anime4K_Clamp_Highlights.glsl",
+      "working_and_upstream_checkout_sha256": "8c5fb67c76bed3021f8a27b050c3b97a6ac1b284f9ce91c04189015c354c0217",
+      "upstream_git_blob_sha256": "a2a9bf7fbc1d75d09660ca2e701e4d7fb0cf5457b94da47e1825032fa2b3671a",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/shaders/Anime4K_Restore_CNN_M.glsl",
+      "upstream_path": "assets/shaders/Anime4K_Restore_CNN_M.glsl",
+      "working_and_upstream_checkout_sha256": "dd515c307d97d8e5c809f263dd94174cc5667b8c1299082cdff14e6ddfc8d4bc",
+      "upstream_git_blob_sha256": "67ea3ed26539e8de3b7d307688535d2ff17e8d147e11dda0247da7770dbecf41",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/shaders/Anime4K_Restore_CNN_S.glsl",
+      "upstream_path": "assets/shaders/Anime4K_Restore_CNN_S.glsl",
+      "working_and_upstream_checkout_sha256": "fca48f8322be4c7c5b14393a6eb6d733bbefffea0ca29694cb6c4b0335dad5ce",
+      "upstream_git_blob_sha256": "97c24dc370ab300c108bfaa09db7f175aeff343674842c299cf3940a3d330427",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/shaders/Anime4K_Restore_CNN_VL.glsl",
+      "upstream_path": "assets/shaders/Anime4K_Restore_CNN_VL.glsl",
+      "working_and_upstream_checkout_sha256": "da18324507c31947943a4401ddcaea669a027705c5d8f4675aeca8a671c2eea7",
+      "upstream_git_blob_sha256": "35036722733305cd4d4e57660b883bbe2569ba2914033c254327107d7b77e35e",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/shaders/Anime4K_Upscale_CNN_x2_M.glsl",
+      "upstream_path": "assets/shaders/Anime4K_Upscale_CNN_x2_M.glsl",
+      "working_and_upstream_checkout_sha256": "249dc3be467f556ed3361deea79f42bac1ae57456c22588c2cc3c2ee8808909c",
+      "upstream_git_blob_sha256": "716e02098a68f0d648761f2b96b4dd139e1cb09b174bb369fca3aa34328fff7e",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/shaders/Anime4K_Upscale_CNN_x2_S.glsl",
+      "upstream_path": "assets/shaders/Anime4K_Upscale_CNN_x2_S.glsl",
+      "working_and_upstream_checkout_sha256": "90b65a4f36950852a34e5f12beb179fafed59fa8d911887e0f5f184337998edf",
+      "upstream_git_blob_sha256": "4c53ec2e287908f7ee7bcb266b0170421626d663576468b7d7dafc62962649a4",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/shaders/Anime4K_Upscale_CNN_x2_VL.glsl",
+      "upstream_path": "assets/shaders/Anime4K_Upscale_CNN_x2_VL.glsl",
+      "working_and_upstream_checkout_sha256": "ff9028a58aac9ad470ecbe379c1accf72443b348fa59eac7af1f091e333c733e",
+      "upstream_git_blob_sha256": "5638fe31c37c151a3443fea3451a3ef91af073f4dbb9615f6c0d1e29db11493d",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    },
+    {
+      "path": "clients/piliplus/assets/shaders/LICENSE",
+      "upstream_path": "assets/shaders/LICENSE",
+      "working_and_upstream_checkout_sha256": "308dab0978e0ea573a10e50c37c45b9486e033de3366d31ea96354156be192b9",
+      "upstream_git_blob_sha256": "edc7f247e1189b61c2d5970d162a14f6affbf03d8f5eb65930d5389c69372867",
+      "byte_identical_to_fixed_upstream_checkout": true,
+      "git_blob_difference_only_checkout_line_endings": true
+    }
+  ]
+}

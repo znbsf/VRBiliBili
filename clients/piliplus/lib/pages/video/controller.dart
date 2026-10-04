@@ -324,8 +324,9 @@ class VideoDetailController extends GetxController
   final isLoginVideo = Accounts.get(AccountType.video).isLogin;
 
   late final watchProgress = GStorage.watchProgress;
-  void cacheLocalProgress() {
-    if (plPlayerController.playerStatus.isCompleted) {
+  void cacheLocalProgress({int? expectedCid}) {
+    if (expectedCid != null && cid.value != expectedCid) return;
+    if (isFileSource && plPlayerController.playerStatus.isCompleted) {
       watchProgress.put(cid.value.toString(), entry.totalTimeMilli);
     } else if (playedTime case final playedTime?) {
       watchProgress.put(cid.value.toString(), playedTime.inMilliseconds);
@@ -681,15 +682,23 @@ class VideoDetailController extends GetxController
   }
 
   /// 更新画质、音质
-  void updatePlayer() {
+  Future<void> updatePlayer({bool autoplay = true}) async {
     final currentVideoQa = this.currentVideoQa.value;
     if (currentVideoQa == null) return;
-    _autoPlay.value = true;
+    _autoPlay.value = autoplay;
     playedTime = plPlayerController.videoPlayerController?.state.position;
     plPlayerController
       ..isBuffering.value = false
       ..buffered.value = 0;
 
+    resolvePlayerSources();
+    await playerInit(autoplay: autoplay);
+  }
+
+  /// Resolve existing DASH URLs without starting another decoder in the cinema.
+  void resolvePlayerSources() {
+    final currentVideoQa = this.currentVideoQa.value;
+    if (currentVideoQa == null) return;
     firstVideo = findVideoByQa(currentVideoQa.code, setCodecs: true);
     videoUrl = VideoUtils.getCdnUrl(firstVideo.playUrls);
 
@@ -702,7 +711,6 @@ class VideoDetailController extends GetxController
       audioUrl = VideoUtils.getCdnUrl(firstAudio.playUrls, isAudio: true);
     }
 
-    playerInit();
   }
 
   Future<void>? _initPlayerIfNeeded(bool autoFullScreenFlag) {

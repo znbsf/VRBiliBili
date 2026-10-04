@@ -1,5 +1,7 @@
 # VRBiliBili：Quest 大屏 PiliPlus 客户端
 
+当前公开版本为实验性源码。最新图标控件迭代的头显自动旅程被系统追踪提示阻塞，尚未完成人工舒适度、控制器射线和 XR 体验验收。历史版本的通过记录不能代表当前版本；详见 [版本与验证边界](docs/QUEST-UI-REFERENCE-IMPLEMENTATION.md)。本次仅公开源码，不提供包含 Meta SDK 的组合 APK。
+
 当前目标是做好 Quest 3 上的基础 PiliPlus 移植。找片、登录和普通播放继续使用 PiliPlus；2026-10-03 根据后续要求增加播放栏的一键全屏影院，关闭透视并支持纯画面/影院布景切换。旧的自由摆放、多窗口空间视频方案不恢复。
 
 源码位于 [clients/piliplus](clients/piliplus)。Quest 详情页使用主视频与右侧简介/评论，提供常驻返回、播放进度、图标工具栏、直接弹幕/画质选择和全屏影院。构建与验证见 [客户端说明](docs/QUEST-CLIENT.md)。原空间设计与 HTML 文件保留为历史参考，不代表当前开发范围。
@@ -50,3 +52,7 @@ node tools/prototype-robustness-check.mjs --output captures/robustness-review
 | [调研快照](docs/research-snapshot.json) | 历史上游版本与来源，不代表实时状态 |
 
 本机安装目录、官方示例副本、完整机器环境记录、原始检索/测试日志、备份、APK 和交接包保留在本地，不纳入仓库。客户端上游与依赖已固定，来源见 [客户端来源说明](clients/piliplus/VRBILIBILI-UPSTREAM.md)。
+
+第三方许可、继承素材来源和源码/二进制发行边界见 [第三方来源与许可索引](docs/THIRD-PARTY-NOTICES.md)。
+
+本次恢复修复、真实 Flutter/原生返回结果与未验收范围见 [隔离恢复验证](docs/ISOLATED-RECOVERY-VALIDATION.md)。

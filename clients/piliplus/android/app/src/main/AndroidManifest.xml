@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.piliplus">
 
+    <uses-permission android:name="com.oculus.permission.USE_PASSTHROUGH" />
+    <uses-feature android:name="com.oculus.feature.PASSTHROUGH" android:required="false" />
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
@@ -260,6 +262,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <activity android:name=".CinemaPreviewActivity" android:exported="false" android:theme="@android:style/Theme.Material.NoActionBar.Fullscreen" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

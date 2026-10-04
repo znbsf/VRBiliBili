@@ -7,7 +7,7 @@
 - 继续使用原 PiliPlus / media-kit 播放链路，在 Quest 普通 Android 大屏窗口内运行。
 - 旧 SpatialPlayerActivity、多面板和摆放系统已移除。后续按用户新要求增加独立 CinemaActivity，仅负责固定银幕的全屏影院。Meta Spatial SDK 0.14.0 和 Media3 1.5.1 用于这一入口。
 - Quest 专用详情布局：左侧视频与常驻进度/播放控制，右侧简介、评论与可用播放列表。
-- 顶部仅保留返回上页、返回主页；播放、快退、快进、弹幕、画质、设置和全屏影院位于底部同一工具栏。Quest 选中视频后自动播放。
+- 顶部提供返回上页、返回主页、信息栏收起/展开与搜索；播放、快退、快进、弹幕、画质、设置和全屏影院位于底部同一工具栏。Quest 选中视频后自动播放。
 - 导航与播放图标保留 52 dp 点击区域，视觉图标为 26 dp；原默认 UI 缩放从 1.15 调到 1.3，保留用户更大的自定义缩放。
 - 播放设置包含实际可用画质、倍速与弹幕开关；继续保留上游完整业务和播放器功能。
 - 同包名覆盖升级，保留登录/历史等应用数据。空间布局文件仅成为无引用历史数据，不读取或影响播放器。
@@ -41,7 +41,7 @@ adb -s QUEST_SERIAL shell am instrument -w io.github.vrbilibili.quest.debug.test
 
 ## 全屏影院
 
-播放栏“全屏影院”进入原生沉浸式 Activity，调用 `scene.enablePassthrough(false)`。默认使用固定银幕和简洁的三维舞台、侧墙、暗光布景；“纯画面”隐藏全部布景。播放时操作栏 3.5 秒后隐藏，点击屏幕唤出，暂停和打开画质选择时保持可见。可从栏内切换弹幕/画质、重新居中或退出全屏。影院默认关闭弹幕，避免挡住画面。
+播放栏“全屏影院”进入原生沉浸式 Activity，调用 `scene.enablePassthrough(false)`。默认使用固定银幕、黑色空间与连续渐变的地面柔光，已移除舞台、侧墙和灯条。环境菜单提供深色影院、浅色空间、纯画面和混合现实；纯画面隐藏全部布景，进入影院时默认关闭透视。屏幕大小可选小/中/大。播放时操作栏 3.5 秒后隐藏，点击屏幕唤出，暂停和打开菜单时保持可见。可从栏内切换弹幕/画质、重新居中或退出全屏。影院默认关闭弹幕，避免挡住画面。
 
 普通播放器先暂停，再移交当前媒体与进度。返回后同步进度并保持暂停，避免两个播放器同时发声。签名 URL 与请求头仅保存在内存；不持久化账户凭据。影院布局不会读取旧空间面板位置。
 
@@ -58,3 +58,11 @@ python tools/Test-QuestCinema.py --serial QUEST_SERIAL --adb C:/path/to/adb.exe 
 ```
 
 Android UiAutomation 只用于普通窗口截图；影院截图使用 metavr 的 metacam 通道，避免把 Android 黑屏误当作 OpenXR 画面。场景关闭时停止轮询并释放 Media3，防止关闭后继续读取定位句柄。
+
+## 2026-10-04 YouTube 录屏参考迁移
+
+共享 QuestTheme 统一首页、搜索、个人媒体库、动态、频道及内容页面的颜色、卡片、弹层、图标命中区域。首页采用左侧导航和顶部搜索/分类；搜索页不再默认弹出键盘；媒体库快捷入口增大；详情支持收起信息栏。原生影院采用矢量图标控件、视频标题、分级菜单和环境/尺寸选项。完整范围与验证状态见 [UI 实施记录](QUEST-UI-REFERENCE-IMPLEMENTATION.md)。
+
+## 模拟器开发
+
+Build-QuestApp.ps1 支持 -TargetPlatform android-x64（默认仍为 android-arm64）。Meta Spatial Simulator 中启用相同 Quest Flutter 布局；影院入口使用共享原生控件的非 XR 视频预览 Activity。预览用于检查布局、播放和菜单，不能代替 Spatial SDK 场景、透视和手柄验收。2026-10-04 面板旅程通过，详情与证据见 QUEST-UI-REFERENCE-IMPLEMENTATION.md 的模拟器验证段。

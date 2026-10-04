@@ -1,3 +1,4 @@
+import 'package:PiliPlus/quest/quest_device.dart';
 import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/custom_height_widget.dart';
 import 'package:PiliPlus/common/widgets/image/network_img_layer.dart';
@@ -46,7 +47,7 @@ class _HomePageState extends CommonPageState<HomePage>
       tabBar = Padding(
         padding: const EdgeInsets.only(top: 4),
         child: SizedBox(
-          height: 42,
+          height: QuestDevice.isQuest ? 54 : 42,
           width: double.infinity,
           child: TabBar(
             controller: _homeController.tabController,
@@ -77,6 +78,11 @@ class _HomePageState extends CommonPageState<HomePage>
     }
     return Column(
       children: [
+        if (QuestDevice.isQuest) Padding(padding: const EdgeInsets.fromLTRB(20, 18, 20, 10),
+          child: Row(children: [
+            const Text('发现', style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700)),
+            const SizedBox(width: 28), searchBar(), const SizedBox(width: 12), msgBadge(_mainController),
+          ])),
         if (!_mainController.useSideBar &&
             MediaQuery.sizeOf(context).isPortrait)
           customAppBar(),

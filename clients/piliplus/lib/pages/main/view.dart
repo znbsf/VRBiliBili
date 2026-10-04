@@ -1,3 +1,4 @@
+import 'package:PiliPlus/quest/quest_device.dart';
 import 'dart:io';
 
 import 'package:PiliPlus/common/assets.dart';
@@ -406,6 +407,32 @@ class _MainAppState extends PopScopeState<MainApp>
   }
 
   Widget _sideBar() {
+    if (QuestDevice.isQuest) {
+      return SizedBox(width: 104, child: SafeArea(child: Column(children: [
+        const SizedBox(height: 20),
+        const Icon(Icons.smart_display_rounded, color: Color(0xFFFB7299), size: 32),
+        const SizedBox(height: 6),
+        const Text('PiliPlus', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
+        const SizedBox(height: 18),
+        IconButton(tooltip: '搜索', onPressed: () => Get.toNamed('/search'), icon: const Icon(Icons.search_rounded)),
+        const SizedBox(height: 12),
+        Expanded(child: SingleChildScrollView(child: Obx(() => Column(children: [
+          for (final entry in _mainController.navigationBars.indexed)
+            Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), child: Material(
+              color: _mainController.selectedIndex.value == entry.$1 ? const Color(0xFF343039) : Colors.transparent,
+              borderRadius: BorderRadius.circular(16),
+              child: InkWell(borderRadius: BorderRadius.circular(16), onTap: () => _mainController.setIndex(entry.$1),
+                child: SizedBox(width: 84, height: 70, child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  _buildIcon(type: entry.$2, selected: _mainController.selectedIndex.value == entry.$1),
+                  const SizedBox(height: 5), Text(entry.$2.label, style: const TextStyle(fontSize: 13)),
+                ]))),
+            )),
+        ])))),
+        userAvatar(colorScheme: _colorScheme, mainController: _mainController),
+        const SizedBox(height: 16),
+      ])));
+    }
+
     if (_mainController.navigationBars.length > 1) {
       if (context.isTablet && _mainController.optTabletNav) {
         return Padding(

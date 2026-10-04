@@ -1,0 +1,2 @@
+# Only the host screenshot verifier and its offline regression tests need Pillow.
+Pillow==12.3.0

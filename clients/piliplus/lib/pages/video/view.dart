@@ -73,6 +73,7 @@ import 'package:PiliPlus/utils/storage_key.dart';
 import 'package:PiliPlus/utils/theme_utils.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/foundation.dart' show kDebugMode, clampDouble;
+import 'package:flutter/services.dart' show PlatformException;
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -171,10 +172,37 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     videoSourceInit();
     if (kDebugMode && QuestDevice.isQuest) {
       QuestDevice.channel.setMethodCallHandler((call) async {
+        if (call.method == 'verifyCinemaEntryGuards') {
+          final detail = videoDetailController;
+          final oldCid = detail.cid.value;
+          final oldQuerying = detail.isQuerying;
+          final rejected = <String, bool>{};
+          try {
+            detail.isQuerying = true;
+            try { await CinemaPlayer.open(detail); }
+            on PlatformException catch (error) { rejected['querying'] = error.code == 'loading'; }
+            detail.isQuerying = false;
+            detail.cid.value = oldCid + 1;
+            try { await CinemaPlayer.open(detail); }
+            on PlatformException catch (error) { rejected['mismatchedCid'] = error.code == 'loading'; }
+            return {...rejected, 'cinemaActive': CinemaPlayer.active};
+          } finally {
+            detail.cid.value = oldCid;
+            detail.isQuerying = oldQuerying;
+          }
+        }
         if (call.method != 'playerState') return null;
         final p = videoDetailController.plPlayerController;
+        final probeCid = (call.arguments as Map?)?['probeCid'] ?? p.cid;
         return {'positionMs': p.positionInMilliseconds, 'durationMs': p.durationInMilliseconds,
           'playing': p.playerStatus.isPlaying,
+          'rawPlaying': p.videoPlayerController?.state.playing ?? false,
+          'cid': p.cid, 'detailCid': videoDetailController.cid.value,
+          'processing': p.processing, 'dataStatus': p.dataStatus.value.name,
+          'cinemaActive': CinemaPlayer.active,
+          'playedTimeMs': videoDetailController.playedTime?.inMilliseconds,
+          'cachedPositionMs': p.cid == null ? null : videoDetailController.watchProgress.get(p.cid.toString()),
+          'cachedProbePositionMs': probeCid == null ? null : videoDetailController.watchProgress.get(probeCid.toString()),
           'width': p.videoPlayerController?.state.width ?? 0,
           'height': p.videoPlayerController?.state.height ?? 0};
       });
@@ -215,6 +243,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
   }
 
   Future<void>? playCallBack() {
+    if (CinemaPlayer.active) return Future<void>.value();
     if (!isShowing) {
       plPlayerController
         ?..addStatusLister(playerListener)
@@ -300,7 +329,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     }
   }
 
-  final bool _questWide = false;
+  bool _questWide = false;
   bool _questLoading = false;
   Future<void> questTogglePlayback() async {
     if (_questLoading) return;
@@ -320,7 +349,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
 
   Future<void> questEnterCinema() async {
     try {
-      await CinemaPlayer.open(videoDetailController);
+      await CinemaPlayer.open(videoDetailController, title: introController.videoDetail.value.title ?? Get.arguments['title'] ?? '正在播放');
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -398,6 +427,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     IconButton(tooltip: label, onPressed: callback,
       style: IconButton.styleFrom(minimumSize: const Size(52, 52),
         foregroundColor: accent ? _questAccent : Colors.white,
+        backgroundColor: accent ? _questAccent.withValues(alpha: .12) : Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
       icon: Icon(icon, size: 26));
 
@@ -1417,11 +1447,14 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
           const SizedBox(width: 12),
           const Text('正在观看', style: TextStyle(fontSize: 14, color: Colors.white54)),
           const Spacer(),
-
+          questIcon(_questWide ? '显示视频信息' : '收起视频信息',
+            _questWide ? Icons.view_sidebar_outlined : Icons.crop_landscape_rounded,
+            () => setState(() => _questWide = !_questWide)),
+          questIcon('搜索视频', Icons.search_rounded, () => Get.toNamed('/search')),
         ])),
         Expanded(child: Padding(padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
           child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            Expanded(flex: 7, child: ClipRRect(borderRadius: BorderRadius.circular(12),
+            Expanded(flex: 8, child: ClipRRect(borderRadius: BorderRadius.circular(12),
               child: ColoredBox(color: const Color(0xFF09090B), child: Column(children: [
                 Expanded(child: LayoutBuilder(builder: (context, area) {
                   final w = min(area.maxWidth, area.maxHeight * 16 / 9);
