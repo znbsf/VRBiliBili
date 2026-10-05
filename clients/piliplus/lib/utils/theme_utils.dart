@@ -1,3 +1,5 @@
+import 'package:PiliPlus/quest/quest_device.dart';
+import 'package:PiliPlus/quest/quest_theme.dart';
 import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/utils/extension/theme_ext.dart';
 import 'package:PiliPlus/utils/font_utils.dart';
@@ -165,6 +167,7 @@ abstract final class ThemeUtils {
         },
       ),
     );
+    if (QuestDevice.isQuest) return QuestTheme.apply(theme);
     if (isDark && Pref.isPureBlackTheme) {
       return darkenTheme(theme);
     }

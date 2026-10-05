@@ -1,0 +1,24 @@
+{
+  "scope": "Original legal texts only, not SDK code; MPT and listed third-party terms retained, not relicensed under the project GPL. Does not resolve combination licensing.",
+  "sources": [
+    {
+      "artifact": "meta-spatial-sdk",
+      "version": "0.14.0",
+      "aar_sha256": "1883e12ebc9a3680e4f2b559e1e958b231a2b7090ac9bb71e6255a1a14db4721"
+    },
+    {
+      "artifact": "meta-spatial-sdk-toolkit",
+      "version": "0.14.0",
+      "aar_sha256": "51aba04a07fe4ebf2338fa9650e2303062663ddc80934a5c416a96165f3869a7"
+    },
+    {
+      "artifact": "meta-spatial-sdk-vr",
+      "version": "0.14.0",
+      "aar_sha256": "ae4ed28b9676ccc384029296011876212cff069c477202ca396a39a79f50837a"
+    }
+  ],
+  "files": {
+    "LICENSE": "bb9b12db3b92c024458df625acd6f2d8140ea805cc6814bac74613a466731368",
+    "notices.html": "3c77d854f4771ed619a89f17cf6eb6e5f5d85e2d37f36de471bd3f9f9e40cf95"
+  }
+}

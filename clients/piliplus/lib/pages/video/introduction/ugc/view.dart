@@ -907,25 +907,29 @@ class _UgcIntroPanelState extends State<UgcIntroPanel> {
               vipStatus: userStat.card?.vip?.status,
               officialType: userStat.card?.official?.type,
             ),
-            Column(
-              crossAxisAlignment: .start,
-              children: [
-                Text(
-                  userStat.card?.name ?? "",
-                  maxLines: 1,
-                  overflow: .ellipsis,
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: isVip && userStat.card?.vip?.type == 2
-                        ? colorScheme.vipColor
-                        : null,
+            Flexible(
+              child: Column(
+                crossAxisAlignment: .start,
+                children: [
+                  Text(
+                    userStat.card?.name ?? "",
+                    maxLines: 1,
+                    overflow: .ellipsis,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: isVip && userStat.card?.vip?.type == 2
+                          ? colorScheme.vipColor
+                          : null,
+                    ),
                   ),
-                ),
-                Text(
-                  '${NumUtils.numFormat(userStat.follower)}粉丝    ${'${NumUtils.numFormat(userStat.archiveCount)}视频'}',
-                  style: TextStyle(fontSize: 12, color: colorScheme.outline),
-                ),
-              ],
+                  Text(
+                    '${NumUtils.numFormat(userStat.follower)}粉丝    ${'${NumUtils.numFormat(userStat.archiveCount)}视频'}',
+                    maxLines: 1,
+                    overflow: .ellipsis,
+                    style: TextStyle(fontSize: 12, color: colorScheme.outline),
+                  ),
+                ],
+              ),
             ),
           ],
         );

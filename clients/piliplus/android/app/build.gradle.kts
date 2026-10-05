@@ -37,6 +37,10 @@ android {
     }
 
     packagingOptions.jniLibs.useLegacyPackaging = true
+    // Flutter/plugin JNI folders may bypass NDK ABI selection; strip unused ABIs from Quest releases.
+    if (gradle.startParameter.taskNames.any { it.contains("Release", ignoreCase = true) }) {
+        packagingOptions.jniLibs.excludes += setOf("**/x86/**", "**/x86_64/**", "**/armeabi-v7a/**")
+    }
 
     val keyProperties = Properties().also {
         val properties = rootProject.file("key.properties")
@@ -62,10 +66,9 @@ android {
     }
 
     buildTypes {
-        all {
-            signingConfig = config ?: signingConfigs["debug"]
-        }
         release {
+            signingConfig = config
+            ndk { abiFilters += "arm64-v8a" }
             if (project.hasProperty("dev")) {
                 applicationIdSuffix = ".dev"
                 resValue(
@@ -74,12 +77,13 @@ android {
                     value = "PiliPlus dev",
                 )
             }
-//            proguardFiles(
-//                getDefaultProguardFile("proguard-android-optimize.txt"),
-//                "proguard-rules.pro"
-//            )
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
         debug {
+            signingConfig = signingConfigs["debug"]
             applicationIdSuffix = ".debug"
         }
     }
@@ -89,6 +93,14 @@ android {
         variant.outputs.forEach { output ->
             (output as ApkVariantOutputImpl).versionCodeOverride = flutter.versionCode
         }
+    }
+}
+
+// Never publish a release silently signed with the shared Android debug key.
+gradle.taskGraph.whenReady {
+    if (allTasks.any { it.project == project && it.name.contains("Release") } &&
+        !rootProject.file("key.properties").exists()) {
+        throw GradleException("Release requires android/key.properties; see docs/RELEASE.md")
     }
 }
 

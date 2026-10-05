@@ -324,12 +324,26 @@ class VideoDetailController extends GetxController
   final isLoginVideo = Accounts.get(AccountType.video).isLogin;
 
   late final watchProgress = GStorage.watchProgress;
-  void cacheLocalProgress() {
-    if (plPlayerController.playerStatus.isCompleted) {
-      watchProgress.put(cid.value.toString(), entry.totalTimeMilli);
-    } else if (playedTime case final playedTime?) {
-      watchProgress.put(cid.value.toString(), playedTime.inMilliseconds);
+  Future<void> cacheLocalProgress({int? expectedCid}) async {
+    // Capture the source before any asynchronous write can outlive navigation.
+    final targetCid = cid.value;
+    if (expectedCid != null && targetCid != expectedCid) return;
+    final progress = isFileSource && plPlayerController.playerStatus.isCompleted
+        ? entry.totalTimeMilli
+        : playedTime?.inMilliseconds;
+    if (targetCid > 0 && progress != null && progress >= 0) {
+      await watchProgress.put(targetCid.toString(), progress);
     }
+  }
+
+  void _cacheProgressOnExit() {
+    unawaited(
+      cacheLocalProgress().catchError((Object error, StackTrace stack) {
+        if (kDebugMode) {
+          debugPrint('Unable to save local playback progress: $error');
+        }
+      }),
+    );
   }
 
   void initFileSource(BiliDownloadEntryInfo entry, {bool isInit = true}) {
@@ -340,7 +354,7 @@ class VideoDetailController extends GetxController
       width: entry.ep?.width ?? entry.pageData?.width ?? 1,
       height: entry.ep?.height ?? entry.pageData?.height ?? 1,
     );
-    if (watchProgress.get(cid.value.toString()) case final int progress?) {
+    if (GStorage.readWatchProgress(cid.value) case final int progress?) {
       if (progress >= entry.totalTimeMilli - 400) {
         defaultST = Duration.zero;
       } else {
@@ -681,15 +695,23 @@ class VideoDetailController extends GetxController
   }
 
   /// 更新画质、音质
-  void updatePlayer() {
+  Future<void> updatePlayer({bool autoplay = true}) async {
     final currentVideoQa = this.currentVideoQa.value;
     if (currentVideoQa == null) return;
-    _autoPlay.value = true;
+    _autoPlay.value = autoplay;
     playedTime = plPlayerController.videoPlayerController?.state.position;
     plPlayerController
       ..isBuffering.value = false
       ..buffered.value = 0;
 
+    resolvePlayerSources();
+    await playerInit(autoplay: autoplay);
+  }
+
+  /// Resolve existing DASH URLs without starting another decoder in the cinema.
+  void resolvePlayerSources() {
+    final currentVideoQa = this.currentVideoQa.value;
+    if (currentVideoQa == null) return;
     firstVideo = findVideoByQa(currentVideoQa.code, setCodecs: true);
     videoUrl = VideoUtils.getCdnUrl(firstVideo.playUrls);
 
@@ -701,8 +723,6 @@ class VideoDetailController extends GetxController
       );
       audioUrl = VideoUtils.getCdnUrl(firstAudio.playUrls, isAudio: true);
     }
-
-    playerInit();
   }
 
   Future<void>? _initPlayerIfNeeded(bool autoFullScreenFlag) {
@@ -1248,7 +1268,7 @@ class VideoDetailController extends GetxController
   void onClose() {
     cid.close();
     if (isFileSource) {
-      cacheLocalProgress();
+      _cacheProgressOnExit();
     }
     introScrollCtr?.dispose();
     introScrollCtr = null;
@@ -1264,7 +1284,7 @@ class VideoDetailController extends GetxController
 
   void onReset({bool isStein = false}) {
     if (isFileSource) {
-      cacheLocalProgress();
+      _cacheProgressOnExit();
     }
 
     playedTime = null;

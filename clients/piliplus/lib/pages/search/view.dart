@@ -1,3 +1,4 @@
+import 'package:PiliPlus/quest/quest_device.dart';
 import 'dart:convert';
 
 import 'package:PiliPlus/common/widgets/dialog/export_import.dart';
@@ -59,7 +60,7 @@ class _SearchPageState extends State<SearchPage> {
     return SimpleScaffold(
       appBar: _buildAppBar,
       body: Padding(
-        padding: .only(left: padding.left, right: padding.right),
+        padding: EdgeInsets.only(left: padding.left + (QuestDevice.isQuest ? 20 : 0), right: padding.right + (QuestDevice.isQuest ? 20 : 0)),
         child: ViewInsetsSafeArea(
           child: CustomScrollView(
             slivers: [
@@ -117,7 +118,7 @@ class _SearchPageState extends State<SearchPage> {
       const SizedBox(width: 10),
     ],
     title: TextField(
-      autofocus: true,
+      autofocus: !QuestDevice.isQuest,
       focusNode: _searchController.searchFocusNode,
       controller: _searchController.controller,
       textInputAction: TextInputAction.search,
@@ -125,7 +126,10 @@ class _SearchPageState extends State<SearchPage> {
       decoration: InputDecoration(
         visualDensity: .standard,
         hintText: _searchController.hintText ?? '搜索',
-        border: InputBorder.none,
+        filled: QuestDevice.isQuest,
+        fillColor: theme.colorScheme.surfaceContainer,
+        contentPadding: QuestDevice.isQuest ? const EdgeInsets.symmetric(horizontal: 20, vertical: 16) : null,
+        border: QuestDevice.isQuest ? OutlineInputBorder(borderRadius: BorderRadius.circular(28), borderSide: BorderSide.none) : InputBorder.none,
       ),
       onSubmitted: (value) => _searchController.submit(),
     ),

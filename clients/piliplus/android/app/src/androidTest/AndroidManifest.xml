@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <instrumentation
+        android:name="com.example.piliplus.CinemaPreviewRegression"
+        android:targetPackage="io.github.vrbilibili.quest.debug"
+        android:label="Offline native Preview regression" />
+</manifest>

@@ -1,56 +1,79 @@
 {
-  "scope": "PiliPlus Quest automatic playback and native cinema fullscreen",
-  "artifact": "reports/quest-cinema-20261003/final/VRBiliBili-Quest-cinema.apk",
-  "sha256": "301bee1057ec4223485369c871e2824f5082254c5b3ee0bcb55289fe9aa3253c",
+  "scope": "Quest UI design reference migration: shared routes and native cinema",
+  "artifact": "reports/quest-icon-only-20261004/VRBiliBili-Quest-icon-only.apk",
+  "sha256": "32e21314b1fb1ef523419fac8c1111436c7a59843603b2f092934d578804216f",
   "installedMatches": true,
   "device": "Quest 3",
-  "journeyPassed": true,
-  "checked": [
-    "selection automatically starts playback",
-    "danmaku, quality and fullscreen on playback toolbar",
-    "pause and ten-second seek",
-    "native cinema video and audio decode",
-    "cinema quality switching",
-    "controls hide and reveal",
-    "pure picture and cinema scene toggle",
-    "position handoff and paused return",
-    "second cinema entry and exit",
-    "back and home"
-  ],
-  "evidence": "reports/quest-cinema-20261003/final/journey.txt",
-  "nativePlayback": {
-    "positionMs": 17367,
-    "playing": true,
-    "videoFrames": 137,
-    "audioBuffers": 246,
-    "sceneReady": true,
-    "firstFrame": true,
-    "sourceChanges": 0,
-    "busy": false,
-    "trackingAligned": false,
-    "passthrough": false,
-    "cinema": true,
-    "roomMeshes": 51,
-    "controlsVisible": false,
-    "error": null
-  },
-  "screenshots": {
-    "quest-detail-ui.png": {
-      "width": 1375,
-      "height": 900
-    },
-    "quest-cinema-ui.png": {
-      "width": 8,
-      "height": 327936
-    },
-    "quest-pure-ui.png": {
-      "width": 4128,
-      "height": 2208
-    }
-  },
+  "journeyPassed": false,
+  "journeyStatus": "blocked_by_headset_tracking_dialog_before_application_navigation",
+  "evidence": "reports/quest-icon-only-20261004/journey.txt",
+  "build": "passed",
   "dartAnalysis": "0 errors, 0 warnings, 3 style infos",
-  "manualControllerInput": "pending user test",
-  "manualComfortAndRecentering": "pending; viewer tracking returned default pose during automation",
-  "lighting": "static floor glow; no video-driven blurred reflections",
-  "screenshotNote": "Cinema uses metacam. Pure picture capture fell back to a stereo compositor mirror; see capture logs."
+  "screenshots": {},
+  "manualControllerInput": "pending: panel accessibility actions and native debug commands do not establish controller ray usability",
+  "manualComfortAndRecentering": "pending",
+  "lighting": "static radial floor glow visually verified on Quest; no video-driven reflection",
+  "reference": "reports/youtube-reference-20261004/REVIEW.md",
+  "previousVersionEvidence": "reports/quest-icon-only-20261004/previous-validation.json",
+  "notImplemented": [
+    "curved screen",
+    "persistent video mini-player while browsing",
+    "video-driven reflections"
+  ],
+  "dataPreservation": "adb install -r, no account clear or uninstall",
+  "simulator": {
+    "date": "2026-10-04",
+    "device": "Meta Spatial Simulator 207.0.0.83.331 / x86_64",
+    "artifact": "reports/quest-simulator-20261004/VRBiliBili-simulator-x64.apk",
+    "sha256": "06ac5da5892e421f39d460f29882fc04ddcb139314667afef5da121574e9158c",
+    "installedMatches": true,
+    "journeyPassed": true,
+    "evidence": "reports/quest-simulator-20261004/panel-journey.txt",
+    "decodedVideo": "1920x1080, playing and advancing; pause/seek checked",
+    "screenshots": [
+      "reports/quest-simulator-20261004/home-loaded.png",
+      "reports/quest-simulator-20261004/quest-account-ui.png",
+      "reports/quest-simulator-20261004/quest-detail-ui.png",
+      "reports/quest-simulator-20261004/quest-dynamic-ui.png",
+      "reports/quest-simulator-20261004/quest-home-ui.png",
+      "reports/quest-simulator-20261004/quest-preview-environment-ui.png",
+      "reports/quest-simulator-20261004/quest-preview-size-ui.png",
+      "reports/quest-simulator-20261004/quest-preview-ui.png",
+      "reports/quest-simulator-20261004/quest-quality-ui.png",
+      "reports/quest-simulator-20261004/quest-search-ui.png",
+      "reports/quest-simulator-20261004/quest-settings-ui.png",
+      "reports/quest-simulator-20261004/quest-wide-ui.png"
+    ],
+    "sharedNativeControls": [
+      "CinemaHud",
+      "CinemaMenu",
+      "CinemaControl"
+    ],
+    "xrSceneValidated": false,
+    "limitations": [
+      "Environment and size preview validates menus only",
+      "Simulator living room is not the application cinema",
+      "Account and dynamic screens checked while logged out",
+      "Preview does not validate danmaku rendering, recentering or passthrough"
+    ],
+    "hardwareUpdatedThisTurn": false
+  },
+  "realDeviceFixes": [
+    "Removed flat albedo override replacing radial floor texture",
+    "Restore MainActivity after immersive activity teardown; return and reentry passed"
+  ],
+  "passthroughValidation": "selection state checked; camera appearance not captured",
+  "wakeAutomation": "automation_disable broadcast completed result=0; existing StayOn setting unchanged",
+  "iteration2": {
+    "fixes": [
+      "Opaque title backing and stronger HUD contrast with larger labels",
+      "Pure mode hides danmaku without losing toggle preference",
+      "Constrain uploader name and counts to available width"
+    ],
+    "analysis": "Changed Flutter introduction file: No issues found",
+    "decodedResolution": "3840x2160 in panel playback",
+    "nativeInputEvidence": "performClick dispatches real View callbacks, not physical controller rays",
+    "startupLimitation": "Some instrumentation launches land on Horizon FocusPlaceholderActivity; successful run followed explicit panel focus restoration. Earlier failures and timeout retained."
+  },
+  "iconLabels": "hidden by default; shown only on hover, focus or press; accessible names and hit areas retained; menu labels retained"
 }

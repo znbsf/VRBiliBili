@@ -5,6 +5,7 @@ import 'package:PiliPlus/models/common/video/video_quality.dart';
 import 'dart:math';
 
 import 'package:PiliPlus/common/assets.dart';
+import 'package:PiliPlus/build_config.dart';
 import 'package:PiliPlus/common/style.dart';
 import 'package:PiliPlus/common/widgets/custom_icon.dart';
 import 'package:PiliPlus/common/widgets/flutter/pop_scope.dart';
@@ -51,11 +52,13 @@ import 'package:PiliPlus/pages/video/widgets/intro_layout.dart';
 import 'package:PiliPlus/pages/video/widgets/player_focus.dart';
 import 'package:PiliPlus/plugin/pl_player/controller.dart';
 import 'package:PiliPlus/plugin/pl_player/models/fullscreen_mode.dart';
+import 'package:PiliPlus/plugin/pl_player/models/data_status.dart';
 import 'package:PiliPlus/plugin/pl_player/models/play_repeat.dart';
 import 'package:PiliPlus/plugin/pl_player/models/play_status.dart';
 import 'package:PiliPlus/plugin/pl_player/utils/fullscreen.dart';
 import 'package:PiliPlus/plugin/pl_player/view/view.dart';
 import 'package:PiliPlus/services/service_locator.dart';
+import 'package:PiliPlus/services/download/download_service.dart';
 import 'package:PiliPlus/services/shutdown_timer_service.dart'
     show shutdownTimerService;
 import 'package:PiliPlus/utils/accounts.dart';
@@ -73,6 +76,7 @@ import 'package:PiliPlus/utils/storage_key.dart';
 import 'package:PiliPlus/utils/theme_utils.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/foundation.dart' show kDebugMode, clampDouble;
+import 'package:flutter/services.dart' show PlatformException;
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -171,12 +175,93 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     videoSourceInit();
     if (kDebugMode && QuestDevice.isQuest) {
       QuestDevice.channel.setMethodCallHandler((call) async {
+        if (call.method == 'verifyCinemaEntryGuards') {
+          final detail = videoDetailController;
+          final oldCid = detail.cid.value;
+          final oldQuerying = detail.isQuerying;
+          final oldStatus = detail.plPlayerController.dataStatus.value;
+          final rejected = <String, bool>{};
+          try {
+            detail.isQuerying = true;
+            try {
+              await CinemaPlayer.open(detail);
+            } on PlatformException catch (error) {
+              rejected['querying'] = error.code == 'loading';
+            }
+            detail.isQuerying = false;
+            detail.cid.value = oldCid + 1;
+            try {
+              await CinemaPlayer.open(detail);
+            } on PlatformException catch (error) {
+              rejected['mismatchedCid'] = error.code == 'loading';
+            }
+            detail.cid.value = oldCid;
+            for (final status in [
+              DataStatus.none,
+              DataStatus.loading,
+              DataStatus.error,
+            ]) {
+              detail.plPlayerController.dataStatus.value = status;
+              try {
+                await CinemaPlayer.open(detail);
+              } on PlatformException catch (error) {
+                rejected[status.name] = error.code == 'loading';
+              }
+            }
+            return {...rejected, 'cinemaActive': CinemaPlayer.active};
+          } finally {
+            detail.cid.value = oldCid;
+            detail.isQuerying = oldQuerying;
+            detail.plPlayerController.dataStatus.value = oldStatus;
+          }
+        }
+        if (call.method == 'pauseForCacheRecovery') {
+          await videoDetailController.plPlayerController.pause();
+          return {'paused': true};
+        }
+        if (call.method == 'downloadCacheState') {
+          final service = Get.find<DownloadService>();
+          await service.waitForInitialization;
+          return {
+            'completed': service.downloadList
+                .map((entry) => entry.cid)
+                .toList(),
+            'waiting': service.waitDownloadQueue
+                .map((entry) => entry.cid)
+                .toList(),
+          };
+        }
         if (call.method != 'playerState') return null;
         final p = videoDetailController.plPlayerController;
-        return {'positionMs': p.positionInMilliseconds, 'durationMs': p.durationInMilliseconds,
+        final probeCid = (call.arguments as Map?)?['probeCid'] ?? p.cid;
+        return {
+          'buildVersionName': BuildConfig.versionName,
+          'buildVersionCode': BuildConfig.versionCode,
+          'buildBaseCommit': BuildConfig.commitHash,
+          'buildLocalPatch': BuildConfig.localPatch,
+          'buildLabel': BuildConfig.buildLabel,
+          'positionMs': p.positionInMilliseconds,
+          'durationMs': p.durationInMilliseconds,
           'playing': p.playerStatus.isPlaying,
+          'rawPlaying': p.videoPlayerController?.state.playing ?? false,
+          'cid': p.cid,
+          'detailCid': videoDetailController.cid.value,
+          'processing': p.processing,
+          'dataStatus': p.dataStatus.value.name,
+          'cinemaActive': CinemaPlayer.active,
+          'playedTimeMs': videoDetailController.playedTime?.inMilliseconds,
+          'cachedPositionMs': p.cid == null
+              ? null
+              : GStorage.readWatchProgress(p.cid!),
+          'cachedProbePositionMs': probeCid == null
+              ? null
+              : GStorage.readWatchProgress(probeCid as int),
+          'restoreStartMs': videoDetailController.defaultST?.inMilliseconds,
+          'playbackRate': p.videoPlayerController?.state.rate ?? p.playbackSpeed,
+          'watchProgressPath': GStorage.watchProgress.path,
           'width': p.videoPlayerController?.state.width ?? 0,
-          'height': p.videoPlayerController?.state.height ?? 0};
+          'height': p.videoPlayerController?.state.height ?? 0,
+        };
       });
     }
 
@@ -215,6 +300,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
   }
 
   Future<void>? playCallBack() {
+    if (CinemaPlayer.active) return Future<void>.value();
     if (!isShowing) {
       plPlayerController
         ?..addStatusLister(playerListener)
@@ -300,7 +386,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     }
   }
 
-  final bool _questWide = false;
+  bool _questWide = false;
   bool _questLoading = false;
   Future<void> questTogglePlayback() async {
     if (_questLoading) return;
@@ -320,7 +406,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
 
   Future<void> questEnterCinema() async {
     try {
-      await CinemaPlayer.open(videoDetailController);
+      await CinemaPlayer.open(videoDetailController, title: introController.videoDetail.value.title ?? Get.arguments['title'] ?? '正在播放');
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -398,6 +484,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     IconButton(tooltip: label, onPressed: callback,
       style: IconButton.styleFrom(minimumSize: const Size(52, 52),
         foregroundColor: accent ? _questAccent : Colors.white,
+        backgroundColor: accent ? _questAccent.withValues(alpha: .12) : Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
       icon: Icon(icon, size: 26));
 
@@ -1417,19 +1504,35 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
           const SizedBox(width: 12),
           const Text('正在观看', style: TextStyle(fontSize: 14, color: Colors.white54)),
           const Spacer(),
-
+          questIcon(_questWide ? '显示视频信息' : '收起视频信息',
+            _questWide ? Icons.view_sidebar_outlined : Icons.crop_landscape_rounded,
+            () => setState(() => _questWide = !_questWide)),
+          questIcon('搜索视频', Icons.search_rounded, () => Get.toNamed('/search')),
         ])),
         Expanded(child: Padding(padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
           child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            Expanded(flex: 7, child: ClipRRect(borderRadius: BorderRadius.circular(12),
-              child: ColoredBox(color: const Color(0xFF09090B), child: Column(children: [
-                Expanded(child: LayoutBuilder(builder: (context, area) {
-                  final w = min(area.maxWidth, area.maxHeight * 16 / 9);
-                  return Center(child: SizedBox(width: w, height: w * 9 / 16,
-                    child: videoPlayer(width: w, height: w * 9 / 16)));
+            Expanded(flex: 8, child: Align(alignment: Alignment.center,
+              child: ClipRRect(borderRadius: BorderRadius.circular(12),
+              child: ColoredBox(color: const Color(0xFF202024), child: Column(
+                mainAxisSize: MainAxisSize.min, children: [
+                Flexible(child: LayoutBuilder(builder: (context, area) {
+                  final player = videoDetailController.plPlayerController;
+                  final state = player.videoPlayerController?.state;
+                  final sourceWidth = (state?.width ?? 0) > 0
+                      ? state!.width : (player.width ?? 16);
+                  final sourceHeight = (state?.height ?? 0) > 0
+                      ? state!.height : (player.height ?? 9);
+                  // Keep normal media proportional. Extreme ratios retain
+                  // contain-fit inside these bounds instead of stretching.
+                  final ratio = (sourceWidth > 0 && sourceHeight > 0
+                      ? sourceWidth / sourceHeight : 16 / 9).clamp(9 / 16, 2.4);
+                  final w = min(area.maxWidth, area.maxHeight * ratio);
+                  return Align(heightFactor: 1, widthFactor: 1,
+                    child: SizedBox(width: w, height: w / ratio,
+                      child: videoPlayer(width: w, height: w / ratio)));
                 })),
                 questTransport(),
-              ])))),
+              ]))))),
             if (!_questWide) const SizedBox(width: 16),
             if (!_questWide) Expanded(flex: 4, child: ClipRRect(borderRadius: BorderRadius.circular(12),
               child: ColoredBox(color: const Color(0xFF202024), child: LayoutBuilder(builder: (context, area) => Column(children: [

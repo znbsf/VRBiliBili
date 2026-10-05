@@ -1,6 +1,9 @@
 [CmdletBinding()]
 param(
     [ValidateSet('debug', 'release')][string] $Mode = 'debug',
+    [ValidateSet('android-arm64', 'android-x64')][string] $TargetPlatform = 'android-arm64',
+    [string] $BuildName = '0.1.0',
+    [int] $BuildNumber = 1,
     [string] $FlutterSdk,
     [string] $AndroidSdk = "$env:LOCALAPPDATA/Android/Sdk",
     [string] $Jdk,
@@ -42,7 +45,7 @@ try {
             $pubExit = $LASTEXITCODE
         }
         if ($pubExit) { throw 'Dependency preparation failed' }
-        & "$FlutterSdk/bin/flutter.bat" build apk "--$Mode" --target-platform android-arm64 --no-pub
+        & "$FlutterSdk/bin/flutter.bat" build apk "--$Mode" --target-platform $TargetPlatform --build-name $BuildName --build-number $BuildNumber --no-pub
         if ($LASTEXITCODE) { throw 'APK build failed' }
         Get-FileHash "build/app/outputs/flutter-apk/app-$Mode.apk" -Algorithm SHA256
     } finally { Pop-Location }

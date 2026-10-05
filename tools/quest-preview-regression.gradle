@@ -1,0 +1,15 @@
+// Build only the offline Preview regression runner, preserving QuestUiDriver
+// as the project's default. Use: gradlew -I ../../../tools/quest-preview-regression.gradle
+// :app:assembleDebugAndroidTest (plus the project's normal build arguments).
+allprojects {
+    plugins.withId('com.android.application') {
+        androidComponents.finalizeDsl { androidDsl ->
+            def runner = project.findProperty('questRegressionRunner') ?: 'CinemaPreviewRegression'
+            if (!(runner in ['CinemaPreviewRegression', 'CinemaFlutterHandoffRegression', 'CinemaCacheRecoveryRegression', 'QuestHardwareRecoveryRegression'])) {
+                throw new GradleException('Unknown offline regression runner')
+            }
+            androidDsl.defaultConfig.testInstrumentationRunner =
+                'com.example.piliplus.' + runner
+        }
+    }
+}

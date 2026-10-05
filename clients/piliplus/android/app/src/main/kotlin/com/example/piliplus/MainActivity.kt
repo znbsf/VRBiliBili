@@ -16,7 +16,7 @@ class MainActivity : AudioServiceActivity() {
         val channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "vrbilibili/device")
         if (applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE != 0) debugChannel = channel
         channel.setMethodCallHandler { call, result ->
-                if (call.method == "isQuest") result.success(Build.MODEL.contains("Quest", ignoreCase = true))
+                if (call.method == "isQuest") result.success(Build.MODEL.contains("Quest", ignoreCase = true) || Build.MODEL.contains("Spatial Simulator", ignoreCase = true))
                 else result.notImplemented()
             }
     }
