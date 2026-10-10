@@ -1,5 +1,9 @@
 # VRBiliBili
 
+> **2026-10-10 更新：当前普通大屏候选为 [v0.1.0-rc.6 / code 6](https://github.com/znbsf/VRBiliBili/releases/tag/v0.1.0-rc.6)。** 新版在保留 Flutter/media-kit 普通面板的基础上隔离了 Meta/XR 运行时，提供原签名 ARM64 APK、匹配源码和原生依赖源码材料。当前仍为预发布，code 6 真机复测未完成。
+>
+> [当前产品说明与构建步骤](https://github.com/znbsf/VRBiliBili/blob/cde0af04f800c54b86f468e15f26ed185b9ff3be/README.md) · [精确源码提交 cde0af0](https://github.com/znbsf/VRBiliBili/commit/cde0af04f800c54b86f468e15f26ed185b9ff3be)。main 的历史代码与恢复记录暂时保留，下方内容描述旧 Q4 阶段；构建新版请使用 rc.6 对应源码，不能把 main 的旧代码当作 code 6。
+
 面向 Meta Quest 3 的实验性 Bilibili 客户端，基于 PiliPlus。选片、账号和普通播放使用 PiliPlus；观看页提供大尺寸播放控件，以及固定屏幕的全屏影院入口。影院支持深色／浅色环境、纯画面模式和屏幕大小调整。
 
 当前源码已合入本地缓存与影院返回的进度恢复修复。真实 Quest 的面板双 CID 隔离及新进程续播已通过；沉浸影院进出仍因未佩戴时系统睡眠阻断，需要用户佩戴后继续验收。2026-10-04 ARM64 本地测试候选为 `2.1.5-quest.20261004.4+2026100404`，关于页显示基础提交、补丁 SHA256 和构建标签。**含 Meta Spatial SDK 的公开 APK Release 仍待组合许可依据确认；目前没有可下载的正式 APK，不以源码压缩包代替 APK。** 详见 [二进制分发核查](docs/BINARY-DISTRIBUTION-REVIEW.md) 与 [本轮交付验收](docs/QUEST-ARM64-DELIVERY.md)。
