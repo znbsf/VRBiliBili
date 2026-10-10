@@ -8,6 +8,6 @@ main 已通过正常双亲合并接入 rc.6 功能，保留原 main 的恢复修
 
 rc.6 本地执行过的 11 项 widget 测试被错误忽略规则漏出 Git/source ZIP。本次 main 修正忽略规则并补入同一测试源码；已发布 tag 和附件不重写。
 
-Quest 仍为 unauthorized，code 6 实机验收未完成。下一步按 [验收矩阵](PANEL-VALIDATION.md) 在用户授权的 Quest 上验证选片网络播放、实际拖动与返回续播、比例裁切、自然休眠恢复及长时间播放。本轮不安装、不绕过设备授权。
+Quest 已恢复 ADB，正式 code 6 保数据升级成功，并完成部分真实播放、返回续播及离头休眠后正常唤醒检查。剩余拖动和视觉验收边界见 [实机记录](QUEST-RC6-ACCEPTANCE.md)；可复用唤醒方法见 [QUEST-TESTING](QUEST-TESTING.md)。
 
 [依赖审计](DEPENDENCIES.md) · [发布记录](RELEASE.md) · [源码交付](SOURCE-DELIVERY.md)

@@ -1,5 +1,7 @@
 # VRBiliBili
 
+> 2026-10-10 实机后续：正式 rc.6 已保数据安装，部分播放、返回续播、离头入睡后正常唤醒检查通过。详细边界见 [实机记录](docs/QUEST-RC6-ACCEPTANCE.md)；下文先前 unauthorized 状态为发布时历史快照。
+
 基于 [PiliPlus](https://github.com/bggRGjQaUbCoE/PiliPlus) 的 Quest 普通 Android 大屏 B 站客户端。使用 Flutter 界面与开源 media-kit 播放，在系统可调整窗口内选片、观看、拖动进度和展开/收起信息栏。
 
 **0.1.0-rc.6 / Android code 6 是预发布候选。** 延续本地 code 5 的普通面板方向，不提供沉浸影院。不是 B 站或 Meta 官方客户端；不宣称支持 SteamVR 或其他头显。
