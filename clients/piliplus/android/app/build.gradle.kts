@@ -27,9 +27,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    val panelAcceptance = providers.gradleProperty("panelAcceptance").orNull == "true"
+    testBuildType = if (panelAcceptance) "release" else "debug"
+
     defaultConfig {
         applicationId = "io.github.vrbilibili.quest"
-        testInstrumentationRunner = "com.example.piliplus.PanelRecoveryRegression"
+        testInstrumentationRunner = if (panelAcceptance) "com.example.piliplus.PanelAcceptanceProbe"
+            else "com.example.piliplus.PanelRecoveryRegression"
         minSdk = 34
         targetSdk = 37
         versionCode = flutter.versionCode

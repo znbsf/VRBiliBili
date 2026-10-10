@@ -154,3 +154,5 @@ test*
 !/test/
 /test/*
 !/test/panel_widgets_test.dart
+
+!/test/release_channel_test.dart

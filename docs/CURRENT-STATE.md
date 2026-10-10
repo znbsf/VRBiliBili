@@ -1,5 +1,7 @@
 # 当前状态：普通 Android 面板
 
+当前候选为 code 7 / rc.7：修复 fork 更新渠道，保持普通面板播放器行为。详见 [RC7-VALIDATION](RC7-VALIDATION.md)。以下 rc.6 身份与结果是已发布历史，不替代新包验收。
+
 唯一推荐目标是普通 Android 大屏播放：保留既有界面、同页展开/收起、单一进度条、松手后一次 seek、保持比例的 cover 裁切。Meta/XR 运行时从当前产品构建隔离；保留旧源码供历史追溯，不恢复影院入口。
 
 main 已通过正常双亲合并接入 rc.6 功能，保留原 main 的恢复修复、测试与交接证据。分叉原因与逐项处理见 [MAIN-INTEGRATION](MAIN-INTEGRATION.md)。

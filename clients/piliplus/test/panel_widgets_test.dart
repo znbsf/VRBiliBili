@@ -1,3 +1,4 @@
+import 'dart:ui' show PointerDeviceKind;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:PiliPlus/quest/panel_seek_bar.dart';
@@ -37,6 +38,22 @@ void main() {
     final gesture=await tester.startGesture(tester.getCenter(find.byType(Slider)));
     await tester.pumpWidget(scene(2)); await gesture.up(); await tester.pump();
     expect(seeks,isEmpty);expect(tester.widget<Slider>(find.byType(Slider)).value,5);
+  });
+  testWidgets('32px transport accepts mouse drag and only seeks on release', (tester) async {
+    final seeks = <int>[];
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: Column(children: [
+      SizedBox(height: 32, child: PanelSeekBar(durationSeconds: 120,
+        positionSeconds: 12, onSeek: seeks.add)),
+      const SizedBox(height: 40),
+    ]))));
+    final rect = tester.getRect(find.byType(Slider));
+    expect(rect.height, 32);
+    final gesture = await tester.startGesture(Offset(rect.left + rect.width * .2, rect.center.dy),
+      kind: PointerDeviceKind.mouse);
+    await gesture.moveTo(Offset(rect.left + rect.width * .65, rect.center.dy));
+    await tester.pump(); expect(seeks, isEmpty);
+    await gesture.up(); await tester.pump();
+    expect(seeks, hasLength(1)); expect(seeks.single, inInclusiveRange(74, 84));
   });
   for(final source in [const Size(1920,1080),const Size(1440,1080),const Size(1080,1920),const Size(2560,1080)]) {
     for(final area in [const Size(640,360),const Size(500,500)]) {

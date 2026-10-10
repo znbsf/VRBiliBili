@@ -3,7 +3,7 @@ param(
     [ValidateSet('debug', 'release')][string] $Mode = 'debug',
     [ValidateSet('android-arm64', 'android-x64')][string] $TargetPlatform = 'android-arm64',
     [string] $BuildName = '0.1.0',
-    [int] $BuildNumber = 6,
+    [int] $BuildNumber = 7,
     [string] $FlutterSdk,
     [string] $AndroidSdk = "$env:LOCALAPPDATA/Android/Sdk",
     [string] $Jdk,

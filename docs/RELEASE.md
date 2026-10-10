@@ -1,3 +1,9 @@
+# code 7 / rc.7 候选
+
+正式包名和签名延续，versionCode 7。停用上游自动更新；手动更新指向本项目。旧 rc.6 tag/附件保持不变。新版本构建身份、哈希、实机与尚未通过项目以新 Release 验证附件为准。见 [RC7-VALIDATION](RC7-VALIDATION.md)。
+
+---
+
 # 0.1.0-rc.6 / code 6 普通面板预发布
 
 版本名 0.1.0，versionCode 6，ARM64，包名 io.github.vrbilibili.quest。使用原正式签名流程，保留覆盖升级的数据兼容性；未访问私钥内容，未生成新签名身份。

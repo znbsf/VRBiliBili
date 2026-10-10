@@ -144,7 +144,7 @@ class _AboutPageState extends State<AboutPage> {
             onSecondaryTap: PlatformUtils.isMobile
                 ? null
                 : () => Utils.copyText(currentVersion),
-            title: const Text('当前版本'),
+            title: const Text('当前版本 · 本项目发布页'),
             leading: const Icon(Icons.commit_outlined),
             trailing: Text(
               currentVersion,
