@@ -51,3 +51,5 @@ Thumbs.db
 **/.gradle/
 **/.flutter-plugins*
 **/ephemeral/
+**/__pycache__/
+*.pyc

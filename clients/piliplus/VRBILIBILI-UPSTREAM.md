@@ -5,11 +5,9 @@ Vendored from https://github.com/bggRGjQaUbCoE/PiliPlus at
 are retained. This directory is the actual Flutter/Android application.
 
 Quest uses a distinct application ID (`io.github.vrbilibili.quest`) and a
-Flutter large-window layout. Ordinary playback stays in the original media-kit player.
-The current implementation also provides an explicit full-screen cinema entry using
-Meta Spatial SDK and Media3. The earlier free-placement/multi-window direction stays
-out of scope. Authentication and user data stay with the existing client.
-See [third-party sources and license boundaries](../../docs/THIRD-PARTY-NOTICES.md).
+Flutter large-window layout. Playback stays in the original media-kit player.
+Historical cinema sources remain excluded from compilation. The ordinary panel
+does not use Meta Spatial SDK, OpenXR or Media3. Authentication remains in PiliPlus.
 
 The project requires Flutter 3.47.5 with the upstream framework patches from
 `lib/scripts/` in an isolated SDK. Do not run upstream `patch.ps1` blindly: it
@@ -25,7 +23,4 @@ Pinned local dependency overrides:
 - media-kit stays locked to upstream fork commit
   `73771ec38176be2d984a3049c28177bce23b54a0`.
 
-Android uses AGP 8.11.1, Kotlin 2.2.21, Gradle 8.14.5 and Java 17.
-The cinema declares Meta Spatial SDK core/toolkit/vr 0.14.0 and AndroidX Media3
-ExoPlayer 1.5.1. Their cached binaries and local official samples are not vendored
-into Git. Source publication does not establish combined-APK redistribution compatibility.
+Android uses AGP 8.11.1, Kotlin 2.2.21, Gradle 8.14.5 and Java 17. Ordinary panel playback remains on media-kit; historical cinema dependencies are excluded.

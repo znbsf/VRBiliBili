@@ -29,14 +29,20 @@ android {
 
     defaultConfig {
         applicationId = "io.github.vrbilibili.quest"
-        testInstrumentationRunner = "com.example.piliplus.QuestUiDriver"
+        testInstrumentationRunner = "com.example.piliplus.PanelRecoveryRegression"
         minSdk = 34
         targetSdk = 37
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
+    // Retained historical notices are not part of this Meta-free panel APK.
+    androidResources { ignoreAssetsPattern = "meta-spatial-sdk-0.14.0" }
     packagingOptions.jniLibs.useLegacyPackaging = true
+    // Flutter/plugin JNI folders may bypass NDK ABI selection; strip unused ABIs from Quest releases.
+    if (gradle.startParameter.taskNames.any { it.contains("Release", ignoreCase = true) }) {
+        packagingOptions.jniLibs.excludes += setOf("**/x86/**", "**/x86_64/**", "**/armeabi-v7a/**")
+    }
 
     val keyProperties = Properties().also {
         val properties = rootProject.file("key.properties")
@@ -62,10 +68,9 @@ android {
     }
 
     buildTypes {
-        all {
-            signingConfig = config ?: signingConfigs["debug"]
-        }
         release {
+            signingConfig = config
+            ndk { abiFilters += "arm64-v8a" }
             if (project.hasProperty("dev")) {
                 applicationIdSuffix = ".dev"
                 resValue(
@@ -74,12 +79,13 @@ android {
                     value = "PiliPlus dev",
                 )
             }
-//            proguardFiles(
-//                getDefaultProguardFile("proguard-android-optimize.txt"),
-//                "proguard-rules.pro"
-//            )
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
         debug {
+            signingConfig = signingConfigs["debug"]
             applicationIdSuffix = ".debug"
         }
     }
@@ -92,7 +98,17 @@ android {
     }
 }
 
+// Never publish a release silently signed with the shared Android debug key.
+gradle.taskGraph.whenReady {
+    if (allTasks.any { it.project == project && it.name.contains("Release") } &&
+        !rootProject.file("key.properties").exists()) {
+        throw GradleException("Release requires android/key.properties; see docs/RELEASE.md")
+    }
+}
+
 kotlin {
+    sourceSets.getByName("main").kotlin.exclude("**/Cinema*.kt")
+    sourceSets.getByName("androidTest").kotlin.exclude("**/Cinema*.kt", "**/QuestHardwareRecoveryRegression.kt")
     compilerOptions {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
@@ -104,8 +120,7 @@ flutter {
 
 
 dependencies {
-    implementation("com.meta.spatial:meta-spatial-sdk:0.14.0")
-    implementation("com.meta.spatial:meta-spatial-sdk-toolkit:0.14.0")
-    implementation("com.meta.spatial:meta-spatial-sdk-vr:0.14.0")
-    implementation("androidx.media3:media3-exoplayer:1.5.1")
 }
+
+// Retain the historical XR driver as source only; it is not a panel test.
+tasks.withType<JavaCompile>().configureEach { exclude("**/QuestUiDriver.java") }

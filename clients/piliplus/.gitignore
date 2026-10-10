@@ -150,3 +150,7 @@ pili_release.json
 dist
 
 test*
+# Project panel regression tests are source, not generated test outputs.
+!/test/
+/test/*
+!/test/panel_widgets_test.dart

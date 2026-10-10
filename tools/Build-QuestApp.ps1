@@ -2,6 +2,8 @@
 param(
     [ValidateSet('debug', 'release')][string] $Mode = 'debug',
     [ValidateSet('android-arm64', 'android-x64')][string] $TargetPlatform = 'android-arm64',
+    [string] $BuildName = '0.1.0',
+    [int] $BuildNumber = 6,
     [string] $FlutterSdk,
     [string] $AndroidSdk = "$env:LOCALAPPDATA/Android/Sdk",
     [string] $Jdk,
@@ -17,6 +19,11 @@ if (!$Jdk) {
 }
 foreach ($file in @("$FlutterSdk/bin/flutter.bat", "$Jdk/bin/java.exe", "$AndroidSdk/platform-tools/adb.exe")) {
     if (!(Test-Path -LiteralPath $file)) { throw "Required tool missing: $file" }
+}
+$sourceCommit = (& git -C $root rev-parse HEAD).Trim()
+if ($LASTEXITCODE) { throw 'Cannot determine source commit' }
+if ($Mode -eq 'release' -and (& git -C $root status --porcelain)) {
+    throw 'Commit the intended source before release building; dirty trees are not release identities.'
 }
 $before = @{}
 foreach ($name in @('JAVA_HOME','ANDROID_HOME','ANDROID_SDK_ROOT','FLUTTER_ROOT','JAVA_TOOL_OPTIONS','Path')) {
@@ -43,7 +50,7 @@ try {
             $pubExit = $LASTEXITCODE
         }
         if ($pubExit) { throw 'Dependency preparation failed' }
-        & "$FlutterSdk/bin/flutter.bat" build apk "--$Mode" --target-platform $TargetPlatform --no-pub
+        & "$FlutterSdk/bin/flutter.bat" build apk "--$Mode" --target-platform $TargetPlatform --build-name $BuildName --build-number $BuildNumber --no-pub "--dart-define=pili.hash=$sourceCommit" "--dart-define=pili.name=$BuildName" "--dart-define=pili.code=$BuildNumber" "--dart-define=vr.patch=clean" "--dart-define=vr.label=ordinary-panel"
         if ($LASTEXITCODE) { throw 'APK build failed' }
         Get-FileHash "build/app/outputs/flutter-apk/app-$Mode.apk" -Algorithm SHA256
     } finally { Pop-Location }

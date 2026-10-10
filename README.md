@@ -1,53 +1,50 @@
 # VRBiliBili
 
-> **2026-10-10 更新：当前普通大屏候选为 [v0.1.0-rc.6 / code 6](https://github.com/znbsf/VRBiliBili/releases/tag/v0.1.0-rc.6)。** 新版在保留 Flutter/media-kit 普通面板的基础上隔离了 Meta/XR 运行时，提供原签名 ARM64 APK、匹配源码和原生依赖源码材料。当前仍为预发布，code 6 真机复测未完成。
->
-> [当前产品说明与构建步骤](https://github.com/znbsf/VRBiliBili/blob/cde0af04f800c54b86f468e15f26ed185b9ff3be/README.md) · [精确源码提交 cde0af0](https://github.com/znbsf/VRBiliBili/commit/cde0af04f800c54b86f468e15f26ed185b9ff3be)。main 的历史代码与恢复记录暂时保留，下方内容描述旧 Q4 阶段；构建新版请使用 rc.6 对应源码，不能把 main 的旧代码当作 code 6。
+基于 [PiliPlus](https://github.com/bggRGjQaUbCoE/PiliPlus) 的 Quest 普通 Android 大屏 B 站客户端。使用 Flutter 界面与开源 media-kit 播放，在系统可调整窗口内选片、观看、拖动进度和展开/收起信息栏。
 
-面向 Meta Quest 3 的实验性 Bilibili 客户端，基于 PiliPlus。选片、账号和普通播放使用 PiliPlus；观看页提供大尺寸播放控件，以及固定屏幕的全屏影院入口。影院支持深色／浅色环境、纯画面模式和屏幕大小调整。
+**0.1.0-rc.6 / Android code 6 是预发布候选。** 延续本地 code 5 的普通面板方向，不提供沉浸影院。不是 B 站或 Meta 官方客户端；不宣称支持 SteamVR 或其他头显。
 
-当前源码已合入本地缓存与影院返回的进度恢复修复。真实 Quest 的面板双 CID 隔离及新进程续播已通过；沉浸影院进出仍因未佩戴时系统睡眠阻断，需要用户佩戴后继续验收。2026-10-04 ARM64 本地测试候选为 `2.1.5-quest.20261004.4+2026100404`，关于页显示基础提交、补丁 SHA256 和构建标签。**含 Meta Spatial SDK 的公开 APK Release 仍待组合许可依据确认；目前没有可下载的正式 APK，不以源码压缩包代替 APK。** 详见 [二进制分发核查](docs/BINARY-DISTRIBUTION-REVIEW.md) 与 [本轮交付验收](docs/QUEST-ARM64-DELIVERY.md)。
+main 已完整接入 rc.6 普通面板、XR 隔离及 seek 修复，并保留双方历史。发布 APK 精确对应 `cde0af0`；后续 main 补齐测试源码，详情见 [整合记录](docs/MAIN-INTEGRATION.md)。
 
-## 应用截图
+## 本版变化
 
-以下均为真实应用运行时的原始截图，播放内容是项目原创色块／音调测试片段。设备和覆盖边界分别标明，截图来源及哈希见 [记录](docs/screenshot-provenance.json)。
+- Meta Spatial SDK core/toolkit/vr/isdk 与影院专用 Media3 不再进入运行时依赖；影院 Activity、XR 权限/功能与入口已脱离普通面板。
+- 原 UI、弹幕、画质设置和单一控制栏保留。展开/收起在同一 Flutter 页面完成，不切换播放器。
+- 拖动进度条时预览目标位置，松手后提交一次 seek，避免连续异步跳转互相覆盖；不主动改变暂停/播放状态。
+- 视频保持比例、按可用区域裁切铺满。不同画面比例会裁掉边缘，不拉伸；编码在视频内部的黑边不自动消除。没有新增“完整显示”模式。
 
-![Quest 3 实际应用窗口：原创离线片段播放](docs/images/app-offline-quest3.png)
+## 下载与保数据升级
 
-Quest 3 的实际 MainActivity 窗口，来自 Q4 候选的 R5 真机播放验证。它证明普通播放器界面与真实素材解码，不是 XR 合成器的双眼画面。素材实际为 320×180；1080P 为测试目录元数据。
+从 [rc.6 预发布](https://github.com/znbsf/VRBiliBili/releases/tag/v0.1.0-rc.6) 获取 ARM64 APK、对应源码、原生播放器源码材料、验证记录和 SHA256SUMS。下载后先核对哈希。
 
-![离线片段播放及影院返回后的暂停状态：模拟器真实应用截图](docs/images/app-offline-recovery-simulator.png)
+包名仍为 `io.github.vrbilibili.quest`，沿用正式签名，versionCode 从旧候选递增到 6。使用 Android 覆盖安装保留该包的账号和数据：
 
-隔离模拟器中，离线片段列表、播放进度和影院返回后的暂停状态。画面中的 1080P 为测试目录元数据；素材实际为 240×136。
-
-![原生播放控件：模拟器非XR预览真实截图](docs/images/app-native-controls-simulator.png)
-
-原生播放控件的非 XR 预览；标题也明确标为“模拟器控件预览（非 XR）”。
-
-## 安装与使用
-
-公开 APK 尚未放行。已有本地授权测试包时，先确认来源、SHA256、包名和签名，再在已启用开发者模式、已授权的 Quest 连接上安装；此说明不要求更改配对或系统权限。
-
-```text
-adb -s <已授权设备序列号> install -r <经校验的ARM64测试APK>
+```powershell
+adb -s YOUR_QUEST_SERIAL install -r VRBiliBili-0.1.0-6-quest-arm64.apk
 ```
 
-本轮测试包使用既有调试包名 `io.github.vrbilibili.quest.debug` 和兼容签名，覆盖安装保留应用数据。签名冲突时应停止核查，不以卸载或清空数据绕过。应用可从 Quest 未知来源列表打开；选片后进入普通播放，点击“全屏影院”进入固定影院，使用“退出全屏”返回。账号登录由使用者自行完成；自动测试不登录、不操作现有账号。
+不要卸载或清数据来解决签名冲突。`.debug` 包的数据独立，正式包不会迁移其账号。该版本未发布商店。
 
-## 开发与验证
+## 验证范围
 
-客户端源码在 [clients/piliplus](clients/piliplus)，构建环境与固定依赖说明见 [开发环境](docs/DEVELOPMENT-ENVIRONMENT.md) 和 [客户端说明](docs/QUEST-CLIENT.md)。ARM64 打包可使用 `tools/quest-arm64.gradle` 明确排除依赖带入的其他 ABI；它不选择签名密钥。Android 重构建、真实设备测试及签名检查应按 [交付验收](docs/QUEST-ARM64-DELIVERY.md) 的边界执行。
+已做普通面板组件测试（拖动、切源、四种视频比例 × 两种窗口尺寸）、静态分析和 Android 编译。实际通过项、APK 哈希、构建提交和依赖/DEX/manifest 核验以 Release 的 `validation.json` 为准。
 
-```text
-dart tests/dart/cinema_handoff_test.dart
+本轮 Quest 连接为 unauthorized，未在设备上安装或运行 code 6。选片网络播放、真实手柄/手势、解码器拖动落点、返回/重启续播、自然休眠恢复、长时间播放与裁切舒适度仍待 code 6 实机验收。code 5 与 Q4 的历史结果不等于 code 6 已通过。
+
+## 构建与开源依赖
+
+使用 Flutter 3.47.5 的独立补丁 SDK、Java 17、Android SDK 37 和锁文件。通过 `tools/Prepare-QuestFlutter.py` 在独立副本应用已有补丁；不要直接运行上游会改全局 Git 设置的 patch.ps1。
+
+```powershell
+./tools/Build-QuestApp.ps1 -Mode release -TargetPlatform android-arm64 -BuildName 0.1.0 -BuildNumber 6
 ```
 
-恢复回归覆盖固定 CID 的进度保存、影院返回时等待写入、坏类型／负值／截断 Hive 尾帧容错、损坏下载记录跳过和多 CID 隔离。模拟器的五个真实应用进程阶段已通过；实际头显结果独立列在 [交付验收](docs/QUEST-ARM64-DELIVERY.md)，不会由 DOM 或模拟器测试代替。
+Release 需要构建者自己的本地签名配置；缺失时失败，不回退 debug 签名。私钥、账号、构建缓存和本机记录不属于源码附件。构建脚本记录提交身份并拒绝带未提交改动的 Release 构建。
 
-历史 HTML 原型仍可打开 [prototype-preview.html](prototype-preview.html)。其账号、视频和播放状态为虚构演示，属于早期参考；浏览器验证方法见 [VALIDATION](docs/VALIDATION.md)。它不实现真实 Bilibili 解码或头显 XR。
+客户端保留 GPLv3；material_ui 为 BSD，webview 为 Apache-2.0，media-kit Dart 包为 MIT，原生 mpv/FFmpeg 及其依赖分别遵守自身许可。审计的 19 个 Git 依赖仓库均为公开仓库，两个本地 vendor 是有来源和许可证的开源源码。详见 [依赖审计](docs/DEPENDENCIES.md)、[源码与重建](docs/SOURCE-DELIVERY.md)、[第三方索引](docs/THIRD-PARTY-NOTICES.md)。
 
-## 上游与许可
+## 项目入口
 
-客户端由 [PiliPlus](https://github.com/bggRGjQaUbCoE/PiliPlus) 固定提交 `c102a6115c7ac040f6a0c6a1653944b81b82dcb4` 修改，继承 GPLv3，完整许可保留在 [客户端 LICENSE](clients/piliplus/LICENSE)，修改与上游说明见 [VRBILIBILI-UPSTREAM](clients/piliplus/VRBILIBILI-UPSTREAM.md)。本项目与 Bilibili、Meta 无官方关联，也未获得其背书。
+[当前状态](docs/CURRENT-STATE.md) · [发布记录](docs/RELEASE.md) · [面板验收](docs/PANEL-VALIDATION.md) · [客户端来源](clients/piliplus/VRBILIBILI-UPSTREAM.md)
 
-Meta Spatial SDK、播放器原生组件及其他依赖各自适用其许可。见 [第三方说明](docs/THIRD-PARTY-NOTICES.md)、[资产来源](docs/client-asset-provenance.json)、[原创测试素材](tests/fixtures/README.md) 和 [APK 分发待决事项](docs/BINARY-DISTRIBUTION-REVIEW.md)。源码公开不等于包含第三方 SDK 的组合 APK 已可分发。
+旧 Cinema 源码、实验测试、空间原型和截图留作历史，构建显式排除了影院代码和历史 Meta notices；不会自动恢复影院。rc.4 是历史 Meta/XR 版本，不能用来证明当前包的架构或体验。旧纯 OpenXR 迁移计划暂停。

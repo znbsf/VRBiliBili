@@ -1,0 +1,41 @@
+{
+  "version": "0.1.0",
+  "versionCode": 4,
+  "package": "io.github.vrbilibili.quest",
+  "sha256": "078b1d27da5aa16399b8a50b0e3f77645a6c6d9ce19294eff43501146a505b1b",
+  "installedHashMatches": true,
+  "signatureVerified": true,
+  "signerSha256": "965bac5fc009f98059d68213a6e7a6a29a27676e1e2d017b8302a62aa95599f9",
+  "abis": [
+    "arm64-v8a"
+  ],
+  "debuggable": false,
+  "q4IntegratedFrom": "d73f75251aed9866e909f3348bbc2f5d490541d8",
+  "sdkNoticesVerified": {
+    "LICENSE": "bb9b12db3b92c024458df625acd6f2d8140ea805cc6814bac74613a466731368",
+    "notices.html": "3c77d854f4771ed619a89f17cf6eb6e5f5d85e2d37f36de471bd3f9f9e40cf95"
+  },
+  "dartHandoffTests": 17,
+  "captureVerifierTests": 20,
+  "staticAnalysis": "no errors; 2 info lints",
+  "xrDisplay": "observed on Quest 3 code 4: consecutive metacam captures show real video frames; layout not accepted",
+  "xrInput": "unverified",
+  "cinemaRoundtrip": "unverified: official Android Back remained in CinemaActivity; native exit control not reached",
+  "tapedeckValidRecording": "unverified",
+  "distribution": "maintainer-requested prerelease; GPL/Meta compatibility unresolved",
+  "proximityOverrideThisTurn": true,
+  "artifact": "reports/quest-release-20261005/layout-v4/VRBiliBili-0.1.0-4-quest-arm64.apk",
+  "releaseV2Cinema": "failed: duplicate Spatial system registration",
+  "releaseV2PanelPlayback": "real Bilibili video observed after official desktop UI input",
+  "proximityRestored": true,
+  "proxOverrideFinal": "DISABLED",
+  "spatialNamesPreserved": true,
+  "openxrInstanceProbe": "passed instance/system only; zero submitted frames",
+  "openxrContractChecks": 12,
+  "panelLayout": "code 4 real video screenshot shows controls adjacent to image; other aspect ratios and wearer review pending",
+  "code4Verification": "docs/QUEST-CONFIRM-20261005.md",
+  "releaseTag": "v0.1.0-rc.4",
+  "openxrMigration": "pending: docs/OPENXR-MIGRATION.md",
+  "releaseUrl": "https://github.com/znbsf/VRBiliBili/releases/tag/v0.1.0-rc.4",
+  "publicationStatusSource": "GitHub release metadata; validation results do not certify distribution compliance"
+}
