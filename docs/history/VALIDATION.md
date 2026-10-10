@@ -1,6 +1,8 @@
+> 历史快照：保留原始版本、结果与经验；不构成当前目标或操作授权。旧“只读/不推送/不发布”、设备状态和源码-only 限制仅适用于记录当时阶段。当前状态见 [CURRENT-STATE](../CURRENT-STATE.md)；历史 pass 不自动等于当前 pass。
+
 # 桌面原型验证
 
-日期：2026-10-01。初始仓库基线在推送前重新执行原型相关回归；具体结果记录在 [validation-results.json](validation-results.json)。
+日期：2026-10-01。初始仓库基线在推送前重新执行原型相关回归；具体结果记录在 [validation-results.json](../validation-results.json)。
 
 | 检查 | 覆盖 |
 | --- | --- |

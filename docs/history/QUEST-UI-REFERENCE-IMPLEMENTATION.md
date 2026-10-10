@@ -1,4 +1,6 @@
-> 历史记录：以下验收和版本结论仅适用于文中旧构建。当前产品为普通 Android 面板；请先阅读 [CURRENT-STATE](CURRENT-STATE.md)。旧影院源码和证据保留，不表示恢复影院入口或通过 code 6 实机验收。
+> 历史快照：保留原始版本、结果与经验；不构成当前目标或操作授权。旧“只读/不推送/不发布”、设备状态和源码-only 限制仅适用于记录当时阶段。当前状态见 [CURRENT-STATE](../CURRENT-STATE.md)；历史 pass 不自动等于当前 pass。
+
+> 历史记录：以下验收和版本结论仅适用于文中旧构建。当前产品为普通 Android 面板；请先阅读 [CURRENT-STATE](../CURRENT-STATE.md)。旧影院源码和证据保留，不表示恢复影院入口或通过 code 6 实机验收。
 
 # Quest UI 录屏参考实施
 

@@ -1,10 +1,12 @@
-> 历史记录：以下验收和版本结论仅适用于文中旧构建。当前产品为普通 Android 面板；请先阅读 [CURRENT-STATE](CURRENT-STATE.md)。旧影院源码和证据保留，不表示恢复影院入口或通过 code 6 实机验收。
+> 历史快照：保留原始版本、结果与经验；不构成当前目标或操作授权。旧“只读/不推送/不发布”、设备状态和源码-only 限制仅适用于记录当时阶段。当前状态见 [CURRENT-STATE](../CURRENT-STATE.md)；历史 pass 不自动等于当前 pass。
+
+> 历史记录：以下验收和版本结论仅适用于文中旧构建。当前产品为普通 Android 面板；请先阅读 [CURRENT-STATE](../CURRENT-STATE.md)。旧影院源码和证据保留，不表示恢复影院入口或通过 code 6 实机验收。
 
 # Quest ARM64 本地交付（2026-10-04）
 
 Q4 debug候选 `2.1.5-quest.20261004.4+2026100404` 已保数据更新到真实Quest 3，APK仅arm64-v8a、UID10056。它沿用现有调试签名，未完成正式发行验收。
 
-安装应用对应交付源码提交 [`d73f75251aed9866e909f3348bbc2f5d490541d8`](https://github.com/znbsf/VRBiliBili/commit/d73f75251aed9866e909f3348bbc2f5d490541d8)。APK编译时基础提交仍是 `cc7c8734bbcf7f0b50a192c58eaf6996e15e7a2d`，22文件补丁SHA256 `10c9aabbb4bdb96419f25ae75aafa2c20f583172bd0271a717b5eac3a988a5e4`，界面标签 `Q4 cc7c8734+10c9aabb`。后续main仅更新测试与文档/截图，不能将新的main提交说成APK已嵌入的基础提交。固定构建清单见 [身份记录](quest-build-identity.json)。
+安装应用对应交付源码提交 [`d73f75251aed9866e909f3348bbc2f5d490541d8`](https://github.com/znbsf/VRBiliBili/commit/d73f75251aed9866e909f3348bbc2f5d490541d8)。APK编译时基础提交仍是 `cc7c8734bbcf7f0b50a192c58eaf6996e15e7a2d`，22文件补丁SHA256 `10c9aabbb4bdb96419f25ae75aafa2c20f583172bd0271a717b5eac3a988a5e4`，界面标签 `Q4 cc7c8734+10c9aabb`。后续main仅更新测试与文档/截图，不能将新的main提交说成APK已嵌入的基础提交。固定构建清单见 [身份记录](../quest-build-identity.json)。
 
 APK141225486字节，SHA256 `c9c90955d5b03aefea18fd8ffc348c6cf3aa7277981df3190bebee0c10f73f31`。本轮只重编译和更新测试APK，产品源码、应用APK、UID和用户数据未变化。
 
@@ -33,7 +35,7 @@ APK141225486字节，SHA256 `c9c90955d5b03aefea18fd8ffc348c6cf3aa7277981df3190be
 
 17项Dart交接回归此前通过；产品Dart未变，既有分析0错误/0警告/2个info。本轮离线AndroidTest构建通过、真机面板上述阶段通过。真实Chrome原型已完成的验证覆盖未变化；DOM、模拟器与真实头显结果分别记录。
 
-工具链、pubspec.lock、Android ABI与 [构建环境](DEVELOPMENT-ENVIRONMENT.md) 保持固定。测试由 `tools/quest-preview-regression.gradle` 选择 `QuestHardwareRecoveryRegression`，离线单工作线程构建。密钥、账户资料、签名机器私有路径不进入仓库。APK内SDK原始LICENSE/notices已逐字节核对；这不构成重新授权。
+工具链、pubspec.lock、Android ABI与 [构建环境](../DEVELOPMENT-ENVIRONMENT.md) 保持固定。测试由 `tools/quest-preview-regression.gradle` 选择 `QuestHardwareRecoveryRegression`，离线单工作线程构建。密钥、账户资料、签名机器私有路径不进入仓库。APK内SDK原始LICENSE/notices已逐字节核对；这不构成重新授权。
 
 普通UI动作开始时可发一次正常唤醒键；不在影院轮询中持续唤醒、不修改接近传感器/追踪设置、不模拟佩戴。阶段间可等待系统自然睡眠再开始下一项正常UI动作，不设置保活。应用数据不清空、账户不登录/变更、网络/权限/配对不调整。自有测试片段仍留在缓存列表，便于交接；不删除用户内容。
 
@@ -41,4 +43,4 @@ APK141225486字节，SHA256 `c9c90955d5b03aefea18fd8ffc348c6cf3aa7277981df3190be
 
 README的Quest截图已更新为Q4 R5真实MainActivity窗口原图；不是XR合成器双眼图像。另两张模拟器图片保留明确标注。
 
-未创建正式tag/Release或公开上传APK；[公开分发风险](BINARY-DISTRIBUTION-REVIEW.md)仍待肯定依据及原生依赖对应源码/构建/relink义务。独立核验的结论是未解决风险，不能推广为所有GPL/Meta组合一律不允许。没有开始OpenXR架构替换，也未自行决定去掉影院。
+未创建正式tag/Release或公开上传APK；[公开分发风险](../BINARY-DISTRIBUTION-REVIEW.md)仍待肯定依据及原生依赖对应源码/构建/relink义务。独立核验的结论是未解决风险，不能推广为所有GPL/Meta组合一律不允许。没有开始OpenXR架构替换，也未自行决定去掉影院。

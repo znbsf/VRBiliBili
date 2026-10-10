@@ -1,6 +1,8 @@
+> 历史快照：保留原始版本、结果与经验；不构成当前目标或操作授权。旧“只读/不推送/不发布”、设备状态和源码-only 限制仅适用于记录当时阶段。当前状态见 [CURRENT-STATE](../CURRENT-STATE.md)；历史 pass 不自动等于当前 pass。
+
 # PiliPlus 真实播放接入基线
 
-核查日期：2026-10-01。上游固定为 [PiliPlus c102a611](https://github.com/bggRGjQaUbCoE/PiliPlus/tree/c102a6115c7ac040f6a0c6a1653944b81b82dcb4)，不是移动分支引用。选取 pubspec.yaml、pubspec.lock、播放器控制器及 LICENSE，经 GitHub API 获取后逐文件校验 Git blob SHA1；完整清单和 SHA256 见 [机器可读基线](piliplus-playback-baseline.json)。本轮未复制完整业务仓库或构建 PiliPlus。
+核查日期：2026-10-01。上游固定为 [PiliPlus c102a611](https://github.com/bggRGjQaUbCoE/PiliPlus/tree/c102a6115c7ac040f6a0c6a1653944b81b82dcb4)，不是移动分支引用。选取 pubspec.yaml、pubspec.lock、播放器控制器及 LICENSE，经 GitHub API 获取后逐文件校验 Git blob SHA1；完整清单和 SHA256 见 [机器可读基线](../piliplus-playback-baseline.json)。本轮未复制完整业务仓库或构建 PiliPlus。
 
 ## 实际依赖
 

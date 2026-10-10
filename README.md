@@ -2,9 +2,17 @@
 
 基于 [PiliPlus](https://github.com/bggRGjQaUbCoE/PiliPlus) 的 Quest 普通 Android 大屏 B 站客户端。保留 Flutter/media-kit 播放、弹幕与画质设置，在同一页面展开/收起信息栏，单一进度条保持原播放状态并在松手后 seek。视频等比 cover 裁切，不拉伸；不是沉浸影院或跨头显 OpenXR 实现。
 
-## 当前本地待发布候选：0.1.0-rc.7 / Android code 7
+## Quest 3 实机画面
 
-截至本轮结束，rc.7 尚未推送或发布；远端最新仍为 rc.6。本地修复与五个发布附件已完成，推送受授权审批阻塞。
+![Quest 3 普通 Android 大屏：code7 视频画面和播放器控件](docs/images/quest3-code7-playback-20261010.png)
+
+2026-10-10，Quest 3 上正式 code7 的真实应用窗口截图（1375×900），公开视频拖动后暂停于 11:53 / 17:50。截图来自设备 Activity 窗口，保留原始画面与控件；没有账号信息或私人搜索记录。当前等比 cover 会裁去部分画面边缘，此图不代表所有比例或字幕完整显示的验收。保留的 PiliPlus 标识来自上游界面。
+
+此截图与 README 是构建后的文档补充；APK 精确源码仍为 `1568ef4b0fc99306f184e5560dacd65a33426e0f`，不把文档提交当作重新构建的包。
+
+## 当前预发布：0.1.0-rc.7 / Android code 7
+
+[下载 rc.7 预发布](https://github.com/znbsf/VRBiliBili/releases/tag/v0.1.0-rc.7) · [当前状态与下一步](docs/CURRENT-STATE.md)。五个附件已从 GitHub 下载并核验 SHA256；不是稳定版。
 
 修复 fork 更新入口：停用 PiliPlus 上游自动检查，手动更新统一打开本项目发布页，不再提供上游 APK 或错误回退。播放器拖动与裁切实现保持原行为，新增正式签名实机事件和窗口截图验收。main 包含完整普通面板、XR 隔离与 seek 修复历史。
 
@@ -24,7 +32,7 @@ adb -s YOUR_QUEST_SERIAL install -r VRBiliBili-0.1.0-7-quest-arm64.apk
 ./tools/Build-QuestApp.ps1 -Mode release -TargetPlatform android-arm64 -BuildName 0.1.0 -BuildNumber 7
 ```
 
-[rc.7 变更与验证边界](docs/RC7-VALIDATION.md) · [rc.6 实机证据](docs/QUEST-RC6-ACCEPTANCE.md) · [可复用 Quest 唤醒/测试方法](docs/QUEST-TESTING.md) · [当前状态](docs/CURRENT-STATE.md)
+[rc.7 变更与验证边界](docs/RC7-VALIDATION.md) · [可复用 Quest 唤醒/测试方法](docs/QUEST-TESTING.md) · [当前状态](docs/CURRENT-STATE.md)
 
 设备上的窗口截图、原生触摸事件与组件几何测试有不同覆盖。没有实测的手柄/手势、主观音画同步、全比例裁切和长时舒适度不标为通过；临时佩戴模拟也不算自然休眠。最终本轮结果以各版本验证附件为准。
 
@@ -33,12 +41,3 @@ adb -s YOUR_QUEST_SERIAL install -r VRBiliBili-0.1.0-7-quest-arm64.apk
 本项目非 Bilibili 或 Meta 官方客户端。继承 [PiliPlus GPLv3 许可证](clients/piliplus/LICENSE)，固定上游来源与修改见 [VRBILIBILI-UPSTREAM](clients/piliplus/VRBILIBILI-UPSTREAM.md)。旧影院源码仅供追溯，已排除于普通面板运行时构建。
 
 [依赖审计](docs/DEPENDENCIES.md) · [第三方声明](docs/THIRD-PARTY-NOTICES.md) · [源码交付](docs/SOURCE-DELIVERY.md) · [分发核查](docs/BINARY-DISTRIBUTION-REVIEW.md) · [发布记录](docs/RELEASE.md)
-
-## Quest 3 实机画面
-
-![Quest 3 普通 Android 大屏：code7 视频画面和播放器控件](docs/images/quest3-code7-playback-20261010.png)
-
-2026-10-10，Quest 3 上正式 code7 的真实应用窗口截图（1375×900），公开视频拖动后暂停于 11:53 / 17:50。截图来自设备 Activity 窗口，保留原始画面与控件；没有账号信息或私人搜索记录。当前等比 cover 会裁去部分画面边缘，此图不代表所有比例或字幕完整显示的验收。保留的 PiliPlus 标识来自上游界面。
-
-此截图与 README 是构建后的文档补充；APK 精确源码仍为 `1568ef4b0fc99306f184e5560dacd65a33426e0f`，不把文档提交当作重新构建的包。
-

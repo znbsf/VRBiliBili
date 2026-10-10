@@ -1,6 +1,14 @@
-# Quest 测试：先复用正常唤醒，再判断实际阻塞
+# Quest 测试 runbook：可复用方法
 
-看到 `Asleep` 不等于必须请用户佩戴。先核对目标 Quest 的序列/型号及现有 ADB server；用户授权测试后，在同一设备上执行正常唤醒和应用启动，并验证结果：
+这里保留稳定操作原则；工具/环境见 [DEVELOPMENT-ENVIRONMENT](DEVELOPMENT-ENVIRONMENT.md)，某次结果见 [RC7-VALIDATION](RC7-VALIDATION.md)。本文件不授予设备或发布权限。
+
+## 身份、保数据和恢复
+
+先核对目标主机、Quest 序列/型号、ADB 状态与当前写入者，避免误用电视或其他线程设备。对齐源码提交、APK 内嵌提交、包名/versionCode/ABI/签名、设备已安装 APK 哈希。覆盖前后记录首次安装时间；用 `adb -s SERIAL install -r APK`，签名不符就停止，不能卸载/清数据绕过。不要读取签名私钥内容；利用正常签名流程与公开证书指纹核验。
+
+## 正常唤醒优先
+
+Asleep 不等于必须要求用户佩戴。已获设备测试授权时，先在一个短操作窗口内执行并观察：
 
 ```powershell
 adb -s SERIAL shell input keyevent KEYCODE_WAKEUP
@@ -9,31 +17,30 @@ adb -s SERIAL shell dumpsys power
 metavr -d SERIAL window focus --json
 ```
 
-将唤醒、启动、采集安排在一个短操作内。离头自动休眠可能让分开的命令失去有效窗口；命令返回零、窗口 visible 或焦点记录都不单独证明实际像素/输入/播放。
+离头自动休眠可能让分开的命令失效；命令返回零、visible 或焦点记录都不单独证明有效输入、画面和播放。正常唤醒后若仍受阻，记录真实阻塞及窗口证据，不泛称“无权限”。
 
-本机历史任务已经使用过以下 Meta CLI 临时开发测试方式。本轮也确认能唤醒，但它可能触发 Guardian 房间定位提示。仅在用户授权这种临时测试时使用，先记原值、限时、最后恢复并读回；不能关闭 Guardian、锁屏或鉴权来继续。
+仅在明确授权且正常方式不足时使用有限临时 proximity 测试。先保存原值，限时，finally 恢复原状态并读回；不能关闭 Guardian、鉴权或安全对话框继续：
 
 ```powershell
 metavr -d SERIAL device proximity --status --json
 metavr -d SERIAL device get-property --json
 metavr -d SERIAL device proximity --disable --duration-ms 120000
-# bounded test window
+# bounded test only; if original state was normal enabled:
 metavr -d SERIAL device proximity --enable
 metavr -d SERIAL device proximity --status --json
 metavr -d SERIAL device get-property --json
 ```
 
-本轮原值/恢复值：enabled=true、prox_override=DISABLED；disable_guardian、disable_dialogs、disable_autosleep、set_proximity_close 均 false。不得把临时覆盖期间的结果当成自然休眠或佩戴/手柄验收。
+原状态不是正常 enabled 时不能盲目套用恢复命令。临时覆盖下的结果不证明自然休眠或佩戴感应。自然睡眠测试必须停止唤醒循环并实际观测 Asleep；暂停后、播放中、佩戴唤醒分别记录。
 
-普通 ADB 坐标点击/鼠标拖动在当前离头面板上未证明有效。旧测试使用 `UiAutomation` 的真实 accessibility `ACTION_CLICK`；本轮独立无权限 instrumentation helper 成功操作正式 rc.6 的视频卡片、播放/暂停、返回、大屏和前进按钮，不替换正式 APK、不读取账户数据库。节点动作不能冒充手柄射线或真实拖动。
+## 有效输入与画面
 
-若正常唤醒已成功，报告真正剩余阻塞，例如 Guardian 房间定位占据焦点、无有效应用像素、输入没有改变进度；不要再把问题概括成“无权限/必须佩戴”。
+`adb shell input mouse swipe` 不带 BUTTON_PRIMARY（source=8194/buttons=0），不能作为按住拖动判据。使用 primary mouse 的 DOWN/MOVE buttons=1、UP buttons=0，或 source=4098 touchscreen；记录原生 Window.Callback 的 source/buttons/time、松开前后进度。点击可用真实 accessibility ACTION_CLICK，但不能冒充物理手柄或拖动。
 
+`-PpanelAcceptance=true` 生成同正式签名的独立 release androidTest，目标为未改动正式 APK；`PanelAcceptanceProbe` 捕获 Activity Window 像素与真实系统输入。主 APK 必须不含 test runner。使用正常 KEYCODE_WAKEUP，不关闭安全机制。输出路径由每次 runner 返回，保存到独立本地证据目录；不要把旧目录当新证据。
 
-## rc.7 补充：真实拖动和应用窗口像素
+黑色/透视 adb screencap、UI 节点树、模拟渲染不算真实应用视频像素。截图公开前核查账号头像、私人历史和 token；只公开用户授权的普通视频画面与控件。当前示例 [Quest3 code7 实图](images/quest3-code7-playback-20261010.png)；它不证明所有比例、完整字幕或主观音画同步。
 
-`adb shell input mouse swipe` 不带 BUTTON_PRIMARY，不能据此判定 slider 故障。用 source MOUSE 且 DOWN/MOVE buttons=1、UP buttons=0 的完整系统事件，或 touchscreen swipe；保留 Window.Callback 的 source/buttons/time 与松开前后位置证据。
+## 分发一致性
 
-`-PpanelAcceptance=true` 生成 release-signed 独立 androidTest，目标是未改动正式 APK。`PanelAcceptanceProbe` 捕获目标 Activity Window 的真实像素，避免把黑色/透视 adb screencap 当作应用布局。正式产品不打入 test runner。只在授权设备执行，使用正常 KEYCODE_WAKEUP，不关闭 Guardian/安全功能。自然睡眠验证须停止唤醒循环并实际读到 Asleep；暂停循环和播放中循环分别报告。
-
-本轮具体数值和限制见 [RC7-VALIDATION](RC7-VALIDATION.md)。原始截图/日志留本地，不作为公开发行附件。
+保留不可变 tag→源码ZIP→APK内嵌提交对应，单独标明后续文档提交。核对公开证书、ABI、非 debug、生产包不含测试 runner、无当前排除的 XR 运行时。draft 上传完整五附件后实际下载核验 SHA256/大小/源 ZIP comment，再发布 prerelease；复核旧 tag/附件不变。没有根目录 workflow/runs 不能声称 CI 通过。

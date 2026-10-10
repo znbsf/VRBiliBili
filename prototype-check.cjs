@@ -19,9 +19,9 @@ check('Every literal ID lookup is declared', refs.every(id=>ids.includes(id)));
 const actions = new Set([...source.matchAll(/button\('([a-z][a-z0-9-]+)'/g)].map(m=>m[1]).concat([...source.matchAll(/data-action="([a-z][a-z0-9-]+)"/g)].map(m=>m[1])));
 check('Every visible action has a handler', [...actions].every(a=>source.includes("a==='"+a+"'")));
 const docDir = __dirname;
-for (const name of ['README.md','V1-FUNCTIONAL-UI-DESIGN.md']) {
+for (const name of ['README.md','docs/history/V1-FUNCTIONAL-UI-DESIGN.md']) {
  const doc=fs.readFileSync(path.join(docDir,name),'utf8');
  const localLinks=[...doc.matchAll(/\]\(([^)]+\.md)\)/g)].map(m=>m[1]).filter(u=>!u.startsWith('http'));
- check(name+' local links resolve',localLinks.every(p=>fs.existsSync(path.resolve(docDir,p))));
+ check(name+' local links resolve',localLinks.every(p=>fs.existsSync(path.resolve(path.dirname(path.join(docDir,name)),p))));
 }
 console.log(JSON.stringify({file,bytes:Buffer.byteLength(source),literalIds:ids.length,actions:actions.size,checks},null,2));

@@ -1,10 +1,12 @@
+> 历史快照：保留原始版本、结果与经验；不构成当前目标或操作授权。旧“只读/不推送/不发布”、设备状态和源码-only 限制仅适用于记录当时阶段。当前状态见 [CURRENT-STATE](../CURRENT-STATE.md)；历史 pass 不自动等于当前 pass。
+
 # B 站客户端迁移到 Quest 3：选型与实施方案
 
 调研日期：2026-09-22。目标已确认：空间大屏观看普通 B 站视频，可移动、缩放，支持手柄和手势；用户有 Quest 3 可做真机测试。
 
 **推荐顺序：先验证 PiliPlus 在 Horizon OS 系统窗口内的体验；需要修改时，以当前 PiliPlus 上游为基础，小范围借鉴 PiliPlusVR 的输入补丁。如果需要应用自己控制三维布局和影院环境，再采用 Meta Spatial SDK + Kotlin + Media3，以 BiliTVNative 为业务代码候选。**
 
-本目录现在是设计资料，尚无已构建或已验收的 Quest 应用。完整操作用例见 [QUEST3-TEST-PLAN.md](QUEST3-TEST-PLAN.md)，来源与版本快照见 [research-snapshot.json](docs/research-snapshot.json)。
+本目录现在是设计资料，尚无已构建或已验收的 Quest 应用。完整操作用例见 [QUEST3-TEST-PLAN.md](QUEST3-TEST-PLAN.md)，来源与版本快照见 [research-snapshot.json](../research-snapshot.json)。
 
 ## 1. 先分清系统已经提供什么
 

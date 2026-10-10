@@ -1,19 +1,17 @@
-# 开发环境范围
+# 当前环境与身份参数
 
-记录日期：2026-10-01。这里只保留可迁移的工具与验证边界；个人机器安装路径、安装日志和本机启动脚本不纳入仓库。
+这是环境映射，不是操作授权；单次事实在 [RC7-VALIDATION](RC7-VALIDATION.md)，方法在 [QUEST-TESTING](QUEST-TESTING.md)，唯一状态入口为 [CURRENT-STATE](CURRENT-STATE.md)。
 
-桌面原型需要 Node 与已有 Chromium。DOM 验证依赖固定为 linkedom 0.18.12；真实浏览器工具使用 Node >=22 的内置 WebSocket，无需下载浏览器。测试工具通过 `--browser` 或 `VRBILI_BROWSER` 接收现有浏览器路径。
-
-客户端业务基础已选定 PiliPlus/Flutter；当前仓库仍是设计与原型，没有业务源码集成。先评审流程，再用头显确认尺度、输入与舒适度，之后选择一个实现路线做单业务面板与独立视频输出的技术验证。
-
-| 已有工具验证记录 | 结果与限制 |
+| 项 | 当前构建基线 |
 | --- | --- |
-| Flutter 3.47.5 / Dart 3.13.4、Android/JDK17 | 已有电脑端 ARM64 示例构建记录；不代表业务客户端完成 |
-| Meta Spatial SDK 0.14.0 官方示例 | Starter/MediaPlayer 示例构建已验证；空间业务集成和设备体验未完成 |
-| Unity 6.3 LTS 6000.3.25f1 与 Android 工具链 | 文件与工具执行已核验；有效许可和项目功能验证仍待处理 |
-| Spatial/XR Simulator | 组件准备记录存在；实际运行和图形验收仍待完成 |
-| Quest、Meta 账号、ADB 部署 | 不属于本次桌面仓库基线验证 |
+| 产品目录 | clients/piliplus，Flutter/media-kit 普通 Android 面板 |
+| 工具链 | Flutter 3.47.5 / Dart 3.13.4、Java17、Android SDK37；沿用本机已隔离工具链，不自动安装 |
+| 正式包 | io.github.vrbilibili.quest；ARM64；versionName0.1.0 / versionCode7 |
+| 当前构建源码 | 1568ef4b0fc99306f184e5560dacd65a33426e0f；后续文档不重新构建 APK |
+| 设备目标 | 本次是 Quest3；每次必须现场核对序列/型号及归属，不把静态参数当永久占用权 |
+| 构建入口 | tools/Build-QuestApp.ps1；正式签名缺失则拒绝 release，不回退 debug |
+| 源/依赖 | pubspec.lock、dependency-audit.json、native-source-manifest.json；锁定开源来源及许可证 |
 
-官方入口：[Meta 平台与工具](https://developers.meta.com/horizon/discover/platforms/)、[Spatial Simulator](https://developers.meta.com/horizon/documentation/android-apps/spatial-sim-overview/)、[Layout SDK](https://developers.meta.com/horizon/documentation/android-apps/meta-vr-layout-sdk/)。这些工具候选不构成最终产品路线决定。
+个人工具路径、ADB 序列、签名配置与原始日志保留本地，不写入公开配置。`.tools/`、当前依赖缓存、`.local/release-signing/` 和客户端签名配置保持原位且未读凭据。历史 Unity/Meta 示例不属于当前 APK 构建依赖，也不是未来自动恢复影院的依据。
 
-机器相关 `.local/`、`.tools/`、完整 `QUEST-DEVELOPMENT-ENVIRONMENT.md` 和启动脚本保留在本地并被忽略。仓库不会自动安装 SDK、引擎、启动设备或登录账号。
+仓库保留旧浏览器原型源码及测试以追溯经验；它们不代表当前 Android 客户端验收。Node/已有浏览器相关要求按对应工具说明执行，不为文档清理安装新工具。

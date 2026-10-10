@@ -1,3 +1,5 @@
+> 历史快照：保留原始版本、结果与经验；不构成当前目标或操作授权。旧“只读/不推送/不发布”、设备状态和源码-only 限制仅适用于记录当时阶段。当前状态见 [CURRENT-STATE](../CURRENT-STATE.md)；历史 pass 不自动等于当前 pass。
+
 # 独立真实媒体技术探针
 
 这是与现有交互原型、正式 PiliPlus UI 解耦的可丢弃可行性验证；不决定最终客户端或 XR 路线。它使用浏览器 HTMLMediaElement 实际解码本地合法视频或 HTTP(S) 直接媒体，验证单一会话的恢复规则。
@@ -32,9 +34,9 @@ node tools/playback-probe-check.mjs --output captures/playback-probe
 
 自动化在独立静音 headless Chrome 里，解码仓库内82KB的原创 H.264/AAC 素材（6秒、240×136、12fps 的颜色变化与正弦音）。通过条件包含真实视频帧、伴音解码、媒体时钟、拖动、HTTP 失败、断网/恢复、重选素材、刷新及关闭/重开浏览器。原始日志/截图位于被忽略的 captures，不进入提交。微型素材只验证流程，不是1080p/30fps或硬件性能验收。
 
-素材生成脚本是 `tools/generate-playback-fixture.py`。本轮只使用已有且签名有效的 Blender 4.1.1，一线程后台2D序列编码，没有3D场景渲染或新软件安装。正常测试直接读取已有素材，**不依赖 Blender**；生成方法见 [素材说明](../tests/fixtures/README.md)。
+素材生成脚本是 `tools/generate-playback-fixture.py`。本轮只使用已有且签名有效的 Blender 4.1.1，一线程后台2D序列编码，没有3D场景渲染或新软件安装。正常测试直接读取已有素材，**不依赖 Blender**；生成方法见 [素材说明](../../tests/fixtures/README.md)。
 
-验证摘要在 [playback-validation.json](playback-validation.json)，不包含本机路径。headless 下音频输出被静音以免干扰用户；音频解码字节证明伴音解码，不能替代真人听感和音画同步检查。
+验证摘要在 [playback-validation.json](../playback-validation.json)，不包含本机路径。headless 下音频输出被静音以免干扰用户；音频解码字节证明伴音解码，不能替代真人听感和音画同步检查。
 
 ## 尚未完成
 
