@@ -2,7 +2,9 @@
 
 基于 [PiliPlus](https://github.com/bggRGjQaUbCoE/PiliPlus) 的 Quest 普通 Android 大屏 B 站客户端。保留 Flutter/media-kit 播放、弹幕与画质设置，在同一页面展开/收起信息栏，单一进度条保持原播放状态并在松手后 seek。视频等比 cover 裁切，不拉伸；不是沉浸影院或跨头显 OpenXR 实现。
 
-## 当前预发布：0.1.0-rc.7 / Android code 7
+## 当前本地待发布候选：0.1.0-rc.7 / Android code 7
+
+截至本轮结束，rc.7 尚未推送或发布；远端最新仍为 rc.6。本地修复与五个发布附件已完成，推送受授权审批阻塞。
 
 修复 fork 更新入口：停用 PiliPlus 上游自动检查，手动更新统一打开本项目发布页，不再提供上游 APK 或错误回退。播放器拖动与裁切实现保持原行为，新增正式签名实机事件和窗口截图验收。main 包含完整普通面板、XR 隔离与 seek 修复历史。
 
