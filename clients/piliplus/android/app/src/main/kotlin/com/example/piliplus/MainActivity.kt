@@ -12,7 +12,9 @@ class MainActivity : AudioServiceActivity() {
     companion object { var debugChannel: MethodChannel? = null }
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
-        CinemaSession.configure(this, flutterEngine)
+        // Keep playback in the resizable Android panel; immersive handoff is disabled.
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "vrbilibili/cinema")
+            .setMethodCallHandler { _, result -> result.error("disabled", "请使用普通大屏播放", null) }
         val channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "vrbilibili/device")
         if (applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE != 0) debugChannel = channel
         channel.setMethodCallHandler { call, result ->

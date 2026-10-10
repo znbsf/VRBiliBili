@@ -97,11 +97,15 @@ class PLVideoPlayer extends StatefulWidget {
     this.danmuWidget,
     this.showEpisodes,
     this.showViewPoints,
+    this.externalControls = false,
+    this.fillVideoArea = false,
     this.fill = Colors.black,
     this.alignment = Alignment.center,
     super.key,
   });
 
+  final bool externalControls;
+  final bool fillVideoArea;
   final double maxWidth;
   final double maxHeight;
   final PlPlayerController plPlayerController;
@@ -1592,7 +1596,8 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
           ),
         ),
 
-        // 头部、底部控制条
+        // Quest supplies one persistent control bar outside the video.
+        if (!widget.externalControls)
         Positioned.fill(
           top: -1,
           bottom: -1,
@@ -1703,7 +1708,7 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
         ),
 
         /// 进度条 live模式下禁用
-        if (!isLive)
+        if (!isLive && !widget.externalControls)
           Positioned(
             bottom: -2.2,
             left: 0,
@@ -2052,12 +2057,12 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
                   flipX: plPlayerController.flipX.value,
                   flipY: plPlayerController.flipY.value,
                   child: FittedBox(
-                    fit: videoFit.boxFit,
+                    fit: widget.fillVideoArea ? BoxFit.cover : videoFit.boxFit,
                     alignment: widget.alignment,
                     child: SimpleVideo(
                       controller: plPlayerController.videoController!,
                       fill: widget.fill,
-                      aspectRatio: videoFit.aspectRatio,
+                      aspectRatio: widget.fillVideoArea ? null : videoFit.aspectRatio,
                     ),
                   ),
                 );

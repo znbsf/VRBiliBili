@@ -55,7 +55,7 @@
         <meta-data android:name="com.oculus.supportedDevices" android:value="quest3|quest3s|questpro" />
         <meta-data android:name="com.oculus.handtracking.version" android:value="V2.0" />
         <meta-data android:name="com.oculus.vr.focusaware" android:value="true" />
-        <activity android:name=".CinemaActivity" android:exported="false" android:launchMode="singleTask"
+        <activity android:name=".CinemaActivity" android:enabled="false" android:exported="false" android:launchMode="singleTask"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode">
             <intent-filter><action android:name="android.intent.action.MAIN" />

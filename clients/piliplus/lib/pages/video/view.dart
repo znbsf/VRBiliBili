@@ -404,17 +404,6 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     } finally { if (mounted) setState(() => _questLoading = false); }
   }
 
-  Future<void> questEnterCinema() async {
-    try {
-      await CinemaPlayer.open(videoDetailController, title: introController.videoDetail.value.title ?? Get.arguments['title'] ?? '正在播放');
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('无法进入影院，请等待视频加载完成后重试。')));
-      }
-    }
-  }
-
   void questQualitySettings() {
     final player = videoDetailController.plPlayerController;
     final ids = videoDetailController.data.dash?.video?.map((v) => v.id).toSet() ?? <int>{};
@@ -1417,6 +1406,8 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
               plPlayerController?.videoController == null
           ? const SizedBox.shrink()
           : PLVideoPlayer(
+              externalControls: QuestDevice.isQuest,
+              fillVideoArea: QuestDevice.isQuest,
               maxWidth: width,
               maxHeight: height,
               plPlayerController: plPlayerController!,
@@ -1511,28 +1502,17 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
         ])),
         Expanded(child: Padding(padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
           child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            Expanded(flex: 8, child: Align(alignment: Alignment.center,
-              child: ClipRRect(borderRadius: BorderRadius.circular(12),
+            Expanded(flex: 8, child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
               child: ColoredBox(color: const Color(0xFF202024), child: Column(
-                mainAxisSize: MainAxisSize.min, children: [
-                Flexible(child: LayoutBuilder(builder: (context, area) {
-                  final player = videoDetailController.plPlayerController;
-                  final state = player.videoPlayerController?.state;
-                  final sourceWidth = (state?.width ?? 0) > 0
-                      ? state!.width : (player.width ?? 16);
-                  final sourceHeight = (state?.height ?? 0) > 0
-                      ? state!.height : (player.height ?? 9);
-                  // Keep normal media proportional. Extreme ratios retain
-                  // contain-fit inside these bounds instead of stretching.
-                  final ratio = (sourceWidth > 0 && sourceHeight > 0
-                      ? sourceWidth / sourceHeight : 16 / 9).clamp(9 / 16, 2.4);
-                  final w = min(area.maxWidth, area.maxHeight * ratio);
-                  return Align(heightFactor: 1, widthFactor: 1,
-                    child: SizedBox(width: w, height: w / ratio,
-                      child: videoPlayer(width: w, height: w / ratio)));
-                })),
-                questTransport(),
-              ]))))),
+                children: [
+                  Expanded(child: LayoutBuilder(builder: (context, area) =>
+                    ClipRect(child: SizedBox.expand(child: videoPlayer(
+                      width: area.maxWidth, height: area.maxHeight))))),
+                  questTransport(),
+                ],
+              )),
+            )),
             if (!_questWide) const SizedBox(width: 16),
             if (!_questWide) Expanded(flex: 4, child: ClipRRect(borderRadius: BorderRadius.circular(12),
               child: ColoredBox(color: const Color(0xFF202024), child: LayoutBuilder(builder: (context, area) => Column(children: [
@@ -1580,7 +1560,9 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
             accent: player.enableShowDanmaku.value)),
           questIcon('选择画质', Icons.hd_outlined, questQualitySettings),
           questIcon('播放设置', Icons.tune_rounded, questPlaybackSettings),
-          questIcon('全屏影院', Icons.fullscreen_rounded, questEnterCinema),
+          questIcon(_questWide ? '退出大屏' : '展开大屏',
+            _questWide ? Icons.fullscreen_exit_rounded : Icons.fullscreen_rounded,
+            () => setState(() => _questWide = !_questWide)),
         ]),
       ])));
   }
