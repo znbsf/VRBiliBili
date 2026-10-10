@@ -33,3 +33,12 @@ adb -s YOUR_QUEST_SERIAL install -r VRBiliBili-0.1.0-7-quest-arm64.apk
 本项目非 Bilibili 或 Meta 官方客户端。继承 [PiliPlus GPLv3 许可证](clients/piliplus/LICENSE)，固定上游来源与修改见 [VRBILIBILI-UPSTREAM](clients/piliplus/VRBILIBILI-UPSTREAM.md)。旧影院源码仅供追溯，已排除于普通面板运行时构建。
 
 [依赖审计](docs/DEPENDENCIES.md) · [第三方声明](docs/THIRD-PARTY-NOTICES.md) · [源码交付](docs/SOURCE-DELIVERY.md) · [分发核查](docs/BINARY-DISTRIBUTION-REVIEW.md) · [发布记录](docs/RELEASE.md)
+
+## Quest 3 实机画面
+
+![Quest 3 普通 Android 大屏：code7 视频画面和播放器控件](docs/images/quest3-code7-playback-20261010.png)
+
+2026-10-10，Quest 3 上正式 code7 的真实应用窗口截图（1375×900），公开视频拖动后暂停于 11:53 / 17:50。截图来自设备 Activity 窗口，保留原始画面与控件；没有账号信息或私人搜索记录。当前等比 cover 会裁去部分画面边缘，此图不代表所有比例或字幕完整显示的验收。保留的 PiliPlus 标识来自上游界面。
+
+此截图与 README 是构建后的文档补充；APK 精确源码仍为 `1568ef4b0fc99306f184e5560dacd65a33426e0f`，不把文档提交当作重新构建的包。
+
