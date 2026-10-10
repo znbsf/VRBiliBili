@@ -1,23 +1,39 @@
-# rc.7 / Android code 7：候选变更与验收边界
+# rc.7 / Android code 7：本轮验证与边界
+
+构建、APK 内嵌提交和 release tag 固定为 `1568ef4b0fc99306f184e5560dacd65a33426e0f`。后续 main 文档提交补记结果，不是重新构建的 APK。rc.6 tag 和附件保持不变。
 
 ## 变更
 
-更新渠道不再自动请求或下载 PiliPlus 上游包。设置中的入口改为“VRBiliBili 发布与更新”，手动检查、旧下载调用和错误路径只使用本项目 releases 页面。浏览器打开失败时不回退到其他项目。许可证、上游致谢和来源说明保留。
+禁用 PiliPlus 上游自动更新检查；设置“VRBiliBili 发布与更新”、关于页手动检查和旧下载调用只打开 `https://github.com/znbsf/VRBiliBili/releases`。忽略传入的上游 asset URL，浏览器失败也不回退。保留开源署名与许可证；不自动下载/安装 APK，也不提供应用内验签。版本为 0.1.0 / code 7，使用原正式包名、正式签名。
 
-版本增加为 0.1.0 / code 7，沿用正式包名和签名。rc.6 tag 与旧 APK 不改写；新包精确源码提交与哈希以其 Release 的 validation.json 为准。
+## 拖动根因与回归
 
-## 拖动诊断
+旧 `adb shell input mouse swipe` 的原生窗口事件为 source=8194、buttonState=0。没有按住鼠标主键，不是有效鼠标拖动。未改动的 rc.6 上，正确 primary-button mouse 在松开前保持 0:04，松开后到 0:34；触屏可从 0:34 到 0:51。不能把旧注入失败写成播放器缺陷。
 
-不能把早期鼠标注入未改变进度认定为播放器缺陷。在未修改的 rc.6 正式 APK 上，release-signed instrumentation 记录到正常 touchscreen DOWN/MOVE/UP 进入原生窗口，真实进度从 0:04 跳到 21:05 / 31:37。已取得 1375×900 的正式应用窗口截图。同窗口对比确认 adb mouse swipe 事件 source=8194、buttonState=0，无主键按下而不 seek；touchscreen source=4098 的完整拖动从 0:04 到 29:42 / 44:32。播放器 seek 实现和 cover 实现没有为制造测试通过而改写。
+code 7 的 release-signed androidTest 再次记录 Activity 原生 Window.Callback：无按键 mouse 保持 0:04；按住主键的 mouse 松开前为 0:04，松开后到 7:55 / 17:50；touchscreen 从 7:55 到 11:53。生产 seek 和 cover 代码没有为测试改写。
 
-新增测试 APK 通过 `-PpanelAcceptance=true` 显式选择 release 目标和原正式签名。它只包含在 androidTest 产物中，诊断正常系统 mouse/touchscreen 事件、按钮状态和进度，抓取目标 Activity 窗口像素，使用普通 KEYCODE_WAKEUP。测试输出在新建的应用专属子目录，不读取账户库，不改 Guardian/凭据/感应器。测试失败仍保留证据。
+测试 APK 通过 `-PpanelAcceptance=true` 明确选择 release 目标并用相同正式签名；主产品 APK 不含测试 runner。默认 debug 恢复 runner 保持可用。测试仅用普通 KEYCODE_WAKEUP；code 7 验收没有接近传感器覆盖，也没有改 Guardian、对话框、安全或休眠设置。
 
-默认 debug instrumentation 与历史恢复 runner 保持可用。测试组件的 APK 不是对外发布的用户 APK。
+## 本轮 code 7 证据
 
-## 验证与限制
+| 检查 | 实际结果 |
+| --- | --- |
+| 组件测试与静态分析 | 16 项通过；改动范围分析无问题；正式 release 构建成功 |
+| 包检查 | ARM64、非 debug、正式包名、原签名；APK 无 Meta/XR 运行时与测试 runner；许可证存在 |
+| 保数据升级 | code 6 → 7，install -r 成功；首次安装时间保留；拉回设备 base APK 与发布 APK SHA256 完全一致 |
+| 选片播放/暂停/拖动 | 网络视频实际播放；暂停稳定；原生正确 mouse 与 touchscreen 拖动通过 |
+| 返回续播 | 同一视频 BV1YLeJ6YECh 在 0:17 返回，再打开首个位置 0:17，随后继续推进 |
+| 自然休眠 | 暂停 0:30 后真实 Asleep；普通唤醒后仍为 0:30；点击播放从 0:32 继续 |
+| 更新通道 | 未出现上游更新弹窗；手动入口实际打开本项目 releases 的浏览器 VIEW intent；失败无上游回退由组件测试覆盖 |
+| 应用像素 | release-signed instrumentation 捕获真实 Activity 窗口 1375×900 的面板/展开/拖动后截图 |
+| 设备收尾 | proximity enabled、override DISABLED；Guardian/dialog/autosleep/proximity-close 覆盖均 false |
 
-- 16 项组件回归：拖动预览/单次提交/源切换、真实32px控制栏鼠标拖动、四种源比例×两种区域、四项更新渠道策略。改动范围静态分析通过。
-- rc.6 真机普通播放、返回同片续播、自然离头入睡后 ADB 正常唤醒与暂停位置保持已记录；code 7 的实际复测结果另列于 Release validation.json，不自动继承旧版本结果。
-- 本次取得的应用窗口像素可支持所测片段的布局观察，但不等于双眼 XR、手柄射线、音画主观同步、所有源比例或长时舒适度通过。四比例几何单测与真机截图是不同覆盖。
-- 新包安装前后核验包名、versionCode、签名与首次安装时间；仅正常覆盖安装，签名不兼容时停止。
-- 无根目录 CI 运行时不宣称 GitHub Actions 通过。
+APK `VRBiliBili-0.1.0-7-quest-arm64.apk`：26,234,610 字节，SHA256 `da179d37ec4e41296424983ca47733825bd35ec357392cdc440c80d214a427f4`。签名证书 SHA256 `965bac5fc009f98059d68213a6e7a6a29a27676e1e2d017b8302a62aa95599f9`。
+
+## 仍未通过的范围
+
+真实窗口像素说明等比 cover 填满区域，也能看到部分水印和字幕边缘被裁掉。保留当前 cover 目标，不宣称全画幅字幕完整。四种源比例×两种区域的几何组件测试不等于全部比例实机验收。
+
+未验收实体手柄/手势、主观音画同步、长时舒适度、所有源比例、实际佩戴唤醒、完整播放中休眠循环。自然休眠结果只覆盖暂停后离头睡眠与普通 ADB 唤醒。没有根目录 CI 工作流，不宣称 GitHub Actions 通过。因此 rc.7 仍是 prerelease。
+
+发布附件保留精确源码、原生依赖源码、validation.json 和 SHA256SUMS；本地原始 UI、序列号和窗口截图不随公开附件分发。原生源码/清单支持核查与重建，不承诺逐字节可复现。

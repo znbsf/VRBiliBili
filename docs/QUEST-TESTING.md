@@ -28,3 +28,12 @@ metavr -d SERIAL device get-property --json
 普通 ADB 坐标点击/鼠标拖动在当前离头面板上未证明有效。旧测试使用 `UiAutomation` 的真实 accessibility `ACTION_CLICK`；本轮独立无权限 instrumentation helper 成功操作正式 rc.6 的视频卡片、播放/暂停、返回、大屏和前进按钮，不替换正式 APK、不读取账户数据库。节点动作不能冒充手柄射线或真实拖动。
 
 若正常唤醒已成功，报告真正剩余阻塞，例如 Guardian 房间定位占据焦点、无有效应用像素、输入没有改变进度；不要再把问题概括成“无权限/必须佩戴”。
+
+
+## rc.7 补充：真实拖动和应用窗口像素
+
+`adb shell input mouse swipe` 不带 BUTTON_PRIMARY，不能据此判定 slider 故障。用 source MOUSE 且 DOWN/MOVE buttons=1、UP buttons=0 的完整系统事件，或 touchscreen swipe；保留 Window.Callback 的 source/buttons/time 与松开前后位置证据。
+
+`-PpanelAcceptance=true` 生成 release-signed 独立 androidTest，目标是未改动正式 APK。`PanelAcceptanceProbe` 捕获目标 Activity Window 的真实像素，避免把黑色/透视 adb screencap 当作应用布局。正式产品不打入 test runner。只在授权设备执行，使用正常 KEYCODE_WAKEUP，不关闭 Guardian/安全功能。自然睡眠验证须停止唤醒循环并实际读到 Asleep；暂停循环和播放中循环分别报告。
+
+本轮具体数值和限制见 [RC7-VALIDATION](RC7-VALIDATION.md)。原始截图/日志留本地，不作为公开发行附件。

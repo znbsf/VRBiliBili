@@ -1,15 +1,13 @@
 # 当前状态：普通 Android 面板
 
-当前候选为 code 7 / rc.7：修复 fork 更新渠道，保持普通面板播放器行为。详见 [RC7-VALIDATION](RC7-VALIDATION.md)。以下 rc.6 身份与结果是已发布历史，不替代新包验收。
+唯一推荐目标：普通 Android 大屏播放，保留原有选片/UI/账号/弹幕/画质能力，同页展开收起、单一圆点进度条、松手后一次 seek、等比 cover 裁切。当前产品运行时已隔离 Meta/XR；历史影院源码保留追溯，不恢复影院入口。
 
-唯一推荐目标是普通 Android 大屏播放：保留既有界面、同页展开/收起、单一进度条、松手后一次 seek、保持比例的 cover 裁切。Meta/XR 运行时从当前产品构建隔离；保留旧源码供历史追溯，不恢复影院入口。
+当前预发布为 [v0.1.0-rc.7 / code 7](https://github.com/znbsf/VRBiliBili/releases/tag/v0.1.0-rc.7)，精确构建源码 `1568ef4b0fc99306f184e5560dacd65a33426e0f`。main 通过正常快进纳入代码，后续文档仅补记实际结果。rc.7 禁用上游自动更新，手动入口只开本项目发布页。
 
-main 已通过正常双亲合并接入 rc.6 功能，保留原 main 的恢复修复、测试与交接证据。分叉原因与逐项处理见 [MAIN-INTEGRATION](MAIN-INTEGRATION.md)。
+16 项组件测试、范围静态分析、正式构建与 code 7 Quest 保数据升级通过。实际正确鼠标/触屏拖动、返回 0:17 续播、暂停 0:30 自然休眠后正常唤醒恢复、手动更新 URL 已验证。旧无按键 mouse 注入失败属于测试输入问题，没有为此改写生产播放器。真实窗口像素已取得，但 cover 会裁去字幕/水印边缘。
 
-公开预发布仍为 `v0.1.0-rc.6`，精确源码提交 `cde0af04f800c54b86f468e15f26ed185b9ff3be`；不能把后续 main 构建称为这一旧 APK。code 5 原始修改保存在 `1cff53e633a6f734e4bbae28dc3a05b4ded23a89`。
+优先下一步：在不回到影院开发的前提下，验收实体手柄/手势、完整播放中休眠循环、典型比例与字幕可读性、长时音画同步。若必须完整显示字幕/边缘，需单独决定是否提供 contain/cover 切换；当前不擅改既定 cover 行为。上述缺口完成前保持 prerelease。
 
-rc.6 本地执行过的 11 项 widget 测试被错误忽略规则漏出 Git/source ZIP。本次 main 修正忽略规则并补入同一测试源码；已发布 tag 和附件不重写。
+历史保留：rc.6 固定 `cde0af04f800c54b86f468e15f26ed185b9ff3be`；code 5 原始改动固化于 `1cff53e633a6f734e4bbae28dc3a05b4ded23a89`。main 的双亲正常合并保留原恢复代码与 rc.6 普通面板改动，详见 [MAIN-INTEGRATION](MAIN-INTEGRATION.md)。旧工作树、分支和发布附件不删除、不覆盖。
 
-Quest 已恢复 ADB，正式 code 6 保数据升级成功，并完成部分真实播放、返回续播及离头休眠后正常唤醒检查。剩余拖动和视觉验收边界见 [实机记录](QUEST-RC6-ACCEPTANCE.md)；可复用唤醒方法见 [QUEST-TESTING](QUEST-TESTING.md)。
-
-[依赖审计](DEPENDENCIES.md) · [发布记录](RELEASE.md) · [源码交付](SOURCE-DELIVERY.md)
+[本轮 rc.7 证据与限制](RC7-VALIDATION.md) · [可复用 Quest 测试](QUEST-TESTING.md) · [历史 rc.6 验收](QUEST-RC6-ACCEPTANCE.md) · [发布记录](RELEASE.md) · [依赖](DEPENDENCIES.md) · [源码交付](SOURCE-DELIVERY.md)
