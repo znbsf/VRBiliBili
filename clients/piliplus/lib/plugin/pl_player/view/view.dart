@@ -1,3 +1,4 @@
+import 'package:PiliPlus/quest/panel_video_fit.dart';
 import 'dart:async';
 import 'dart:io';
 import 'dart:math' as math;
@@ -2056,13 +2057,19 @@ class _PLVideoPlayerState extends State<PLVideoPlayer>
                 return Transform.flip(
                   flipX: plPlayerController.flipX.value,
                   flipY: plPlayerController.flipY.value,
-                  child: FittedBox(
-                    fit: widget.fillVideoArea ? BoxFit.cover : videoFit.boxFit,
+                  child: widget.fillVideoArea ? PanelVideoFit(
                     alignment: widget.alignment,
                     child: SimpleVideo(
                       controller: plPlayerController.videoController!,
                       fill: widget.fill,
-                      aspectRatio: widget.fillVideoArea ? null : videoFit.aspectRatio,
+                    ),
+                  ) : FittedBox(
+                    fit: videoFit.boxFit,
+                    alignment: widget.alignment,
+                    child: SimpleVideo(
+                      controller: plPlayerController.videoController!,
+                      fill: widget.fill,
+                      aspectRatio: videoFit.aspectRatio,
                     ),
                   ),
                 );

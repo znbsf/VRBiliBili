@@ -1,0 +1,2169 @@
+{
+  "scope": "pubspec.lock and resolved local package LICENSE texts; runtime Gradle graph audited separately",
+  "git_repositories": {
+    "bggRGjQaUbCoE/audio_service": {
+      "full_name": "bggRGjQaUbCoE/audio_service",
+      "license": null,
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/audio_session": {
+      "full_name": "bggRGjQaUbCoE/audio_session",
+      "license": "MIT",
+      "visibility": "public"
+    },
+    "My-Responsitories/flutter_cached_network_image_ce": {
+      "full_name": "My-Responsitories/flutter_cached_network_image_ce",
+      "license": null,
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/canvas_danmaku": {
+      "full_name": "bggRGjQaUbCoE/canvas_danmaku",
+      "license": "MIT",
+      "visibility": "public"
+    },
+    "My-Responsitories/catcher_2": {
+      "full_name": "My-Responsitories/catcher_2",
+      "license": "Apache-2.0",
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/flutter_chat_packages": {
+      "full_name": "bggRGjQaUbCoE/flutter_chat_packages",
+      "license": null,
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/extended_nested_scroll_view": {
+      "full_name": "bggRGjQaUbCoE/extended_nested_scroll_view",
+      "license": "MIT",
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/flutter_html": {
+      "full_name": "bggRGjQaUbCoE/flutter_html",
+      "license": "MIT",
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/flutter_inappwebview": {
+      "full_name": "bggRGjQaUbCoE/flutter_inappwebview",
+      "license": "Apache-2.0",
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/flutter_smart_dialog": {
+      "full_name": "bggRGjQaUbCoE/flutter_smart_dialog",
+      "license": "MIT",
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/flutter_sortable_wrap": {
+      "full_name": "bggRGjQaUbCoE/flutter_sortable_wrap",
+      "license": "MIT",
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/font_awesome_flutter": {
+      "full_name": "bggRGjQaUbCoE/font_awesome_flutter",
+      "license": "NOASSERTION",
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/getx": {
+      "full_name": "bggRGjQaUbCoE/getx",
+      "license": "MIT",
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/material_design_icons_flutter": {
+      "full_name": "bggRGjQaUbCoE/material_design_icons_flutter",
+      "license": "MIT",
+      "visibility": "public"
+    },
+    "My-Responsitories/media-kit": {
+      "full_name": "My-Responsitories/media-kit",
+      "license": "MIT",
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/flutter_native_device_orientation": {
+      "full_name": "bggRGjQaUbCoE/flutter_native_device_orientation",
+      "license": "MIT",
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/super_sliver_list": {
+      "full_name": "bggRGjQaUbCoE/super_sliver_list",
+      "license": "MIT",
+      "visibility": "public"
+    },
+    "wgh136/webdav_client": {
+      "full_name": "wgh136/webdav_client",
+      "license": "BSD-3-Clause",
+      "visibility": "public"
+    },
+    "bggRGjQaUbCoE/window_manager": {
+      "full_name": "bggRGjQaUbCoE/window_manager",
+      "license": "MIT",
+      "visibility": "public"
+    }
+  },
+  "packages": [
+    {
+      "name": "_fe_analyzer_shared",
+      "source": "hosted",
+      "version": "108.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "analyzer",
+      "source": "hosted",
+      "version": "14.4.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "android_file_picker",
+      "source": "hosted",
+      "version": "2.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "ansicolor",
+      "source": "hosted",
+      "version": "2.0.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "app_links",
+      "source": "hosted",
+      "version": "7.2.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "app_links_linux",
+      "source": "hosted",
+      "version": "1.0.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "app_links_platform_interface",
+      "source": "hosted",
+      "version": "2.0.4",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "app_links_web",
+      "source": "hosted",
+      "version": "1.0.4",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "archive",
+      "source": "hosted",
+      "version": "4.3.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "args",
+      "source": "hosted",
+      "version": "2.7.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "asn1lib",
+      "source": "hosted",
+      "version": "1.6.5",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "async",
+      "source": "hosted",
+      "version": "2.13.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "audio_service",
+      "source": "git",
+      "version": "0.18.19",
+      "url": "https://github.com/bggRGjQaUbCoE/audio_service.git",
+      "revision": "ac920683b8140134fe8af8f7d1d89f155a879e1d",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "audio_service_platform_interface",
+      "source": "hosted",
+      "version": "0.1.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "audio_service_web",
+      "source": "hosted",
+      "version": "0.1.4",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "audio_session",
+      "source": "git",
+      "version": "0.2.4",
+      "url": "https://github.com/bggRGjQaUbCoE/audio_session.git",
+      "revision": "c8c2143c1720292801f72867e29ddeb50c36134e",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "battery_plus",
+      "source": "hosted",
+      "version": "7.1.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "battery_plus_platform_interface",
+      "source": "hosted",
+      "version": "2.0.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "boolean_selector",
+      "source": "hosted",
+      "version": "2.1.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "brotli",
+      "source": "hosted",
+      "version": "0.6.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "build",
+      "source": "hosted",
+      "version": "4.0.11",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "build_config",
+      "source": "hosted",
+      "version": "1.3.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "build_daemon",
+      "source": "hosted",
+      "version": "4.1.6",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "build_runner",
+      "source": "hosted",
+      "version": "2.16.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "built_collection",
+      "source": "hosted",
+      "version": "5.1.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "built_value",
+      "source": "hosted",
+      "version": "8.13.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "cached_network_image_ce",
+      "source": "git",
+      "version": "4.6.4",
+      "url": "https://github.com/My-Responsitories/flutter_cached_network_image_ce.git",
+      "revision": "dacec4de669b4c52c59576509db069e3194408ac",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "cached_network_image_platform_interface_ce",
+      "source": "git",
+      "version": "5.2.0",
+      "url": "https://github.com/My-Responsitories/flutter_cached_network_image_ce.git",
+      "revision": "dacec4de669b4c52c59576509db069e3194408ac",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "canvas_danmaku",
+      "source": "git",
+      "version": "0.2.6",
+      "url": "https://github.com/bggRGjQaUbCoE/canvas_danmaku.git",
+      "revision": "275046d8647a6a26cba1d0dadb9e28688cb3dbf1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "catcher_2",
+      "source": "git",
+      "version": "2.1.9",
+      "url": "https://github.com/My-Responsitories/catcher_2.git",
+      "revision": "0a9f6fd4ee2ac13ab75591ea70530e245ddb4366",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "characters",
+      "source": "hosted",
+      "version": "1.4.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "chat_bottom_container",
+      "source": "git",
+      "version": "0.5.2",
+      "url": "https://github.com/bggRGjQaUbCoE/flutter_chat_packages.git",
+      "revision": "d2f7b8df63126d9f347c1320de10db15deab06db",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "checked_yaml",
+      "source": "hosted",
+      "version": "2.0.4",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "cli_config",
+      "source": "hosted",
+      "version": "0.2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "cli_util",
+      "source": "hosted",
+      "version": "0.4.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "clock",
+      "source": "hosted",
+      "version": "1.1.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "code_assets",
+      "source": "hosted",
+      "version": "2.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "collection",
+      "source": "hosted",
+      "version": "1.19.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "connectivity_plus",
+      "source": "hosted",
+      "version": "7.3.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "connectivity_plus_platform_interface",
+      "source": "hosted",
+      "version": "2.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "convert",
+      "source": "hosted",
+      "version": "3.1.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "cookie_jar",
+      "source": "hosted",
+      "version": "4.0.9",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "cross_file",
+      "source": "hosted",
+      "version": "0.3.5+5",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "crypto",
+      "source": "hosted",
+      "version": "3.0.7",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "csslib",
+      "source": "hosted",
+      "version": "1.0.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "cupertino_ui",
+      "source": "hosted",
+      "version": "1.1.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "dart_style",
+      "source": "hosted",
+      "version": "3.1.13",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "dbus",
+      "source": "hosted",
+      "version": "0.7.15",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "device_info_plus",
+      "source": "hosted",
+      "version": "13.2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "device_info_plus_platform_interface",
+      "source": "hosted",
+      "version": "8.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "dio",
+      "source": "hosted",
+      "version": "5.11.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "dio_http2_adapter",
+      "source": "hosted",
+      "version": "2.9.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "dio_web_adapter",
+      "source": "hosted",
+      "version": "2.2.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "dlna_dart",
+      "source": "hosted",
+      "version": "0.1.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "dynamic_color",
+      "source": "hosted",
+      "version": "2.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "easy_debounce",
+      "source": "hosted",
+      "version": "2.0.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "encrypt",
+      "source": "hosted",
+      "version": "5.0.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "equatable",
+      "source": "hosted",
+      "version": "2.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "extended_list_library",
+      "source": "hosted",
+      "version": "3.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "extended_nested_scroll_view",
+      "source": "git",
+      "version": "6.2.1",
+      "url": "https://github.com/bggRGjQaUbCoE/extended_nested_scroll_view.git",
+      "revision": "d9136d5d85f41cd92f80771b84ef7c9d4c97e95c",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "fake_async",
+      "source": "hosted",
+      "version": "1.3.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "ffi",
+      "source": "hosted",
+      "version": "2.2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "ffi_leak_tracker",
+      "source": "hosted",
+      "version": "0.1.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "file",
+      "source": "hosted",
+      "version": "7.0.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "file_picker",
+      "source": "hosted",
+      "version": "13.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "file_picker_darwin",
+      "source": "hosted",
+      "version": "2.1.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "file_picker_linux",
+      "source": "hosted",
+      "version": "2.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "file_picker_platform_interface",
+      "source": "hosted",
+      "version": "4.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "file_picker_web",
+      "source": "hosted",
+      "version": "4.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "file_selector_linux",
+      "source": "hosted",
+      "version": "0.9.4+1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "file_selector_macos",
+      "source": "hosted",
+      "version": "0.9.5+1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "file_selector_platform_interface",
+      "source": "hosted",
+      "version": "2.7.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "file_selector_windows",
+      "source": "hosted",
+      "version": "0.9.3+6",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "fixnum",
+      "source": "hosted",
+      "version": "1.1.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "fl_chart",
+      "source": "hosted",
+      "version": "1.2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flex_seed_scheme",
+      "source": "hosted",
+      "version": "5.0.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter",
+      "source": "sdk",
+      "version": "0.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_displaymode",
+      "source": "hosted",
+      "version": "0.7.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_html",
+      "source": "git",
+      "version": "3.0.0",
+      "url": "https://github.com/bggRGjQaUbCoE/flutter_html.git",
+      "revision": "e33a789a4dce561267a995d3bc48c638c3950e02",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_inappwebview",
+      "source": "hosted",
+      "version": "6.1.5",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_inappwebview_android",
+      "source": "path",
+      "version": "1.1.3",
+      "path": "vendor/webview",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_inappwebview_internal_annotations",
+      "source": "hosted",
+      "version": "1.3.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_inappwebview_ios",
+      "source": "hosted",
+      "version": "1.1.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_inappwebview_macos",
+      "source": "hosted",
+      "version": "1.1.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_inappwebview_platform_interface",
+      "source": "hosted",
+      "version": "1.3.0+1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_inappwebview_web",
+      "source": "hosted",
+      "version": "1.1.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_inappwebview_windows",
+      "source": "git",
+      "version": "0.6.0",
+      "url": "https://github.com/bggRGjQaUbCoE/flutter_inappwebview.git",
+      "revision": "0bfa46dfff87f0d9e9d5e13cbd5c4a7c7310f8c9",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_launcher_icons",
+      "source": "hosted",
+      "version": "0.14.4",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_lints",
+      "source": "hosted",
+      "version": "6.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_localizations",
+      "source": "sdk",
+      "version": "0.0.0",
+      "license_files": []
+    },
+    {
+      "name": "flutter_native_splash",
+      "source": "hosted",
+      "version": "2.4.8",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_plugin_android_lifecycle",
+      "source": "hosted",
+      "version": "2.0.35",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_smart_dialog",
+      "source": "git",
+      "version": "5.3.0",
+      "url": "https://github.com/bggRGjQaUbCoE/flutter_smart_dialog.git",
+      "revision": "5a1be84314e8c53efa3b7324cd8dc535fefe931a",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_sortable_wrap",
+      "source": "git",
+      "version": "1.0.6",
+      "url": "https://github.com/bggRGjQaUbCoE/flutter_sortable_wrap.git",
+      "revision": "4c26cbdad3b6efb5625cc5bd5fd0ae2459bf31f7",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_svg",
+      "source": "hosted",
+      "version": "2.3.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_test",
+      "source": "sdk",
+      "version": "0.0.0",
+      "license_files": []
+    },
+    {
+      "name": "flutter_volume_controller",
+      "source": "hosted",
+      "version": "2.0.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "flutter_web_plugins",
+      "source": "sdk",
+      "version": "0.0.0",
+      "license_files": []
+    },
+    {
+      "name": "font_awesome_flutter",
+      "source": "git",
+      "version": "10.9.0",
+      "url": "https://github.com/bggRGjQaUbCoE/font_awesome_flutter.git",
+      "revision": "cf4a19ece5cb296d73d90f0d73106f779c85fa26",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "get",
+      "source": "git",
+      "version": "4.7.2",
+      "url": "https://github.com/bggRGjQaUbCoE/getx.git",
+      "revision": "3e65da893d9736135b2631a39e46c8f5388c2536",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "glob",
+      "source": "hosted",
+      "version": "2.2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "graphs",
+      "source": "hosted",
+      "version": "2.3.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "gtk",
+      "source": "hosted",
+      "version": "2.2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "hive_ce",
+      "source": "hosted",
+      "version": "2.20.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "hooks",
+      "source": "hosted",
+      "version": "2.2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "html",
+      "source": "hosted",
+      "version": "0.15.7",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "http",
+      "source": "hosted",
+      "version": "1.6.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "http2",
+      "source": "hosted",
+      "version": "2.3.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "http_multi_server",
+      "source": "hosted",
+      "version": "3.2.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "http_parser",
+      "source": "hosted",
+      "version": "4.1.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "image",
+      "source": "hosted",
+      "version": "4.10.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "image_cropper",
+      "source": "hosted",
+      "version": "12.2.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "image_cropper_for_web",
+      "source": "hosted",
+      "version": "7.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "image_cropper_platform_interface",
+      "source": "hosted",
+      "version": "8.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "image_picker",
+      "source": "hosted",
+      "version": "1.2.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "image_picker_android",
+      "source": "hosted",
+      "version": "0.8.13+23",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "image_picker_for_web",
+      "source": "hosted",
+      "version": "3.1.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "image_picker_ios",
+      "source": "hosted",
+      "version": "0.8.13+8",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "image_picker_linux",
+      "source": "hosted",
+      "version": "0.2.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "image_picker_macos",
+      "source": "hosted",
+      "version": "0.2.2+1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "image_picker_platform_interface",
+      "source": "hosted",
+      "version": "2.11.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "image_picker_windows",
+      "source": "hosted",
+      "version": "0.2.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "intl",
+      "source": "hosted",
+      "version": "0.20.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "io",
+      "source": "hosted",
+      "version": "1.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "isolate_channel",
+      "source": "hosted",
+      "version": "0.6.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "jni",
+      "source": "hosted",
+      "version": "1.0.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "jni_flutter",
+      "source": "hosted",
+      "version": "1.0.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "jni_util",
+      "source": "hosted",
+      "version": "1.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "jnigen",
+      "source": "hosted",
+      "version": "1.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "js",
+      "source": "hosted",
+      "version": "0.7.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "json_annotation",
+      "source": "hosted",
+      "version": "4.12.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "leak_tracker",
+      "source": "hosted",
+      "version": "11.0.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "leak_tracker_flutter_testing",
+      "source": "hosted",
+      "version": "3.0.10",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "leak_tracker_testing",
+      "source": "hosted",
+      "version": "3.0.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "lints",
+      "source": "hosted",
+      "version": "6.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "list_counter",
+      "source": "hosted",
+      "version": "1.0.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "live_photo_maker",
+      "source": "hosted",
+      "version": "0.0.6",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "logger",
+      "source": "hosted",
+      "version": "2.8.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "logging",
+      "source": "hosted",
+      "version": "1.3.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "matcher",
+      "source": "hosted",
+      "version": "0.12.20",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "material_color_utilities",
+      "source": "hosted",
+      "version": "0.13.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "material_design_icons_flutter",
+      "source": "git",
+      "version": "7.0.7447",
+      "url": "https://github.com/bggRGjQaUbCoE/material_design_icons_flutter.git",
+      "revision": "2bb68d1de3c7bb8c6117fce54d43da65a2387163",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "material_new_shapes",
+      "source": "hosted",
+      "version": "1.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "material_ui",
+      "source": "path",
+      "version": "1.4.0",
+      "path": "vendor/material_ui",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "media_kit",
+      "source": "git",
+      "version": "1.1.11",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "revision": "73771ec38176be2d984a3049c28177bce23b54a0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "media_kit_libs_android_video",
+      "source": "git",
+      "version": "1.3.7",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "revision": "73771ec38176be2d984a3049c28177bce23b54a0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "media_kit_libs_ios_video",
+      "source": "git",
+      "version": "1.1.4",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "revision": "73771ec38176be2d984a3049c28177bce23b54a0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "media_kit_libs_linux",
+      "source": "hosted",
+      "version": "1.2.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "media_kit_libs_macos_video",
+      "source": "hosted",
+      "version": "1.1.4",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "media_kit_libs_video",
+      "source": "git",
+      "version": "1.0.5",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "revision": "73771ec38176be2d984a3049c28177bce23b54a0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "media_kit_libs_windows_video",
+      "source": "git",
+      "version": "1.0.10",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "revision": "73771ec38176be2d984a3049c28177bce23b54a0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "media_kit_native_event_loop",
+      "source": "git",
+      "version": "1.0.9",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "revision": "73771ec38176be2d984a3049c28177bce23b54a0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "media_kit_video",
+      "source": "git",
+      "version": "1.2.5",
+      "url": "https://github.com/My-Responsitories/media-kit.git",
+      "revision": "73771ec38176be2d984a3049c28177bce23b54a0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "menu_base",
+      "source": "hosted",
+      "version": "0.1.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "meta",
+      "source": "hosted",
+      "version": "1.19.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "mime",
+      "source": "hosted",
+      "version": "2.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "native_device_orientation",
+      "source": "git",
+      "version": "2.0.5",
+      "url": "https://github.com/bggRGjQaUbCoE/flutter_native_device_orientation.git",
+      "revision": "7be186c79adca7d3ff5abc34bc75d171c68c2694",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "nm",
+      "source": "hosted",
+      "version": "0.5.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "objective_c",
+      "source": "hosted",
+      "version": "9.6.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "octo_image",
+      "source": "hosted",
+      "version": "2.1.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "package_config",
+      "source": "hosted",
+      "version": "3.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "package_info_plus",
+      "source": "hosted",
+      "version": "10.2.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "package_info_plus_platform_interface",
+      "source": "hosted",
+      "version": "4.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "path",
+      "source": "hosted",
+      "version": "1.9.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "path_parsing",
+      "source": "hosted",
+      "version": "1.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "path_provider",
+      "source": "hosted",
+      "version": "2.1.6",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "path_provider_android",
+      "source": "hosted",
+      "version": "2.3.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "path_provider_foundation",
+      "source": "hosted",
+      "version": "2.6.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "path_provider_linux",
+      "source": "hosted",
+      "version": "2.2.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "path_provider_platform_interface",
+      "source": "hosted",
+      "version": "2.1.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "path_provider_windows",
+      "source": "hosted",
+      "version": "2.3.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "permission_handler_android",
+      "source": "hosted",
+      "version": "14.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "permission_handler_apple",
+      "source": "hosted",
+      "version": "9.6.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "permission_handler_platform_interface",
+      "source": "hosted",
+      "version": "4.4.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "petitparser",
+      "source": "hosted",
+      "version": "7.0.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "platform",
+      "source": "hosted",
+      "version": "3.2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "plugin_platform_interface",
+      "source": "hosted",
+      "version": "2.1.8",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pointycastle",
+      "source": "hosted",
+      "version": "3.9.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pool",
+      "source": "hosted",
+      "version": "1.5.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "posix",
+      "source": "hosted",
+      "version": "6.5.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pretty_qr_code",
+      "source": "hosted",
+      "version": "3.6.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "protobuf",
+      "source": "hosted",
+      "version": "6.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pub_semver",
+      "source": "hosted",
+      "version": "2.2.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pubspec_parse",
+      "source": "hosted",
+      "version": "1.6.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "qr",
+      "source": "hosted",
+      "version": "3.0.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "re_highlight",
+      "source": "hosted",
+      "version": "0.0.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "record_use",
+      "source": "hosted",
+      "version": "1.1.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "rxdart",
+      "source": "hosted",
+      "version": "0.28.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "saver_gallery",
+      "source": "hosted",
+      "version": "5.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "screen_brightness_android",
+      "source": "hosted",
+      "version": "2.1.6",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "screen_brightness_ios",
+      "source": "hosted",
+      "version": "2.1.4",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "screen_brightness_platform_interface",
+      "source": "hosted",
+      "version": "2.1.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "screen_retriever",
+      "source": "hosted",
+      "version": "0.2.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "screen_retriever_linux",
+      "source": "hosted",
+      "version": "0.2.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "screen_retriever_macos",
+      "source": "hosted",
+      "version": "0.2.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "screen_retriever_platform_interface",
+      "source": "hosted",
+      "version": "0.2.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "screen_retriever_windows",
+      "source": "hosted",
+      "version": "0.2.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "share_plus",
+      "source": "hosted",
+      "version": "13.3.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "share_plus_platform_interface",
+      "source": "hosted",
+      "version": "7.2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "shared_preferences",
+      "source": "hosted",
+      "version": "2.5.5",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "shared_preferences_android",
+      "source": "hosted",
+      "version": "2.4.28",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "shared_preferences_foundation",
+      "source": "hosted",
+      "version": "2.5.7",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "shared_preferences_linux",
+      "source": "hosted",
+      "version": "2.4.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "shared_preferences_platform_interface",
+      "source": "hosted",
+      "version": "2.4.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "shared_preferences_web",
+      "source": "hosted",
+      "version": "2.4.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "shared_preferences_windows",
+      "source": "hosted",
+      "version": "2.4.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "shelf",
+      "source": "hosted",
+      "version": "1.4.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "shelf_web_socket",
+      "source": "hosted",
+      "version": "3.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "shortid",
+      "source": "hosted",
+      "version": "0.1.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "sky_engine",
+      "source": "sdk",
+      "version": "0.0.0",
+      "license_files": [
+        "license"
+      ]
+    },
+    {
+      "name": "source_span",
+      "source": "hosted",
+      "version": "1.10.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "stack_trace",
+      "source": "hosted",
+      "version": "1.12.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "stream_channel",
+      "source": "hosted",
+      "version": "2.1.4",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "stream_transform",
+      "source": "hosted",
+      "version": "2.1.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "string_scanner",
+      "source": "hosted",
+      "version": "1.4.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "super_sliver_list",
+      "source": "git",
+      "version": "0.4.1",
+      "url": "https://github.com/bggRGjQaUbCoE/super_sliver_list.git",
+      "revision": "71f34fa179e2d05818004e22e632dd59f2a223be",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "synchronized",
+      "source": "hosted",
+      "version": "3.4.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "term_glyph",
+      "source": "hosted",
+      "version": "1.2.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "test_api",
+      "source": "hosted",
+      "version": "0.7.12",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "tray_manager",
+      "source": "hosted",
+      "version": "0.5.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "typed_data",
+      "source": "hosted",
+      "version": "1.4.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "universal_io",
+      "source": "hosted",
+      "version": "2.3.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "upower",
+      "source": "hosted",
+      "version": "0.7.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "url_launcher",
+      "source": "hosted",
+      "version": "6.3.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "url_launcher_android",
+      "source": "hosted",
+      "version": "6.3.33",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "url_launcher_ios",
+      "source": "hosted",
+      "version": "6.4.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "url_launcher_linux",
+      "source": "hosted",
+      "version": "3.2.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "url_launcher_macos",
+      "source": "hosted",
+      "version": "3.2.6",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "url_launcher_platform_interface",
+      "source": "hosted",
+      "version": "2.3.2",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "url_launcher_web",
+      "source": "hosted",
+      "version": "2.4.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "url_launcher_windows",
+      "source": "hosted",
+      "version": "3.1.6",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "uuid",
+      "source": "hosted",
+      "version": "4.6.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "vector_graphics",
+      "source": "hosted",
+      "version": "1.2.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "vector_graphics_codec",
+      "source": "hosted",
+      "version": "1.1.13",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "vector_graphics_compiler",
+      "source": "hosted",
+      "version": "1.3.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "vector_math",
+      "source": "hosted",
+      "version": "2.4.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "vm_service",
+      "source": "hosted",
+      "version": "15.3.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "wakelock_plus",
+      "source": "hosted",
+      "version": "1.8.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "wakelock_plus_platform_interface",
+      "source": "hosted",
+      "version": "1.7.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "watcher",
+      "source": "hosted",
+      "version": "1.2.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "waterfall_flow",
+      "source": "hosted",
+      "version": "3.1.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "web",
+      "source": "hosted",
+      "version": "1.1.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "web_socket",
+      "source": "hosted",
+      "version": "1.0.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "web_socket_channel",
+      "source": "hosted",
+      "version": "3.0.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "webdav_client",
+      "source": "git",
+      "version": "1.2.2",
+      "url": "https://github.com/wgh136/webdav_client.git",
+      "revision": "2f669c98fb81cff1c64fee93466a1475c77e4273",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "win32",
+      "source": "hosted",
+      "version": "6.4.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "win32_registry",
+      "source": "hosted",
+      "version": "3.0.3",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "window_manager",
+      "source": "git",
+      "version": "0.5.2",
+      "url": "https://github.com/bggRGjQaUbCoE/window_manager.git",
+      "revision": "ac535d09a5850279e6591a9bdd285f9a3edeebf8",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "windows_file_picker",
+      "source": "hosted",
+      "version": "2.0.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "xdg_directories",
+      "source": "hosted",
+      "version": "1.1.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "xml",
+      "source": "hosted",
+      "version": "6.6.1",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "yaml",
+      "source": "hosted",
+      "version": "3.1.4",
+      "license_files": [
+        "LICENSE"
+      ]
+    }
+  ],
+  "local_vendor": "material_ui BSD; webview Apache-2.0; both source-controlled, not private binary libraries",
+  "closed_runtime": "Meta Spatial SDK core/toolkit/vr/isdk before isolation; removed from active dependencies",
+  "native_backend": "media-kit MIT Dart wrapper; libmpv/FFmpeg LGPL route and native build scripts require separate corresponding-source handling"
+}

@@ -1,6 +1,6 @@
+import 'package:PiliPlus/quest/panel_seek_bar.dart';
 import 'dart:io' show Platform;
 import 'package:PiliPlus/quest/quest_device.dart';
-import 'package:PiliPlus/quest/cinema_player.dart';
 import 'package:PiliPlus/models/common/video/video_quality.dart';
 import 'dart:math';
 
@@ -52,7 +52,6 @@ import 'package:PiliPlus/pages/video/widgets/intro_layout.dart';
 import 'package:PiliPlus/pages/video/widgets/player_focus.dart';
 import 'package:PiliPlus/plugin/pl_player/controller.dart';
 import 'package:PiliPlus/plugin/pl_player/models/fullscreen_mode.dart';
-import 'package:PiliPlus/plugin/pl_player/models/data_status.dart';
 import 'package:PiliPlus/plugin/pl_player/models/play_repeat.dart';
 import 'package:PiliPlus/plugin/pl_player/models/play_status.dart';
 import 'package:PiliPlus/plugin/pl_player/utils/fullscreen.dart';
@@ -76,7 +75,6 @@ import 'package:PiliPlus/utils/storage_key.dart';
 import 'package:PiliPlus/utils/theme_utils.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/foundation.dart' show kDebugMode, clampDouble;
-import 'package:flutter/services.dart' show PlatformException;
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -175,46 +173,6 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     videoSourceInit();
     if (kDebugMode && QuestDevice.isQuest) {
       QuestDevice.channel.setMethodCallHandler((call) async {
-        if (call.method == 'verifyCinemaEntryGuards') {
-          final detail = videoDetailController;
-          final oldCid = detail.cid.value;
-          final oldQuerying = detail.isQuerying;
-          final oldStatus = detail.plPlayerController.dataStatus.value;
-          final rejected = <String, bool>{};
-          try {
-            detail.isQuerying = true;
-            try {
-              await CinemaPlayer.open(detail);
-            } on PlatformException catch (error) {
-              rejected['querying'] = error.code == 'loading';
-            }
-            detail.isQuerying = false;
-            detail.cid.value = oldCid + 1;
-            try {
-              await CinemaPlayer.open(detail);
-            } on PlatformException catch (error) {
-              rejected['mismatchedCid'] = error.code == 'loading';
-            }
-            detail.cid.value = oldCid;
-            for (final status in [
-              DataStatus.none,
-              DataStatus.loading,
-              DataStatus.error,
-            ]) {
-              detail.plPlayerController.dataStatus.value = status;
-              try {
-                await CinemaPlayer.open(detail);
-              } on PlatformException catch (error) {
-                rejected[status.name] = error.code == 'loading';
-              }
-            }
-            return {...rejected, 'cinemaActive': CinemaPlayer.active};
-          } finally {
-            detail.cid.value = oldCid;
-            detail.isQuerying = oldQuerying;
-            detail.plPlayerController.dataStatus.value = oldStatus;
-          }
-        }
         if (call.method == 'pauseForCacheRecovery') {
           await videoDetailController.plPlayerController.pause();
           return {'paused': true};
@@ -248,7 +206,6 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
           'detailCid': videoDetailController.cid.value,
           'processing': p.processing,
           'dataStatus': p.dataStatus.value.name,
-          'cinemaActive': CinemaPlayer.active,
           'playedTimeMs': videoDetailController.playedTime?.inMilliseconds,
           'cachedPositionMs': p.cid == null
               ? null
@@ -300,7 +257,6 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
   }
 
   Future<void>? playCallBack() {
-    if (CinemaPlayer.active) return Future<void>.value();
     if (!isShowing) {
       plPlayerController
         ?..addStatusLister(playerListener)
@@ -1488,7 +1444,7 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
     body: ColoredBox(color: const Color(0xFF141416), child: SafeArea(
       child: Column(children: [
         Padding(padding: const EdgeInsets.symmetric(horizontal: 12), child: Row(children: [
-          questIcon('返回上页', Icons.arrow_back_rounded, () => Get.back()),
+          questIcon('返回上页', Icons.arrow_back_rounded, Get.back),
           questIcon('返回主页', Icons.home_outlined, videoDetailController.plPlayerController.onCloseAll),
           const SizedBox(width: 12),
           const Text('PiliPlus', style: TextStyle(fontSize: 21, fontWeight: FontWeight.w700, color: _questAccent)),
@@ -1539,9 +1495,9 @@ class _VideoDetailPageVState extends State<VideoDetailPageV>
             trackHeight: 3, activeTrackColor: _questAccent, inactiveTrackColor: Colors.white24,
             thumbColor: Colors.white, thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
             overlayShape: const RoundSliderOverlayShape(overlayRadius: 20)),
-            child: Slider(value: position.toDouble().clamp(0, max(1, duration).toDouble()),
-              max: max(1, duration).toDouble(),
-              onChanged: duration > 0 ? (v) => player.seek(Duration(seconds: v.round()), isSeek: false) : null));
+            child: PanelSeekBar(key: ValueKey(player.cid),
+              durationSeconds: duration, positionSeconds: position,
+              onSeek: (seconds) => player.seek(Duration(seconds: seconds), isSeek: false)));
         })),
         Row(children: [
           questIcon('播放 / 暂停', _questLoading ? Icons.hourglass_top_rounded :

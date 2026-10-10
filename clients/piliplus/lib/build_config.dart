@@ -22,5 +22,5 @@ abstract final class BuildConfig {
     'vr.label',
     defaultValue: 'development',
   );
-  static const String sourceSummary = 'main $commitHash + local $localPatch';
+  static const String sourceSummary = '$commitHash (patch: $localPatch)';
 }

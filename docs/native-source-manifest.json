@@ -1,0 +1,212 @@
+[
+  {
+    "name": "native-build",
+    "repository": "My-Responsitories/libmpv-android-video-build",
+    "ref": "8e50ecc027cd2443a3ef9b1a87991d37f1acdc41",
+    "source_url": "https://github.com/My-Responsitories/libmpv-android-video-build/tree/8e50ecc027cd2443a3ef9b1a87991d37f1acdc41",
+    "bytes": 96524,
+    "sha256": "e0725a3758bc09811029fce1dc0ab5b5c46dbe8928aee49be60ad21b63541ac5",
+    "archive": "native-build.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "mpv",
+    "repository": "mpv-player/mpv",
+    "ref": "v0.41.0",
+    "source_url": "https://github.com/mpv-player/mpv/tree/v0.41.0",
+    "bytes": 7794574,
+    "sha256": "e0c5bdda9e30153386c5bc9e35ac62a32a0f7b823735c513df0e220a6783edcf",
+    "archive": "mpv.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "ffmpeg",
+    "repository": "FFmpeg/FFmpeg",
+    "ref": "n9.0.1",
+    "source_url": "https://github.com/FFmpeg/FFmpeg/tree/n9.0.1",
+    "bytes": 23174743,
+    "sha256": "874a22cf0e0611c7424f0b94fef38a694ef8895357c8ca3aead6530427ed49ac",
+    "archive": "ffmpeg.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "mbedtls",
+    "repository": "Mbed-TLS/mbedtls",
+    "ref": "v3.6.5",
+    "source_url": "https://github.com/Mbed-TLS/mbedtls/tree/v3.6.5",
+    "bytes": 6164502,
+    "sha256": "f510d079703df1054b9427dd9f342144c20ce28b44a42d22f14a5789e974c3d2",
+    "archive": "mbedtls.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "fribidi",
+    "repository": "fribidi/fribidi",
+    "ref": "v1.0.16",
+    "source_url": "https://github.com/fribidi/fribidi/tree/v1.0.16",
+    "bytes": 2213063,
+    "sha256": "05f9f736f9c8cecd4163946188d0805484ee2833fe24f9e14004060194886045",
+    "archive": "fribidi.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "harfbuzz",
+    "repository": "harfbuzz/harfbuzz",
+    "ref": "14.3.1",
+    "source_url": "https://github.com/harfbuzz/harfbuzz/tree/14.3.1",
+    "bytes": 42341886,
+    "sha256": "1db4b3abec8e9a595b48976a2b12755367e6026b1339ab11d06afec4362ca5ac",
+    "archive": "harfbuzz.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "libass",
+    "repository": "libass/libass",
+    "ref": "0.17.5",
+    "source_url": "https://github.com/libass/libass/tree/0.17.5",
+    "bytes": 432688,
+    "sha256": "a3347906dd11918f2d016ff7cfec3d880e115ea7103ffa21c80534e642cc6612",
+    "archive": "libass.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "libwebp",
+    "repository": "webmproject/libwebp",
+    "ref": "v1.6.0",
+    "source_url": "https://github.com/webmproject/libwebp/tree/v1.6.0",
+    "bytes": 4047964,
+    "sha256": "a7876c0f0cfe7f9a53ea2fe888d2dd6adbb0e8a98bb3b258f1ea595e3d698a9a",
+    "archive": "libwebp.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "freetype",
+    "repository": "freetype/freetype",
+    "ref": "VER-2-14-3",
+    "source_url": "https://github.com/freetype/freetype/tree/VER-2-14-3",
+    "bytes": 2985826,
+    "sha256": "2a94ba89ff807517609477a666342e673acc3c9f11fb445065b32d7c1680e999",
+    "archive": "freetype.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "dav1d",
+    "repository": "videolan/dav1d",
+    "ref": "1.5.4",
+    "source_url": "https://github.com/videolan/dav1d/tree/1.5.4",
+    "bytes": 2031159,
+    "sha256": "9789e0de6899c63a6efec887b30b42942b2bc15474d5ed638c20347ab9885124",
+    "archive": "dav1d.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "libplacebo",
+    "repository": "haasn/libplacebo",
+    "ref": "v7.360.1",
+    "source_url": "https://github.com/haasn/libplacebo/tree/v7.360.1",
+    "bytes": 1016604,
+    "sha256": "84768b3acfe8bcc0746ee7e76dcbe8915db38566a41719e15c51ff1c6702e2ae",
+    "archive": "libplacebo.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "mbedtls-framework",
+    "repository": "Mbed-TLS/mbedtls-framework",
+    "ref": "457996474728cb8e968ed21953b72f74d2f536b2",
+    "source_url": "https://github.com/Mbed-TLS/mbedtls-framework/tree/457996474728cb8e968ed21953b72f74d2f536b2",
+    "bytes": 1470957,
+    "sha256": "d3d4f22071b103133cf8a26594efef81083b043ad66f9b56c020abcb0f7dd366",
+    "archive": "mbedtls-framework.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "Vulkan-Headers",
+    "repository": "KhronosGroup/Vulkan-Headers",
+    "ref": "450bd2232225d6c7728a4108055ac2e37cef6475",
+    "source_url": "https://github.com/KhronosGroup/Vulkan-Headers/tree/450bd2232225d6c7728a4108055ac2e37cef6475",
+    "bytes": 2977150,
+    "sha256": "92f01ccda5a1f2a37d32e2ecba04689057845a9fa28586d163ef65a52e0c7a5f",
+    "archive": "Vulkan-Headers.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "fast_float",
+    "repository": "fastfloat/fast_float",
+    "ref": "97b54ca9e75f5303507699d27c6b4f4efe4641a1",
+    "source_url": "https://github.com/fastfloat/fast_float/tree/97b54ca9e75f5303507699d27c6b4f4efe4641a1",
+    "bytes": 164087,
+    "sha256": "0a17208b75330b50800f1b4f653b4cd07498862b05fa06aa46ccfe2eb15caeec",
+    "archive": "fast_float.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "glad",
+    "repository": "Dav1dde/glad",
+    "ref": "73db193f853e2ee079bf3ca8a64aa2eaf6459043",
+    "source_url": "https://github.com/Dav1dde/glad/tree/73db193f853e2ee079bf3ca8a64aa2eaf6459043",
+    "bytes": 784568,
+    "sha256": "5e813fa1e392f0d34cd7f087bdf084b0be5a177238b486b8a9287fdc84876e16",
+    "archive": "glad.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "jinja",
+    "repository": "pallets/jinja",
+    "ref": "15206881c006c79667fe5154fe80c01c65410679",
+    "source_url": "https://github.com/pallets/jinja/tree/15206881c006c79667fe5154fe80c01c65410679",
+    "bytes": 313467,
+    "sha256": "e286447d23d53187088deac64c8baeab0daec5be7498170aa7da868ca94d4281",
+    "archive": "jinja.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "markupsafe",
+    "repository": "pallets/markupsafe",
+    "ref": "297fc8e356e6836a62087949245d09a28e9f1b13",
+    "source_url": "https://github.com/pallets/markupsafe/tree/297fc8e356e6836a62087949245d09a28e9f1b13",
+    "bytes": 96852,
+    "sha256": "f66ea875200829c2029e171b059cf71dc3f497ab1c4d3cb429cbc696f4437a05",
+    "archive": "markupsafe.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "nuklear",
+    "repository": "Immediate-Mode-UI/Nuklear",
+    "ref": "242f35efa067a46c595645eeda7b1771ea1f83b1",
+    "source_url": "https://github.com/Immediate-Mode-UI/Nuklear/tree/242f35efa067a46c595645eeda7b1771ea1f83b1",
+    "bytes": 2467841,
+    "sha256": "4f32b6eec727c91e4cc6f7c7fd55a9aab792dfbc085852f580ad3bcaef19b5af",
+    "archive": "nuklear.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "mediakit-android-helper",
+    "repository": "media-kit/media-kit-android-helper",
+    "ref": "42054e5d479f39ccbb0ae604862e2bcaf59b74c2",
+    "source_url": "https://github.com/media-kit/media-kit-android-helper/tree/42054e5d479f39ccbb0ae604862e2bcaf59b74c2",
+    "bytes": 1410536,
+    "sha256": "bc6ca64b14c56541e8e94552e36750bb8670dde09f80950e774ce75044b91e4a",
+    "archive": "mediakit-android-helper.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "media-kit-native-build",
+    "repository": "My-Responsitories/media-kit",
+    "ref": "9cb11e61ff756a645d4cfa8678c2fdc6b45097f8",
+    "source_url": "https://github.com/My-Responsitories/media-kit/tree/9cb11e61ff756a645d4cfa8678c2fdc6b45097f8",
+    "bytes": 7532202,
+    "sha256": "9bb1fe5c25e16daa2b18f1ab545ce122345a1984fa6a631f4052f68420e102cd",
+    "archive": "media-kit-native-build.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  },
+  {
+    "name": "media-kit-app",
+    "repository": "My-Responsitories/media-kit",
+    "ref": "73771ec38176be2d984a3049c28177bce23b54a0",
+    "source_url": "https://github.com/My-Responsitories/media-kit/tree/73771ec38176be2d984a3049c28177bce23b54a0",
+    "bytes": 7532311,
+    "sha256": "5a7348a8b6e7c9a8e960a128ee81598c56149688d450ac60872c330abdd6d1c3",
+    "archive": "media-kit-app.zip",
+    "route": "GitHub API via gh; TLS verification enabled"
+  }
+]

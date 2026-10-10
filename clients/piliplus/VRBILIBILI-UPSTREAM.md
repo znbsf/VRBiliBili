@@ -6,8 +6,8 @@ are retained. This directory is the actual Flutter/Android application.
 
 Quest uses a distinct application ID (`io.github.vrbilibili.quest`) and a
 Flutter large-window layout. Playback stays in the original media-kit player.
-The old multi-window spatial activity was removed. A separate fixed-screen cinema
-now uses Meta Spatial SDK / OpenXR and Media3. Authentication remains in PiliPlus.
+Historical cinema sources remain excluded from compilation. The ordinary panel
+does not use Meta Spatial SDK, OpenXR or Media3. Authentication remains in PiliPlus.
 
 The project requires Flutter 3.47.5 with the upstream framework patches from
 `lib/scripts/` in an isolated SDK. Do not run upstream `patch.ps1` blindly: it
@@ -23,4 +23,4 @@ Pinned local dependency overrides:
 - media-kit stays locked to upstream fork commit
   `73771ec38176be2d984a3049c28177bce23b54a0`.
 
-Android uses AGP 8.11.1, Kotlin 2.2.21, Gradle 8.14.5 and Java 17. The cinema uses Meta Spatial SDK 0.14.0 and Media3 1.5.1; ordinary panel playback remains on media-kit.
+Android uses AGP 8.11.1, Kotlin 2.2.21, Gradle 8.14.5 and Java 17. Ordinary panel playback remains on media-kit; historical cinema dependencies are excluded.

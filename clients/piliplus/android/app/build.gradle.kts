@@ -29,13 +29,15 @@ android {
 
     defaultConfig {
         applicationId = "io.github.vrbilibili.quest"
-        testInstrumentationRunner = "com.example.piliplus.QuestUiDriver"
+        testInstrumentationRunner = "com.example.piliplus.PanelRecoveryRegression"
         minSdk = 34
         targetSdk = 37
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
+    // Retained historical notices are not part of this Meta-free panel APK.
+    androidResources { ignoreAssetsPattern = "meta-spatial-sdk-0.14.0" }
     packagingOptions.jniLibs.useLegacyPackaging = true
     // Flutter/plugin JNI folders may bypass NDK ABI selection; strip unused ABIs from Quest releases.
     if (gradle.startParameter.taskNames.any { it.contains("Release", ignoreCase = true) }) {
@@ -105,6 +107,8 @@ gradle.taskGraph.whenReady {
 }
 
 kotlin {
+    sourceSets.getByName("main").kotlin.exclude("**/Cinema*.kt")
+    sourceSets.getByName("androidTest").kotlin.exclude("**/Cinema*.kt", "**/QuestHardwareRecoveryRegression.kt")
     compilerOptions {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
@@ -116,8 +120,7 @@ flutter {
 
 
 dependencies {
-    implementation("com.meta.spatial:meta-spatial-sdk:0.14.0")
-    implementation("com.meta.spatial:meta-spatial-sdk-toolkit:0.14.0")
-    implementation("com.meta.spatial:meta-spatial-sdk-vr:0.14.0")
-    implementation("androidx.media3:media3-exoplayer:1.5.1")
 }
+
+// Retain the historical XR driver as source only; it is not a panel test.
+tasks.withType<JavaCompile>().configureEach { exclude("**/QuestUiDriver.java") }
